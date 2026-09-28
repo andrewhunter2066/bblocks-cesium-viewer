@@ -1,0 +1,13 @@
+examples:
+  - title: Example for uplift
+    content: >
+      Simple JSON object. The jq pre-step adds `three` and `doubleString` before the context
+      is applied; the SPARQL post-step then derives `four` from `two` in the RDF graph.
+    snippets:
+      - language: json
+        code: |
+          {
+            "one": 1,
+            "two": 2,
+            "string": "value"
+          }

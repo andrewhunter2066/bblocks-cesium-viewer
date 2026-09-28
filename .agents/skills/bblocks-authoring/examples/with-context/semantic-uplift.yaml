@@ -1,0 +1,10 @@
+additionalSteps:
+  # Pre-processing: runs on the JSON document BEFORE the context is applied.
+  # Adds computed fields so they get picked up by the context mappings.
+  - type: jq
+    code: '.three = 3 | .doubleString = "\(.string)\(.string)"'
+
+  # Post-processing: runs on the RDF graph AFTER JSON-LD uplift.
+  # Adds further triples derived from the graph (here: ex2:hasFour from ex:hasTwo).
+  - type: sparql-update
+    ref: semantic-uplift/update.sparql

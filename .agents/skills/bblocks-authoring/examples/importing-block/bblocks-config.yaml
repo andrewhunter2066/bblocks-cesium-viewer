@@ -1,0 +1,5 @@
+identifier-prefix: myorg.obs.
+name: Observation Blocks
+imports:
+  - default                                          # main OGC register
+  - https://opengeospatial.github.io/ogcapi-sosa    # needed for bblocks://ogc.sosa.* references

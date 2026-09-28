@@ -1,0 +1,85 @@
+transforms:
+  # jq: simple expression, inline code
+  - id: prefix-keys
+    description: Adds a "PREF_" prefix to all object keys.
+    type: jq
+    code: |
+      with_entries(.key = "PREF_" + .key)
+
+  # jq: inline code, no declared inputs/outputs (defaults to application/json → application/json)
+  - id: add-type
+    description: Adds an explicit type field to a JSON object.
+    type: jq
+    code: |
+      .type = "ex:MyFeature"
+
+  # sparql-update: post-process RDF in-place via a SPARQL UPDATE
+  - id: prefix-predicates
+    description: Rewrites http://example.com/ predicates to a URN namespace.
+    type: sparql-update
+    ref: transforms/prefix-predicates.sparql
+
+  # python: no dependencies
+  - id: python-uppercase-keys
+    description: Uppercases all keys in a JSON object.
+    type: python
+    inputs:
+      mediaTypes: [application/json]
+    outputs:
+      mediaTypes: [application/json]
+    code: |
+      import json
+      data = json.loads(input_data)
+      output_data = json.dumps({k.upper(): v for k, v in data.items()}, indent=2)
+
+  # python: with pip dependency and python version guard
+  - id: python-to-csv
+    description: Converts a flat JSON object or array to CSV using pandas.
+    type: python
+    inputs:
+      mediaTypes: [application/json]
+    outputs:
+      mediaTypes:
+        - mimeType: text/csv
+          defaultExtension: csv
+    metadata:
+      dependencies:
+        pip: pandas
+        python: ">=3.10"   # silently skipped if requirement is not met
+    code: |
+      import json, pandas as pd
+      data = json.loads(input_data)
+      rows = data if isinstance(data, list) else [data]
+      output_data = pd.DataFrame(rows).to_csv(index=False)
+
+  # node: no dependencies
+  - id: node-add-metadata
+    description: Adds a 'generatedBy' field to a JSON object.
+    type: node
+    inputs:
+      mediaTypes: [application/json]
+    outputs:
+      mediaTypes: [application/json]
+    code: |
+      const data = JSON.parse(inputData);
+      data.generatedBy = 'bblocks-node-transform';
+      outputData = JSON.stringify(data, null, 2);
+
+  # python: output profile validation — validate transform output against another block
+  - id: python-to-geojson
+    description: Wraps input JSON in a GeoJSON Feature; output is validated against the Feature block.
+    type: python
+    inputs:
+      mediaTypes: [application/json]
+    outputs:
+      mediaTypes: [application/geo+json]
+      profiles:
+        - bblocks://ogc.geo.features.feature
+    code: |
+      import json
+      data = json.loads(input_data)
+      output_data = json.dumps({
+          "type": "Feature",
+          "geometry": {"type": "Point", "coordinates": [0, 0]},
+          "properties": data
+      }, indent=2)

@@ -1,0 +1,9 @@
+"$schema": https://json-schema.org/draft/2020-12/schema
+description: Reusable property set — defines the custom properties added by this block.
+allOf:
+  - type: object
+    properties:
+      myProp:
+        type: string
+    required:
+      - myProp

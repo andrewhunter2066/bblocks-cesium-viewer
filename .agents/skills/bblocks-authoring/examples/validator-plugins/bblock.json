@@ -1,0 +1,16 @@
+{
+  "name": "Validator plugins example",
+  "abstract": "Demonstrates validator plugins for ZIP integrity, WKT geometry, and XSD/XML validation. The XSD validator reads its schema from a validation resource declared in bblock.json.",
+  "status": "under-development",
+  "dateTimeAddition": "2024-10-03T11:31:00+02:00",
+  "itemClass": "schema",
+  "version": "0.1",
+  "resources": [
+    {
+      "role": "validation",
+      "ref": "assets/schema.xsd",
+      "format": "application/xml",
+      "conformsTo": "https://www.w3.org/2001/XMLSchema"
+    }
+  ]
+}

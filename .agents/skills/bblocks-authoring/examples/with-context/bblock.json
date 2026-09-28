@@ -1,0 +1,8 @@
+{
+  "name": "Pre and Post Semantic Uplift example",
+  "abstract": "Shows how to use semantic-uplift.yaml for pre-processing (jq) and post-processing (SPARQL UPDATE) steps around the JSON-LD context application.",
+  "status": "under-development",
+  "dateTimeAddition": "2024-10-03T11:31:00+02:00",
+  "itemClass": "schema",
+  "version": "0.1"
+}

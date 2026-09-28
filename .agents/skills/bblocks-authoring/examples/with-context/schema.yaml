@@ -1,0 +1,10 @@
+type: object
+properties:
+  one:
+    type: number
+  two:
+    type: number
+  string:
+    type: string
+required:
+  - one

@@ -1,0 +1,17 @@
+"$schema": https://json-schema.org/draft/2020-12/schema
+description: Property set for a vector observation result (bearing + distance using GeoPose).
+allOf:
+  - $ref: https://opengeospatial.github.io/ogcapi-sosa/build/annotated/sosa/properties/observation/schema.yaml
+  - type: object
+    properties:
+      hasResult:
+        properties:
+          pose:
+            $ref: bblocks://ogc.geo.geopose.basic.ypr
+          distance:
+            type: number
+    required:
+      - hasResult
+    not:
+      required:
+        - hasSimpleResult

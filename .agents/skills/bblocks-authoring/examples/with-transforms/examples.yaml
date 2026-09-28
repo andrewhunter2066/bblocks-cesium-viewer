@@ -1,0 +1,12 @@
+examples:
+  - title: JSON object to transform
+    content: >
+      This snippet is run through all transforms whose declared inputs include
+      `application/json`. The outputs are written to `build/tests/` for inspection.
+    snippets:
+      - language: json
+        code: |
+          {
+            "foo": "bar",
+            "count": 42
+          }

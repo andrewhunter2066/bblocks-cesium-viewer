@@ -1,0 +1,13 @@
+PREFIX ex: <http://example.com/>
+PREFIX ex2: <https://example.net/2/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+INSERT {
+  ?s ex2:hasFour ?hasFour ;
+     ex2:nineBound ?nineBound .
+} WHERE {
+  ?s ex:hasTwo ?hasTwo
+  BIND(xsd:integer(?hasTwo * 2) AS ?hasFour) .
+  OPTIONAL { ?s ex:hasNine ?nine . }
+  BIND(BOUND(?nine) AS ?nineBound)
+}

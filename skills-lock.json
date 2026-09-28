@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "skills": {
+    "bblocks-authoring": {
+      "source": "ogcincubator/ogc-llm-skills",
+      "ref": "master",
+      "sourceType": "github",
+      "skillPath": "skills/bblocks/authoring/SKILL.md",
+      "computedHash": "58947abe43179be669a5cefb28b743222ba1922eb0366697fc6992fdb3a38603"
+    },
+    "bblocks-consuming": {
+      "source": "ogcincubator/ogc-llm-skills",
+      "ref": "master",
+      "sourceType": "github",
+      "skillPath": "skills/bblocks/consuming/SKILL.md",
+      "computedHash": "bd88f2ead659e1e9ec343c516cff27a47a3a8a185390260881e8edd70730ade4"
+    }
+  }
+}

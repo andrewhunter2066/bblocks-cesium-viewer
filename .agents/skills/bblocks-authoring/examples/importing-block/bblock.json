@@ -1,0 +1,16 @@
+{
+  "name": "Vector Observation Feature",
+  "abstract": "Profiles two imported SOSA blocks (Observation and ObservationCollection) to require a vector bearing+distance result. Demonstrates composing multiple bblocks:// references in a single schema.",
+  "status": "under-development",
+  "dateTimeAddition": "2023-05-19T00:00:00Z",
+  "itemClass": "schema",
+  "version": "1.0",
+  "sources": [
+    {
+      "title": "Semantic Sensor Network Ontology",
+      "link": "https://www.w3.org/TR/vocab-ssn/"
+    }
+  ],
+  "dependsOn": ["bblocks://ogc.sosa.properties.observation"],
+  "tags": ["sosa", "observations", "examples"]
+}

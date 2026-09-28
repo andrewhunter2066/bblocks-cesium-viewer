@@ -1,0 +1,26 @@
+"$schema": https://json-schema.org/draft/2020-12/schema
+description: >
+  Profiles SOSA Observation and ObservationCollection to require a 'hasResult'
+  with a GeoPose bearing+distance. Uses bblocks:// to reference imported blocks;
+  the register must import the SOSA register for these to resolve.
+$defs:
+  VectorObservation:
+    allOf:
+      - $ref: bblocks://ogc.sosa.features.observation
+      - type: object
+        properties:
+          properties:
+            # Reference a separate schema for the result property set
+            $ref: ./result-schema.yaml
+  VectorObservationCollection:
+    allOf:
+      - $ref: bblocks://ogc.sosa.features.observationCollection
+      - type: object
+        properties:
+          features:
+            type: array
+            items:
+              $ref: "#/$defs/VectorObservation"
+anyOf:
+  - $ref: "#/$defs/VectorObservation"
+  - $ref: "#/$defs/VectorObservationCollection"

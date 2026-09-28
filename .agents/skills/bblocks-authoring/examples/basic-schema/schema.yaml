@@ -1,0 +1,14 @@
+"$schema": https://json-schema.org/draft/2020-12/schema
+description: >
+  A GeoJSON Feature with a required 'myProp' string property.
+  Uses bblocks:// to reference the standard GeoJSON Feature block and inherits
+  its JSON-LD context and SHACL shapes automatically.
+$defs:
+  MyFeature:
+    allOf:
+      - $ref: bblocks://ogc.geo.features.feature
+      - properties:
+          properties:
+            $ref: ./property-set-schema.yaml
+anyOf:
+  - $ref: "#/$defs/MyFeature"

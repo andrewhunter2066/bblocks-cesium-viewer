@@ -1,0 +1,11 @@
+identifier-prefix: myorg.examples.
+name: Validator Plugin Examples
+imports:
+  - default
+plugins:
+  validators:
+    # Each entry installs pip packages and scans modules for validator classes.
+    # Each plugin runs in its own isolated virtualenv.
+    - pip: git+https://github.com/ogcincubator/bblocks-sample-validator-plugins.git
+      modules:
+        - bbplugin_sample_validators   # provides ZipValidator, WktValidator, XsdValidator
