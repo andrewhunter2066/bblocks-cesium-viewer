@@ -1,4 +1,4 @@
-// End-to-end rule tests with the harness's real per-block configs, through the same code a render
+// End-to-end rule tests with the demo blocks' real per-block configs, through the same code a render
 // uses: config loading (load-config.js), classification (the copied rules.js), geometry
 // (topo-geometry.js) and primitives (cesium-scene.js). The utility network — pipes classified by
 // assetCondition, no parcels, no cadastral vocabulary — shows the viewer is domain-independent,
@@ -11,10 +11,13 @@ import { buildTopologyShapes, defaultConfigFor } from './utils/topo-geometry.js'
 import { buildScenePrimitives } from './cesium-scene.js';
 import { createFakeCesium } from './test-support/fake-cesium.js';
 
-const read = name => readFileSync(new URL(`../../harness/fixtures/${name}`, import.meta.url), 'utf8');
+const read = path => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
+const FIXTURES = 'harness/fixtures';
+const PARCEL_CONFIG = '_sources/cesiumViewerDemo/parcel/viewer-config.json';
+const UTILITY_NETWORK_CONFIG = '_sources/cesiumViewerDemo/utilityNetwork/viewer-config.json';
 
 async function renderWithConfig(documentName, configName) {
-  const data = JSON.parse(read(documentName));
+  const data = JSON.parse(read(`${FIXTURES}/${documentName}`));
   const context = { bblock: { resources: [{ role: CESIUM_VIEWER_CONFIG_ROLE, ref: configName }] } };
   const fetchImpl = async ref => ({ ok: true, status: 200, text: async () => read(ref) });
   const loaded = await loadConfig(context, defaultConfigFor(data), fetchImpl);
@@ -27,7 +30,7 @@ async function renderWithConfig(documentName, configName) {
 const fillOf = record => record.fill.options.geometryInstances[0].options.attributes.color.color;
 
 test('utility network: literal, CURIE and full-URI rules classify each pipe', async () => {
-  const { Cesium, loaded, records } = await renderWithConfig('utility-network-georeferenced.json', 'utility-network-config.json');
+  const { Cesium, loaded, records } = await renderWithConfig('utility-network-georeferenced.json', UTILITY_NETWORK_CONFIG);
   assert.deepEqual(loaded.warnings, []);
   const byId = Object.fromEntries(records.map(r => [r.id, r]));
 
@@ -53,14 +56,14 @@ test('utility network: literal, CURIE and full-URI rules classify each pipe', as
 });
 
 test('utility network: pipes keep their underground heights unless flattened', async () => {
-  const { shapes } = await renderWithConfig('utility-network-georeferenced.json', 'utility-network-config.json');
+  const { shapes } = await renderWithConfig('utility-network-georeferenced.json', UTILITY_NETWORK_CONFIG);
   const heights = id => shapes.renderables.find(r => r.id === id).polygons.flatMap(p => p.outer.map(c => c[2]));
   assert.ok(heights('pipe-d:solid').every(h => h < 0), 'underground');
   assert.ok(heights('pipe-c:solid').every(h => h === 0), 'flattened to the ground');
 });
 
 test('parcel: grouped parcel kinds, flattened, with dashed former tenure hidden', async () => {
-  const { Cesium, loaded, records } = await renderWithConfig('parcel.json', 'parcel-config.json');
+  const { Cesium, loaded, records } = await renderWithConfig('parcel.json', PARCEL_CONFIG);
   assert.deepEqual(loaded.warnings, []);
   const parcels = records.filter(r => r.group === 'parcel');
   assert.deepEqual(parcels.map(r => [r.id, r.kind, r.kindLabel, r.visible]), [

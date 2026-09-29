@@ -1,0 +1,8 @@
+examples:
+  - title: Four pipe segments in Murray Street, Perth
+    content: |
+      Open the **Globe** tab. The document is the harness fixture
+      `utility-network-georeferenced.json`, shared with the plugin's own tests.
+    snippets:
+      - language: json
+        ref: ../../../harness/fixtures/utility-network-georeferenced.json

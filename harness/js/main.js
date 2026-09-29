@@ -7,9 +7,12 @@ import { CESIUM_VIEWER_CONFIG_ROLE } from '../../src/js/utils/load-config.js';
 
 // Fixture paths are fetch()ed relative to the page (harness/index.html), not this module.
 // All but the two squares are copies of the Three.js plugin's fixtures (see fixtures/README.md).
-// A fixture's `config` is applied automatically when it is selected.
+// A fixture's `config` is applied automatically when it is selected. The configs are the
+// register's own files: the demo blocks' viewer configs and the config block's examples.
+const PARCEL_CONFIG = '../_sources/cesiumViewerDemo/parcel/viewer-config.json';
+const UTILITY_NETWORK_CONFIG = '../_sources/cesiumViewerDemo/utilityNetwork/viewer-config.json';
 const FIXTURES = [
-  { label: 'Parcel (solid + open shell + 3 parcels)', file: 'fixtures/parcel.json', config: 'fixtures/parcel-config.json' },
+  { label: 'Parcel (solid + open shell + 3 parcels)', file: 'fixtures/parcel.json', config: PARCEL_CONFIG },
   { label: 'Derived 3D solid (solid + open shell + 3 parcels, below ground)', file: 'fixtures/derived-3d-solid.json' },
   { label: 'Cube', file: 'fixtures/cube.json' },
   { label: 'Cube with void (translucent)', file: 'fixtures/cube-with-void.json' },
@@ -19,17 +22,17 @@ const FIXTURES = [
   {
     label: 'Utility network, georeferenced (4 pipes, underground)',
     file: 'fixtures/utility-network-georeferenced.json',
-    config: 'fixtures/utility-network-config.json',
+    config: UTILITY_NETWORK_CONFIG,
   },
   { label: 'Georeferenced square (a single ring)', file: 'fixtures/georeferenced-square.json' },
   { label: 'Projected-only square (no match expected)', file: 'fixtures/projected-only-square.json' },
 ];
 
 const SAMPLE_CONFIGS = [
-  { label: 'Parcel rules', file: 'fixtures/parcel-config.json' },
-  { label: 'Utility network rules', file: 'fixtures/utility-network-config.json' },
-  { label: 'Cesium: OpenTopoMap basemap + camera', file: 'fixtures/cesium-basemap-camera-config.json' },
-  { label: 'Cesium: ion imagery + terrain (needs token)', file: 'fixtures/cesium-ion-config.json' },
+  { label: 'Parcel rules', file: PARCEL_CONFIG },
+  { label: 'Utility network rules', file: UTILITY_NETWORK_CONFIG },
+  { label: 'Cesium: OpenTopoMap basemap + camera', file: '../_sources/cesiumViewerConfig/examples/basemap-and-camera.json' },
+  { label: 'Cesium: ion imagery + terrain (needs token)', file: '../_sources/cesiumViewerConfig/examples/ion-imagery-and-terrain.json' },
 ];
 
 const TOKEN_STORAGE_KEY = 'bblocks-cesium-viewer:ion-token';
@@ -168,7 +171,7 @@ async function loadDocumentUrl(url, label, config = null) {
   statusEl.textContent = `Loading ${label}…`;
   try {
     const content = await fetchText(url);
-    setConfig(config, config?.split('/').pop());
+    setConfig(config, config?.split('/').slice(-2).join('/'));
     setDocument(content, label, detectMimeType(url));
   } catch (e) {
     statusEl.textContent = `Failed to load ${label}: ${e.message}`;
@@ -197,7 +200,7 @@ $('urlLoad').addEventListener('click', () => {
 
 sampleConfigSelect.addEventListener('change', () => {
   const file = sampleConfigSelect.value;
-  setConfig(file || null, file.split('/').pop());
+  setConfig(file || null, file.split('/').slice(-2).join('/'));
   renderCurrentDocument();
 });
 

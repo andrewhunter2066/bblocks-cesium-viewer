@@ -14,7 +14,7 @@ and is added to other registers the same way.
 | Location | This repo (created from the OGC bblock template). Currently `andrewhunter2066/bblocks-cesium-viewer`; expected to move to `ogcincubator/bblocks-cesium-viewer` after development. |
 | Isolation | bblocks-viewer-topo-feature-plugin is **not modified** by this work. |
 | Branching | All development on `feature/cesium-viewer`, reviewed as a PR into `master`. |
-| Layout | Plugin JavaScript in `src/js/` (tests alongside), CSS in `src/css/`; test harness in `harness/` (its script in `harness/js/`); `package.json`/`vite.config.js` at the root; building block in `_sources/cesiumViewerConfig/`. Template blocks `myFeature/` and `mySchema/` are removed. |
+| Layout | Plugin JavaScript in `src/js/` (tests alongside), CSS in `src/css/`; test harness in `harness/` (its script in `harness/js/`); `package.json`/`vite.config.js` at the root; building block in `_sources/cesiumViewerConfig/`. Template blocks `myFeature/` and `mySchema/` are removed. *(Stage 6:)* two demo blocks, `_sources/cesiumViewerDemo/parcel` and `…/utilityNetwork`, whose examples (the harness fixtures, by `ref`) open in the Globe tab with their own `viewer-config.json`; without them the dogfooded plugin would never show a tab in this register. |
 | Dogfooding | This register declares its own plugin under `viewer.view-plugins` in `bblocks-config.yaml`. |
 | Coordinates | Read each point feature's `geometry` — GeoJSON WGS84 (EPSG:4326) lon/lat + ellipsoidal height — straight into `Cartesian3.fromDegrees`. No proj4, no geoid model. Projected coordinates in `place` are ignored. Higher-order features (`geometry: null`) are assembled from their referenced points. A document with no point `geometry` does not match (no Globe tab). |
 | Rule engine | **Copied** (not depended on) from bblocks-viewer-topo-feature-plugin branch `refactor/parameterised-viewer` at commit `d94018b`: `src/utils/rules.js`, `curie.js`, `config.js`, `resolve-config.js` plus their tests, into `src/js/utils/`. Each copied file carries a provenance header; later upstream fixes are ported by hand. |
@@ -53,9 +53,10 @@ Anything a browser uses is visible in devtools, so the goal is **nothing secret 
      reachable same-origin at `http://localhost:9090/register/dist/index.js` with a JS MIME type —
      no separate server or CORS. After each `./build.sh`, `npm run local-register` rewrites (or
      adds) this plugin's `viewer.viewPlugins` entry in `build-local/register.json` to that URL.
-   - Still to verify (stage 4/6, once a block declares `resources`): whether a relative
-     `resources[].ref` in `bblock.json` reaches the plugin as a fetchable absolute URL in
-     `context.bblock`.
+   - Relative `resources[].ref` *(verified in stage 6)*: the postprocessor rewrites it to an
+     absolute URL under `--base-url` (`…/register/_sources/<block>/viewer-config.json`), in both
+     `register.json` and the json-full document the viewer passes as `context.bblock`, and the
+     plugin fetches it (end-to-end check in the real viewer).
 
 Keep the browser devtools console open while testing — errors from the plugin's async code only
 appear there.
@@ -76,17 +77,23 @@ appear there.
    per-block config and optional ion token.
 5. **UI** *(done)* — group toggles, labels, zoom-to-extent, fullscreen, compact vs. expanded layout; plain
    DOM, no Vuetify/mdi.
-6. **Building block & docs** — `_sources/cesiumViewerConfig/` (schema, description, examples,
+6. **Building block & docs** *(done)* — `_sources/cesiumViewerConfig/` (schema, description, examples,
    tests), `bblocks-config.yaml` register metadata + `view-plugins` entry, README replacing the
    template's, CHANGELOG.
 
 ## Handover checklist (after development)
 
 - [ ] OGC provides the `identifier-prefix` → set it in `bblocks-config.yaml` (currently the
-      template placeholder `ogc.bbr.template.`).
+      template placeholder `ogc.bbr.template.`), and update the `bblocks://ogc.bbr.template.…`
+      links in `_sources/*/description.md`, `examples.yaml` and the demo blocks' `seeAlso`, and the
+      demo URL in the README.
 - [ ] Repo transferred to `ogcincubator/bblocks-cesium-viewer` → update the jsDelivr URL
       (`https://cdn.jsdelivr.net/gh/<owner>/bblocks-cesium-viewer@dist/…`) in
-      `bblocks-config.yaml`, README and the workflow comment.
+      `bblocks-config.yaml`, README and the workflow comment, and the repository links in
+      `bblocks-config.yaml`'s description and `_sources/cesiumViewerConfig/bblock.json`.
 - [ ] OGC adds the block to the official register.
 - [ ] Secret scanning + push protection enabled on the final repo; ion token secret (if any)
       recreated there, restricted to the new domain.
+- [ ] If the published register should show ion imagery/terrain: add a CI step that writes the
+      secret into the relevant `viewer-config.json` as `cesium.ionToken` before the postprocessor
+      runs (the reusable `process-bblocks.yml` has no hook for this yet).
