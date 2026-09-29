@@ -113,8 +113,10 @@ repository** and **any token in use is low-value and restricted**.
 - No credentials or tokens are ever committed. Cesium account logins are never used anywhere.
 - A Cesium ion token is optional, needed only for ion imagery or terrain:
   - **Local development:** a gitignored `.env.local` (`VITE_CESIUM_ION_TOKEN`, documented empty in
-    `.env.example`) or the harness's token box (kept in that browser's `localStorage`). Only the
-    harness reads them; they are never compiled into `dist/`.
+    `.env.example`) or the harness's token box (kept in that browser's `localStorage`). They are
+    never compiled into `dist/`. The harness injects the token into the configuration it hands the
+    plugin; `npm run local-register` injects it into copies of the blocks' configurations in the
+    gitignored `build-local/ion-configs/` for the local viewer, never into `_sources/`.
   - **Published register:** a GitHub Actions secret, written into the published configuration as
     `cesium.ionToken` at build time — the harness does the same with its token box. The reusable
     `process-bblocks.yml` workflow has no step for this yet.

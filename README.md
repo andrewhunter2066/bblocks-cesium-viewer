@@ -106,7 +106,9 @@ console warning. Cesium's built-in demo token is never used.
 low-value and restricted: scoped to `assets:read` and limited to the register's domain in the ion
 dashboard. A published register should inject it into the configuration at build time
 (`cesium.ionToken`) from a CI secret. The standard `process-bblocks.yml` workflow has no step for
-this yet; a register that needs ion must add one before the postprocessor runs.
+this yet; a register that needs ion must add one before the postprocessor runs. Locally,
+`npm run local-register` does this from `.env.local` (see [In the real viewer](#in-the-real-viewer));
+its logic is in `scripts/lib/local-ion.mjs`.
 
 ## Development
 
@@ -131,7 +133,8 @@ tab. The current plugin instance is available in the browser console as `harness
 For ion content locally, either use the token box (kept only in that browser's `localStorage`) or
 copy `.env.example` to `.env.local` and set `VITE_CESIUM_ION_TOKEN`. Both are gitignored and never
 part of `dist/`. The harness injects the token into the configuration as `cesium.ionToken`, as a
-published register's build would.
+published register's build would; choose **Sample config → Cesium: ion imagery + terrain** to use
+it. `.env.local` is also used by `npm run local-register` (below).
 
 ### In the real viewer
 
@@ -146,7 +149,16 @@ Then open, for example, <http://localhost:9090/bblock/ogc.bbr.template.cesiumVie
 choose **Examples** and the **Globe** tab. `view.sh`'s container serves this whole repository under
 `/register/`, so the local plugin is loaded same-origin from
 `http://localhost:9090/register/dist/index.js`. Re-run `npm run local-register` after every
-`./build.sh`. Keep the browser's developer console open: errors from the plugin's asynchronous work
+`./build.sh`.
+
+If `.env.local` (or the environment) sets `VITE_CESIUM_ION_TOKEN`, `npm run local-register` also
+gives every block ion imagery and terrain with that token — what a published register's CI would
+do from a secret. It writes copies of the blocks' configurations with `cesium.basemap`/`terrain`
+set to `ion` (unless a block chose its own) and `cesium.ionToken` added to the gitignored
+`build-local/ion-configs/`, and points the local register at them; the tracked `_sources/` files
+are never changed and the token is never printed. Without a token it undoes this, so the blocks'
+own configurations apply again. Note that `view.sh` publishes port 9090 on all network
+interfaces, so a restricted development token is essential. Keep the browser's developer console open: errors from the plugin's asynchronous work
 only appear there.
 
 ## Repository layout

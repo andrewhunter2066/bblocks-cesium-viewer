@@ -11,7 +11,7 @@
     "prebuild": "node scripts/check-cesium-version.mjs",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
-    "test": "node --import ./scripts/test-raw-loader.mjs --test \"src/js/**/*.test.js\"",
+    "test": "node --import ./scripts/test-raw-loader.mjs --test \"src/js/**/*.test.js\" \"scripts/**/*.test.mjs\"",
     "local-register": "node scripts/use-local-plugin.mjs"
   },
   "devDependencies": {
