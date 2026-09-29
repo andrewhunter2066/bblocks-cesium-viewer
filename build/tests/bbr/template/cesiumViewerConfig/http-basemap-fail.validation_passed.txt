@@ -1,0 +1,23 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.883839+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using http-basemap-fail.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'http://tiles.example.org/{z}/{x}/{y}.png' does not match '^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://'
+
+Failed validating 'pattern' in schema[1]['properties']['url']:
+    {'pattern': '^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://',
+     'type': 'string'}
+
+On instance['url']:
+    'http://tiles.example.org/{z}/{x}/{y}.png'
+=== End JSON Schema ===
+

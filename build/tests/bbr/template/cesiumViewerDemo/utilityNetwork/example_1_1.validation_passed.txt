@@ -1,0 +1,10 @@
+Validation report for ogc.bbr.template.cesiumViewerDemo.utilityNetwork - Globe view demo: underground utility network
+Generated 2026-09-29T19:08:01.923703+00:00
+=== Files ===
+Using ../../../harness/fixtures/utility-network-georeferenced.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

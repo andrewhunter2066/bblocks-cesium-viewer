@@ -1,0 +1,10 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.899732+00:00
+=== Files ===
+Using ../cesiumViewerDemo/utilityNetwork/viewer-config.json from examples
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

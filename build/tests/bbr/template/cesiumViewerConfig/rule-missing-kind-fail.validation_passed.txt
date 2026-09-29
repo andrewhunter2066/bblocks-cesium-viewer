@@ -1,0 +1,102 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.886781+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using rule-missing-kind-fail.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'kind' is a required property
+
+Failed validating 'required' in schema['properties']['rules']['items']:
+    {'additionalProperties': False,
+     'properties': {'elevation': {'$ref': '#/$defs/elevation'},
+                    'geometry': {'description': "How the feature's "
+                                                'topology is turned into a '
+                                                'shape.',
+                                 'enum': ['solid',
+                                          'open-shell',
+                                          'polygon',
+                                          'face',
+                                          'ring']},
+                    'group': {'description': 'Groups several kinds under '
+                                             'one heading and toggle. '
+                                             'Defaults to `kind`.',
+                              'minLength': 1,
+                              'type': 'string'},
+                    'initiallyVisible': {'description': 'Whether the '
+                                                        'feature is shown '
+                                                        'when the view '
+                                                        'opens. Default '
+                                                        'true.',
+                                         'type': 'boolean'},
+                    'kind': {'description': 'Identifier grouping this '
+                                            "rule's features, e.g. "
+                                            '`parcel-created`.',
+                             'minLength': 1,
+                             'type': 'string'},
+                    'kindLabel': {'description': 'Human-readable name for '
+                                                 'this kind, e.g. `Former '
+                                                 'Tenure`.',
+                                  'type': 'string'},
+                    'label': {'additionalProperties': False,
+                              'description': "Where a feature's label "
+                                             'comes from: the first of '
+                                             '`properties` (dot-separated '
+                                             'paths) that\n'
+                                             'resolves to a non-empty '
+                                             'value or to an object with a '
+                                             'string `label`, else '
+                                             '`fallback`\n'
+                                             '(default `id`).\n',
+                              'properties': {'fallback': {'type': 'string'},
+                                             'properties': {'items': {'type': 'string'},
+                                                            'type': 'array'}},
+                              'type': 'object'},
+                    'match': {'additionalProperties': False,
+                              'description': 'Restricts the rule to '
+                                             'features whose property '
+                                             'value (or any value, for an '
+                                             'array) equals\n'
+                                             'one of `values`. Values may '
+                                             'be literals, CURIEs expanded '
+                                             "against the document's own\n"
+                                             '`@context`, or full URIs; '
+                                             'both sides are expanded '
+                                             'before comparing.\n',
+                              'properties': {'property': {'description': 'Dot-separated '
+                                                                         'path '
+                                                                         'into '
+                                                                         'the '
+                                                                         'feature, '
+                                                                         'e.g. '
+                                                                         '`properties.parcelState`.',
+                                                          'minLength': 1,
+                                                          'type': 'string'},
+                                             'values': {'items': {'type': 'string'},
+                                                        'minItems': 1,
+                                                        'type': 'array'}},
+                              'required': ['property', 'values'],
+                              'type': 'object'},
+                    'source': {'description': 'Top-level collection of the '
+                                              'document to classify, e.g. '
+                                              '`solids`, `parcels`, '
+                                              '`faces`,\n'
+                                              '`rings`, or the derived '
+                                              '`surfaces` (shells no solid '
+                                              'uses).\n',
+                               'minLength': 1,
+                               'type': 'string'},
+                    'style': {'$ref': '#/$defs/style'}},
+     'required': ['source', 'kind', 'geometry'],
+     'type': 'object'}
+
+On instance['rules'][0]:
+    {'geometry': 'solid', 'source': 'solids'}
+=== End JSON Schema ===
+

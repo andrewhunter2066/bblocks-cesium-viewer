@@ -1,0 +1,217 @@
+{
+  "metaRegistry": "https://w3id.org/ogc/bblocks/meta-register.json",
+  "name": "Cesium globe viewer for topo-feature documents",
+  "abstract": "A CesiumJS **Globe** view for topo-feature topology documents in the Building Blocks viewer, the\nJSON Schema for its per-block configuration, and demo blocks that use it.\n",
+  "description": "The `TopoFeatureCesiumPlugin` is a [bblocks-viewer](https://github.com/opengeospatial/bblocks-viewer)\nview plugin. It adds a **Globe** tab to any example or transform output that is a\n[topo-feature](https://github.com/ogcincubator/topo-feature) document whose points carry WGS84\n`geometry`, drawing its solids, surfaces, faces and parcels at their real positions on a\nCesiumJS globe \u2014 OpenStreetMap on the flat ellipsoid by default, with no Cesium ion token needed.\n\nWhich features are drawn and how is set by rules shared with the Three.js topology view\n([bblocks-viewer-topo-feature-plugin](https://github.com/ogcincubator/bblocks-viewer-topo-feature-plugin)),\noptionally configured per block; see the *Cesium globe viewer configuration* block. This register\ndeclares the plugin itself, so the demo blocks' examples open in the Globe tab here.\n\nSource, harness and instructions for adding the plugin to another register:\n[bblocks-cesium-viewer](https://github.com/andrewhunter2066/bblocks-cesium-viewer).\n",
+  "modified": "2026-09-29T19:08:01.547702",
+  "tooling": {
+    "bblocks-postprocess": {
+      "commitId": "\"6411aed037da38c6d9079d9350eca33d004a4d0c",
+      "shortCommitId": "\"6411ae",
+      "date": "2026-09-23T12:30:49+00:00\""
+    }
+  },
+  "gitRepository": "https://github.com/andrewhunter2066/bblocks-cesium-viewer",
+  "gitHubRepository": "https://github.com/andrewhunter2066/bblocks-cesium-viewer/blob/master/",
+  "baseURL": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/",
+  "viewerURL": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/",
+  "validationReport": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/report.html",
+  "validationReportJson": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/report.json",
+  "imports": [
+    "https://opengeospatial.github.io/bblocks/register.json"
+  ],
+  "bblocks": [
+    {
+      "itemIdentifier": "ogc.bbr.template.cesiumViewerConfig",
+      "name": "Cesium globe viewer configuration",
+      "abstract": "Per-block configuration for the bblocks-viewer Globe view of topo-feature documents: which features are drawn and how (rules shared with the Three.js topology view), plus the globe's basemap, terrain and initial camera.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-28T00:00:00Z",
+      "itemClass": "schema",
+      "version": "0.1",
+      "tags": [
+        "viewer",
+        "view-plugin",
+        "cesium",
+        "topo-feature",
+        "configuration"
+      ],
+      "group": "Globe viewer",
+      "highlighted": true,
+      "links": [
+        {
+          "title": "TopoFeatureCesiumPlugin source",
+          "href": "https://github.com/andrewhunter2066/bblocks-cesium-viewer"
+        },
+        {
+          "title": "Three.js TopoFeaturePlugin (shares the rule configuration)",
+          "href": "https://github.com/ogcincubator/bblocks-viewer-topo-feature-plugin"
+        },
+        {
+          "title": "topo-feature",
+          "href": "https://github.com/ogcincubator/topo-feature"
+        }
+      ],
+      "shaclShapes": {},
+      "dateOfLastChange": "2026-09-28",
+      "schema": {
+        "application/yaml": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerConfig/schema.yaml",
+        "application/json": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerConfig/schema.json"
+      },
+      "sourceSchema": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/schema.yaml",
+      "resolvedSchemaProperties": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerConfig/resolvedProperties.json",
+      "sourceFiles": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/andrewhunter2066/bblocks-cesium-viewer/blob/master/build/tests/bbr/template/cesiumViewerConfig/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/markdown/bbr/template/cesiumViewerConfig/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/json-full/bbr/template/cesiumViewerConfig/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/bblock/ogc.bbr.template.cesiumViewerConfig"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.bbr.template.cesiumViewerDemo.parcel",
+      "name": "Globe view demo: cadastral parcel",
+      "abstract": "A Western Australian cadastral survey as a topo-feature document \u2014 a 3D lot solid, the ground surface and three parcels \u2014 shown in the Globe view with the parcel rules from the Three.js topology view.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-28T00:00:00Z",
+      "itemClass": "schema",
+      "version": "0.1",
+      "tags": [
+        "viewer",
+        "cesium",
+        "topo-feature",
+        "cadastre",
+        "demo"
+      ],
+      "group": "Globe viewer",
+      "seeAlso": [
+        "bblocks://ogc.bbr.template.cesiumViewerConfig"
+      ],
+      "resources": [
+        {
+          "role": "https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config",
+          "ref": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/parcel/viewer-config.json",
+          "format": "application/json",
+          "title": "Globe view configuration"
+        }
+      ],
+      "shaclShapes": {},
+      "dateOfLastChange": "2026-09-28",
+      "schema": {
+        "application/yaml": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/parcel/schema.yaml",
+        "application/json": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/parcel/schema.json"
+      },
+      "sourceSchema": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/parcel/schema.yaml",
+      "resolvedSchemaProperties": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/parcel/resolvedProperties.json",
+      "sourceFiles": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/parcel/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/andrewhunter2066/bblocks-cesium-viewer/blob/master/build/tests/bbr/template/cesiumViewerDemo/parcel/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/markdown/bbr/template/cesiumViewerDemo/parcel/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/json-full/bbr/template/cesiumViewerDemo/parcel/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/bblock/ogc.bbr.template.cesiumViewerDemo.parcel"
+        }
+      }
+    },
+    {
+      "itemIdentifier": "ogc.bbr.template.cesiumViewerDemo.utilityNetwork",
+      "name": "Globe view demo: underground utility network",
+      "abstract": "Four underground pipe segments as topo-feature solids, classified by asset condition \u2014 a non-cadastral document showing that the Globe view's rules are domain-independent.",
+      "status": "under-development",
+      "dateTimeAddition": "2026-09-28T00:00:00Z",
+      "itemClass": "schema",
+      "version": "0.1",
+      "tags": [
+        "viewer",
+        "cesium",
+        "topo-feature",
+        "utilities",
+        "demo"
+      ],
+      "group": "Globe viewer",
+      "seeAlso": [
+        "bblocks://ogc.bbr.template.cesiumViewerConfig"
+      ],
+      "resources": [
+        {
+          "role": "https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config",
+          "ref": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/utilityNetwork/viewer-config.json",
+          "format": "application/json",
+          "title": "Globe view configuration"
+        }
+      ],
+      "shaclShapes": {},
+      "dateOfLastChange": "2026-09-28",
+      "schema": {
+        "application/yaml": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/utilityNetwork/schema.yaml",
+        "application/json": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/utilityNetwork/schema.json"
+      },
+      "sourceSchema": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/utilityNetwork/schema.yaml",
+      "resolvedSchemaProperties": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/utilityNetwork/resolvedProperties.json",
+      "sourceFiles": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerDemo/utilityNetwork/",
+      "validationPassed": true,
+      "testOutputs": "https://github.com/andrewhunter2066/bblocks-cesium-viewer/blob/master/build/tests/bbr/template/cesiumViewerDemo/utilityNetwork/",
+      "documentation": {
+        "markdown": {
+          "mediatype": "text/markdown",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/markdown/bbr/template/cesiumViewerDemo/utilityNetwork/index.md"
+        },
+        "json-full": {
+          "mediatype": "application/json",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/generateddocs/json-full/bbr/template/cesiumViewerDemo/utilityNetwork/index.json"
+        },
+        "bblocks-viewer": {
+          "mediatype": "text/html",
+          "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/bblock/ogc.bbr.template.cesiumViewerDemo.utilityNetwork"
+        }
+      }
+    }
+  ],
+  "viewer": {
+    "viewPlugins": [
+      {
+        "url": "https://cdn.jsdelivr.net/gh/andrewhunter2066/bblocks-cesium-viewer@dist/index.js",
+        "export": "TopoFeatureCesiumPlugin"
+      }
+    ]
+  },
+  "remoteCacheDir": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/_cache",
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/register.json",
+      "type": "application/json",
+      "title": "This Building Blocks Register in JSON format"
+    },
+    {
+      "rel": "self",
+      "href": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/bblocks.ttl",
+      "type": "text/turtle",
+      "title": "This Building Blocks Register in RDF Turtle format"
+    },
+    {
+      "rel": "self",
+      "href": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/bblocks.jsonld",
+      "type": "application/ld+json",
+      "title": "This Building Blocks Register in JSON-LD format"
+    }
+  ]
+}

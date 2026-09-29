@@ -1,0 +1,10 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.883194+00:00
+=== Files ===
+Using defaults-and-flatten-to.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+Validation passed
+=== End JSON Schema ===
+

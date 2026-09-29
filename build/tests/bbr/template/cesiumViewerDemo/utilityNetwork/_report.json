@@ -1,0 +1,51 @@
+{
+  "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.utilityNetwork - Globe view demo: underground utility network",
+  "bblockName": "Globe view demo: underground utility network",
+  "bblockId": "ogc.bbr.template.cesiumViewerDemo.utilityNetwork",
+  "generated": "2026-09-29T19:08:01.923753+00:00",
+  "result": true,
+  "items": [
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/template/cesiumViewerDemo/utilityNetwork/example_1_1.json",
+        "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerDemo/utilityNetwork/example_1_1.json",
+        "exampleIndex": 1,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using ../../../harness/fixtures/utility-network-georeferenced.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "globalErrors": {},
+  "counts": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  }
+}

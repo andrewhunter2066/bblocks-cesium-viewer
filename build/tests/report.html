@@ -1,0 +1,1282 @@
+
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Building Blocks validation report</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+            .entry-message {
+                white-space: pre-wrap;
+                font-size: 80%;
+                line-height: 1.1;
+            }
+            *[data-bs-toggle] .caret {
+                display: inline-block;
+                transform: rotate(90deg);
+                transition: transform 0.25s;
+            }
+            *[data-bs-toggle].collapsed .caret {
+                transform: rotate(0deg);
+            }
+            .highlighted {
+                animation: highlight-border 3500ms ease-out;
+            }
+            .highlighted h2 button {
+                animation: highlight 3500ms ease-out;
+            }
+            @keyframes highlight {
+                0% {
+                    background: #ffff90;
+                }
+                100% {
+                    background: var(--bs-accordion-active-bg);
+                }
+            }
+            @keyframes highlight-border {
+                0% {
+                    border-color: red;
+                    border-width: 2px;
+                }
+                100% {
+                    border-color: var(--bs-accordion-border-color);
+                    border-width: var(--bs-accordion-border-width);
+                }
+            }
+            .anchor {
+                color: black;
+                opacity: 0;
+                text-decoration: none;
+                margin-left: 0.5em;
+                margin-right: 0.5em;
+            }
+            .anchor-container:hover .anchor {
+                opacity: 60%;
+            }
+            .anchor-container:hover .anchor:hover {
+                opacity: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title">Building blocks validation report</h1>
+            <small class="datetime">Generated at 2026-09-29T19:08:01.941840+00:00</small>
+                <p class="summary fw-semibold text-success">
+                    Number of passing building blocks: 3 / 3 (100%)
+                </p>
+            <div class="text-end small" id="expand-collapse">
+                <a href="#" class="expand-all">Expand all</a>
+                <a href="#" class="collapse-all">Collapse all</a>
+            </div>
+                <div class="accordion mt-2" id="bblock-reports">
+                        <div class="accordion-item bblock-report" data-bblock-id="ogc.bbr.template.cesiumViewerConfig" id="bblock-ogc.bbr.template.cesiumViewerConfig">
+                            <h2 class="accordion-header bblock-title anchor-container">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#bblock-collapse-ogc\.bbr\.template\.cesiumViewerConfig">
+                                    <div class="flex-fill">
+                                        Cesium globe viewer configuration
+                                        <small class="ms-2 bblock-id">ogc.bbr.template.cesiumViewerConfig</small>
+                                        <a class="anchor" href="#bblock-ogc.bbr.template.cesiumViewerConfig">¶</a>
+                                    </div>
+
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
+                                    </span>
+                                </button>
+                            </h2>
+                            <div class="accordion-collapse collapse " id="bblock-collapse-ogc.bbr.template.cesiumViewerConfig">
+                                <div class="accordion-body">
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 14 / 14
+                                        </p>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-1">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-1"
+                                                            aria-expanded="false" aria-controls="uid-1"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/basemap-without-placeholders-fail.json" target="_blank">basemap-without-placeholders-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-1">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-1">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using basemap-without-placeholders-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;https://tiles.example.org/tile.png&#x27; does not match &#x27;^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://&#x27;
+
+Failed validating &#x27;pattern&#x27; in schema[1][&#x27;properties&#x27;][&#x27;url&#x27;]:
+    {&#x27;pattern&#x27;: &#x27;^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://&#x27;,
+     &#x27;type&#x27;: &#x27;string&#x27;}
+
+On instance[&#x27;url&#x27;]:
+    &#x27;https://tiles.example.org/tile.png&#x27;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-2">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-2"
+                                                            aria-expanded="false" aria-controls="uid-2"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/camera-without-height-fail.json" target="_blank">camera-without-height-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-2">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-2">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using camera-without-height-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;height&#x27; is a required property
+
+Failed validating &#x27;required&#x27; in schema[&#x27;properties&#x27;][&#x27;cesium&#x27;][&#x27;properties&#x27;][&#x27;camera&#x27;]:
+    {&#x27;additionalProperties&#x27;: False,
+     &#x27;description&#x27;: &#x27;Initial view. Without it, the view frames the &#x27;
+                    &quot;document&#x27;s features.&quot;,
+     &#x27;properties&#x27;: {&#x27;heading&#x27;: {&#x27;description&#x27;: &#x27;Degrees clockwise from &#x27;
+                                               &#x27;north. Default 0.&#x27;,
+                                &#x27;type&#x27;: &#x27;number&#x27;},
+                    &#x27;height&#x27;: {&#x27;description&#x27;: &#x27;Metres above the ellipsoid.&#x27;,
+                               &#x27;type&#x27;: &#x27;number&#x27;},
+                    &#x27;latitude&#x27;: {&#x27;maximum&#x27;: 90,
+                                 &#x27;minimum&#x27;: -90,
+                                 &#x27;type&#x27;: &#x27;number&#x27;},
+                    &#x27;longitude&#x27;: {&#x27;maximum&#x27;: 180,
+                                  &#x27;minimum&#x27;: -180,
+                                  &#x27;type&#x27;: &#x27;number&#x27;},
+                    &#x27;pitch&#x27;: {&#x27;description&#x27;: &#x27;Degrees; negative looks &#x27;
+                                             &#x27;down. Default -45.&#x27;,
+                              &#x27;maximum&#x27;: 90,
+                              &#x27;minimum&#x27;: -90,
+                              &#x27;type&#x27;: &#x27;number&#x27;},
+                    &#x27;roll&#x27;: {&#x27;description&#x27;: &#x27;Degrees. Default 0.&#x27;,
+                             &#x27;type&#x27;: &#x27;number&#x27;}},
+     &#x27;required&#x27;: [&#x27;longitude&#x27;, &#x27;latitude&#x27;, &#x27;height&#x27;],
+     &#x27;type&#x27;: &#x27;object&#x27;}
+
+On instance[&#x27;cesium&#x27;][&#x27;camera&#x27;]:
+    {&#x27;latitude&#x27;: -31.9, &#x27;longitude&#x27;: 115.8}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-3">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-3"
+                                                            aria-expanded="false" aria-controls="uid-3"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/defaults-and-flatten-to.json" target="_blank">defaults-and-flatten-to.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-3">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-3">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using defaults-and-flatten-to.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-4">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-4"
+                                                            aria-expanded="false" aria-controls="uid-4"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/empty-config.json" target="_blank">empty-config.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-4">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-4">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using empty-config.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-5">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-5"
+                                                            aria-expanded="false" aria-controls="uid-5"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/http-basemap-fail.json" target="_blank">http-basemap-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-5">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-5">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using http-basemap-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;http://tiles.example.org/{z}/{x}/{y}.png&#x27; does not match &#x27;^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://&#x27;
+
+Failed validating &#x27;pattern&#x27; in schema[1][&#x27;properties&#x27;][&#x27;url&#x27;]:
+    {&#x27;pattern&#x27;: &#x27;^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://&#x27;,
+     &#x27;type&#x27;: &#x27;string&#x27;}
+
+On instance[&#x27;url&#x27;]:
+    &#x27;http://tiles.example.org/{z}/{x}/{y}.png&#x27;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-6">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-6"
+                                                            aria-expanded="false" aria-controls="uid-6"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/opacity-out-of-range-fail.json" target="_blank">opacity-out-of-range-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-6">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-6">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using opacity-out-of-range-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: 1.5 is greater than the maximum of 1
+
+Failed validating &#x27;maximum&#x27; in schema[&#x27;properties&#x27;][&#x27;rules&#x27;][&#x27;items&#x27;][&#x27;properties&#x27;][&#x27;style&#x27;][&#x27;properties&#x27;][&#x27;opacity&#x27;]:
+    {&#x27;description&#x27;: &#x27;Fill opacity, 0 (transparent) to 1 (opaque).&#x27;,
+     &#x27;maximum&#x27;: 1,
+     &#x27;minimum&#x27;: 0,
+     &#x27;type&#x27;: &#x27;number&#x27;}
+
+On instance[&#x27;rules&#x27;][0][&#x27;style&#x27;][&#x27;opacity&#x27;]:
+    1.5</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-7">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-7"
+                                                            aria-expanded="false" aria-controls="uid-7"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/rule-missing-kind-fail.json" target="_blank">rule-missing-kind-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-7">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-7">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using rule-missing-kind-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;kind&#x27; is a required property
+
+Failed validating &#x27;required&#x27; in schema[&#x27;properties&#x27;][&#x27;rules&#x27;][&#x27;items&#x27;]:
+    {&#x27;additionalProperties&#x27;: False,
+     &#x27;properties&#x27;: {&#x27;elevation&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/elevation&#x27;},
+                    &#x27;geometry&#x27;: {&#x27;description&#x27;: &quot;How the feature&#x27;s &quot;
+                                                &#x27;topology is turned into a &#x27;
+                                                &#x27;shape.&#x27;,
+                                 &#x27;enum&#x27;: [&#x27;solid&#x27;,
+                                          &#x27;open-shell&#x27;,
+                                          &#x27;polygon&#x27;,
+                                          &#x27;face&#x27;,
+                                          &#x27;ring&#x27;]},
+                    &#x27;group&#x27;: {&#x27;description&#x27;: &#x27;Groups several kinds under &#x27;
+                                             &#x27;one heading and toggle. &#x27;
+                                             &#x27;Defaults to `kind`.&#x27;,
+                              &#x27;minLength&#x27;: 1,
+                              &#x27;type&#x27;: &#x27;string&#x27;},
+                    &#x27;initiallyVisible&#x27;: {&#x27;description&#x27;: &#x27;Whether the &#x27;
+                                                        &#x27;feature is shown &#x27;
+                                                        &#x27;when the view &#x27;
+                                                        &#x27;opens. Default &#x27;
+                                                        &#x27;true.&#x27;,
+                                         &#x27;type&#x27;: &#x27;boolean&#x27;},
+                    &#x27;kind&#x27;: {&#x27;description&#x27;: &#x27;Identifier grouping this &#x27;
+                                            &quot;rule&#x27;s features, e.g. &quot;
+                                            &#x27;`parcel-created`.&#x27;,
+                             &#x27;minLength&#x27;: 1,
+                             &#x27;type&#x27;: &#x27;string&#x27;},
+                    &#x27;kindLabel&#x27;: {&#x27;description&#x27;: &#x27;Human-readable name for &#x27;
+                                                 &#x27;this kind, e.g. `Former &#x27;
+                                                 &#x27;Tenure`.&#x27;,
+                                  &#x27;type&#x27;: &#x27;string&#x27;},
+                    &#x27;label&#x27;: {&#x27;additionalProperties&#x27;: False,
+                              &#x27;description&#x27;: &quot;Where a feature&#x27;s label &quot;
+                                             &#x27;comes from: the first of &#x27;
+                                             &#x27;`properties` (dot-separated &#x27;
+                                             &#x27;paths) that\n&#x27;
+                                             &#x27;resolves to a non-empty &#x27;
+                                             &#x27;value or to an object with a &#x27;
+                                             &#x27;string `label`, else &#x27;
+                                             &#x27;`fallback`\n&#x27;
+                                             &#x27;(default `id`).\n&#x27;,
+                              &#x27;properties&#x27;: {&#x27;fallback&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                             &#x27;properties&#x27;: {&#x27;items&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                                            &#x27;type&#x27;: &#x27;array&#x27;}},
+                              &#x27;type&#x27;: &#x27;object&#x27;},
+                    &#x27;match&#x27;: {&#x27;additionalProperties&#x27;: False,
+                              &#x27;description&#x27;: &#x27;Restricts the rule to &#x27;
+                                             &#x27;features whose property &#x27;
+                                             &#x27;value (or any value, for an &#x27;
+                                             &#x27;array) equals\n&#x27;
+                                             &#x27;one of `values`. Values may &#x27;
+                                             &#x27;be literals, CURIEs expanded &#x27;
+                                             &quot;against the document&#x27;s own\n&quot;
+                                             &#x27;`@context`, or full URIs; &#x27;
+                                             &#x27;both sides are expanded &#x27;
+                                             &#x27;before comparing.\n&#x27;,
+                              &#x27;properties&#x27;: {&#x27;property&#x27;: {&#x27;description&#x27;: &#x27;Dot-separated &#x27;
+                                                                         &#x27;path &#x27;
+                                                                         &#x27;into &#x27;
+                                                                         &#x27;the &#x27;
+                                                                         &#x27;feature, &#x27;
+                                                                         &#x27;e.g. &#x27;
+                                                                         &#x27;`properties.parcelState`.&#x27;,
+                                                          &#x27;minLength&#x27;: 1,
+                                                          &#x27;type&#x27;: &#x27;string&#x27;},
+                                             &#x27;values&#x27;: {&#x27;items&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                                        &#x27;minItems&#x27;: 1,
+                                                        &#x27;type&#x27;: &#x27;array&#x27;}},
+                              &#x27;required&#x27;: [&#x27;property&#x27;, &#x27;values&#x27;],
+                              &#x27;type&#x27;: &#x27;object&#x27;},
+                    &#x27;source&#x27;: {&#x27;description&#x27;: &#x27;Top-level collection of the &#x27;
+                                              &#x27;document to classify, e.g. &#x27;
+                                              &#x27;`solids`, `parcels`, &#x27;
+                                              &#x27;`faces`,\n&#x27;
+                                              &#x27;`rings`, or the derived &#x27;
+                                              &#x27;`surfaces` (shells no solid &#x27;
+                                              &#x27;uses).\n&#x27;,
+                               &#x27;minLength&#x27;: 1,
+                               &#x27;type&#x27;: &#x27;string&#x27;},
+                    &#x27;style&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/style&#x27;}},
+     &#x27;required&#x27;: [&#x27;source&#x27;, &#x27;kind&#x27;, &#x27;geometry&#x27;],
+     &#x27;type&#x27;: &#x27;object&#x27;}
+
+On instance[&#x27;rules&#x27;][0]:
+    {&#x27;geometry&#x27;: &#x27;solid&#x27;, &#x27;source&#x27;: &#x27;solids&#x27;}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-8">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-8"
+                                                            aria-expanded="false" aria-controls="uid-8"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/unknown-geometry-fail.json" target="_blank">unknown-geometry-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-8">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-8">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using unknown-geometry-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;sphere&#x27; is not one of [&#x27;solid&#x27;, &#x27;open-shell&#x27;, &#x27;polygon&#x27;, &#x27;face&#x27;, &#x27;ring&#x27;]
+
+Failed validating &#x27;enum&#x27; in schema[&#x27;properties&#x27;][&#x27;rules&#x27;][&#x27;items&#x27;][&#x27;properties&#x27;][&#x27;geometry&#x27;]:
+    {&#x27;description&#x27;: &quot;How the feature&#x27;s topology is turned into a shape.&quot;,
+     &#x27;enum&#x27;: [&#x27;solid&#x27;, &#x27;open-shell&#x27;, &#x27;polygon&#x27;, &#x27;face&#x27;, &#x27;ring&#x27;]}
+
+On instance[&#x27;rules&#x27;][0][&#x27;geometry&#x27;]:
+    &#x27;sphere&#x27;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-9">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-9"
+                                                            aria-expanded="false" aria-controls="uid-9"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/unknown-member-fail.json" target="_blank">unknown-member-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-9">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-9">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using unknown-member-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: Additional properties are not allowed (&#x27;ruls&#x27; was unexpected)
+
+Failed validating &#x27;additionalProperties&#x27; in schema:
+    {&#x27;$defs&#x27;: {&#x27;cesiumOptions&#x27;: {&#x27;additionalProperties&#x27;: False,
+                                 &#x27;description&#x27;: &#x27;Globe-only options. &#x27;
+                                                &#x27;Everything works without &#x27;
+                                                &#x27;an ion token: the default &#x27;
+                                                &#x27;is OpenStreetMap\n&#x27;
+                                                &#x27;imagery on the flat WGS84 &#x27;
+                                                &#x27;ellipsoid.\n&#x27;,
+                                 &#x27;properties&#x27;: {&#x27;basemap&#x27;: {&#x27;description&#x27;: &#x27;`osm` &#x27;
+                                                                           &#x27;(default), &#x27;
+                                                                           &#x27;`ion` &#x27;
+                                                                           &#x27;(Cesium &#x27;
+                                                                           &#x27;ion &#x27;
+                                                                           &#x27;world &#x27;
+                                                                           &#x27;imagery; &#x27;
+                                                                           &#x27;needs &#x27;
+                                                                           &#x27;`ionToken`), &#x27;
+                                                                           &#x27;or &#x27;
+                                                                           &#x27;an &#x27;
+                                                                           &#x27;XYZ &#x27;
+                                                                           &#x27;tile\n&#x27;
+                                                                           &#x27;template &#x27;
+                                                                           &#x27;served &#x27;
+                                                                           &#x27;over &#x27;
+                                                                           &#x27;https &#x27;
+                                                                           &#x27;with &#x27;
+                                                                           &#x27;`{z}`, &#x27;
+                                                                           &#x27;`{x}` &#x27;
+                                                                           &#x27;and &#x27;
+                                                                           &#x27;`{y}` &#x27;
+                                                                           &#x27;placeholders.\n&#x27;,
+                                                            &#x27;oneOf&#x27;: [{&#x27;enum&#x27;: [&#x27;osm&#x27;,
+                                                                                &#x27;ion&#x27;]},
+                                                                      {&#x27;additionalProperties&#x27;: False,
+                                                                       &#x27;properties&#x27;: {&#x27;credit&#x27;: {&#x27;description&#x27;: &#x27;Attribution &#x27;
+                                                                                                                &#x27;shown &#x27;
+                                                                                                                &#x27;on &#x27;
+                                                                                                                &#x27;the &#x27;
+                                                                                                                &#x27;globe; &#x27;
+                                                                                                                &#x27;required &#x27;
+                                                                                                                &#x27;by &#x27;
+                                                                                                                &#x27;most &#x27;
+                                                                                                                &#x27;tile &#x27;
+                                                                                                                &#x27;providers.&#x27;,
+                                                                                                 &#x27;type&#x27;: &#x27;string&#x27;},
+                                                                                      &#x27;maximumLevel&#x27;: {&#x27;description&#x27;: &#x27;Deepest &#x27;
+                                                                                                                      &#x27;zoom &#x27;
+                                                                                                                      &#x27;level &#x27;
+                                                                                                                      &#x27;the &#x27;
+                                                                                                                      &#x27;tile &#x27;
+                                                                                                                      &#x27;server &#x27;
+                                                                                                                      &#x27;has.&#x27;,
+                                                                                                       &#x27;minimum&#x27;: 0,
+                                                                                                       &#x27;type&#x27;: &#x27;integer&#x27;},
+                                                                                      &#x27;url&#x27;: {&#x27;pattern&#x27;: &#x27;^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://&#x27;,
+                                                                                              &#x27;type&#x27;: &#x27;string&#x27;}},
+                                                                       &#x27;required&#x27;: [&#x27;url&#x27;],
+                                                                       &#x27;type&#x27;: &#x27;object&#x27;}]},
+                                                &#x27;camera&#x27;: {&#x27;additionalProperties&#x27;: False,
+                                                           &#x27;description&#x27;: &#x27;Initial &#x27;
+                                                                          &#x27;view. &#x27;
+                                                                          &#x27;Without &#x27;
+                                                                          &#x27;it, &#x27;
+                                                                          &#x27;the &#x27;
+                                                                          &#x27;view &#x27;
+                                                                          &#x27;frames &#x27;
+                                                                          &#x27;the &#x27;
+                                                                          &quot;document&#x27;s &quot;
+                                                                          &#x27;features.&#x27;,
+                                                           &#x27;properties&#x27;: {&#x27;heading&#x27;: {&#x27;description&#x27;: &#x27;Degrees &#x27;
+                                                                                                     &#x27;clockwise &#x27;
+                                                                                                     &#x27;from &#x27;
+                                                                                                     &#x27;north. &#x27;
+                                                                                                     &#x27;Default &#x27;
+                                                                                                     &#x27;0.&#x27;,
+                                                                                      &#x27;type&#x27;: &#x27;number&#x27;},
+                                                                          &#x27;height&#x27;: {&#x27;description&#x27;: &#x27;Metres &#x27;
+                                                                                                    &#x27;above &#x27;
+                                                                                                    &#x27;the &#x27;
+                                                                                                    &#x27;ellipsoid.&#x27;,
+                                                                                     &#x27;type&#x27;: &#x27;number&#x27;},
+                                                                          &#x27;latitude&#x27;: {&#x27;maximum&#x27;: 90,
+                                                                                       &#x27;minimum&#x27;: -90,
+                                                                                       &#x27;type&#x27;: &#x27;number&#x27;},
+                                                                          &#x27;longitude&#x27;: {&#x27;maximum&#x27;: 180,
+                                                                                        &#x27;minimum&#x27;: -180,
+                                                                                        &#x27;type&#x27;: &#x27;number&#x27;},
+                                                                          &#x27;pitch&#x27;: {&#x27;description&#x27;: &#x27;Degrees; &#x27;
+                                                                                                   &#x27;negative &#x27;
+                                                                                                   &#x27;looks &#x27;
+                                                                                                   &#x27;down. &#x27;
+                                                                                                   &#x27;Default &#x27;
+                                                                                                   &#x27;-45.&#x27;,
+                                                                                    &#x27;maximum&#x27;: 90,
+                                                                                    &#x27;minimum&#x27;: -90,
+                                                                                    &#x27;type&#x27;: &#x27;number&#x27;},
+                                                                          &#x27;roll&#x27;: {&#x27;description&#x27;: &#x27;Degrees. &#x27;
+                                                                                                  &#x27;Default &#x27;
+                                                                                                  &#x27;0.&#x27;,
+                                                                                   &#x27;type&#x27;: &#x27;number&#x27;}},
+                                                           &#x27;required&#x27;: [&#x27;longitude&#x27;,
+                                                                        &#x27;latitude&#x27;,
+                                                                        &#x27;height&#x27;],
+                                                           &#x27;type&#x27;: &#x27;object&#x27;},
+                                                &#x27;ionToken&#x27;: {&#x27;description&#x27;: &#x27;Cesium &#x27;
+                                                                            &#x27;ion &#x27;
+                                                                            &#x27;access &#x27;
+                                                                            &#x27;token, &#x27;
+                                                                            &#x27;used &#x27;
+                                                                            &#x27;only &#x27;
+                                                                            &#x27;by &#x27;
+                                                                            &#x27;`ion` &#x27;
+                                                                            &#x27;imagery &#x27;
+                                                                            &#x27;or &#x27;
+                                                                            &#x27;terrain. &#x27;
+                                                                            &#x27;Never &#x27;
+                                                                            &#x27;commit &#x27;
+                                                                            &#x27;one: &#x27;
+                                                                            &#x27;a\n&#x27;
+                                                                            &#x27;published &#x27;
+                                                                            &#x27;register &#x27;
+                                                                            &#x27;injects &#x27;
+                                                                            &#x27;it &#x27;
+                                                                            &#x27;at &#x27;
+                                                                            &#x27;build &#x27;
+                                                                            &#x27;time &#x27;
+                                                                            &#x27;from &#x27;
+                                                                            &#x27;a &#x27;
+                                                                            &#x27;CI &#x27;
+                                                                            &#x27;secret. &#x27;
+                                                                            &#x27;It &#x27;
+                                                                            &#x27;is &#x27;
+                                                                            &#x27;visible &#x27;
+                                                                            &#x27;to &#x27;
+                                                                            &#x27;anyone\n&#x27;
+                                                                            &#x27;using &#x27;
+                                                                            &#x27;the &#x27;
+                                                                            &#x27;viewer, &#x27;
+                                                                            &#x27;so &#x27;
+                                                                            &#x27;it &#x27;
+                                                                            &#x27;must &#x27;
+                                                                            &#x27;be &#x27;
+                                                                            &#x27;scoped &#x27;
+                                                                            &#x27;to &#x27;
+                                                                            &#x27;`assets:read` &#x27;
+                                                                            &#x27;and &#x27;
+                                                                            &#x27;restricted &#x27;
+                                                                            &#x27;to &#x27;
+                                                                            &#x27;the &#x27;
+                                                                            &quot;register&#x27;s\n&quot;
+                                                                            &#x27;domain.\n&#x27;,
+                                                             &#x27;type&#x27;: &#x27;string&#x27;},
+                                                &#x27;terrain&#x27;: {&#x27;description&#x27;: &#x27;`ellipsoid` &#x27;
+                                                                           &#x27;(default, &#x27;
+                                                                           &#x27;flat) &#x27;
+                                                                           &#x27;or &#x27;
+                                                                           &#x27;`ion` &#x27;
+                                                                           &#x27;(Cesium &#x27;
+                                                                           &#x27;World &#x27;
+                                                                           &#x27;Terrain; &#x27;
+                                                                           &#x27;needs &#x27;
+                                                                           &#x27;`ionToken`).&#x27;,
+                                                            &#x27;enum&#x27;: [&#x27;ellipsoid&#x27;,
+                                                                     &#x27;ion&#x27;]}},
+                                 &#x27;type&#x27;: &#x27;object&#x27;},
+               &#x27;elevation&#x27;: {&#x27;description&#x27;: &#x27;`preserve` (default) keeps &#x27;
+                                            &quot;each point&#x27;s height; &quot;
+                                            &#x27;`flatten` clamps the feature &#x27;
+                                            &#x27;to the ground\n&#x27;
+                                            &#x27;(terrain, or the ellipsoid); &#x27;
+                                            &#x27;`{ &quot;flattenTo&quot;: n }` places &#x27;
+                                            &#x27;it n metres above the &#x27;
+                                            &#x27;ellipsoid.\n&#x27;,
+                             &#x27;oneOf&#x27;: [{&#x27;enum&#x27;: [&#x27;preserve&#x27;, &#x27;flatten&#x27;]},
+                                       {&#x27;additionalProperties&#x27;: False,
+                                        &#x27;properties&#x27;: {&#x27;flattenTo&#x27;: {&#x27;type&#x27;: &#x27;number&#x27;}},
+                                        &#x27;required&#x27;: [&#x27;flattenTo&#x27;],
+                                        &#x27;type&#x27;: &#x27;object&#x27;}]},
+               &#x27;rule&#x27;: {&#x27;additionalProperties&#x27;: False,
+                        &#x27;properties&#x27;: {&#x27;elevation&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/elevation&#x27;},
+                                       &#x27;geometry&#x27;: {&#x27;description&#x27;: &#x27;How &#x27;
+                                                                   &#x27;the &#x27;
+                                                                   &quot;feature&#x27;s &quot;
+                                                                   &#x27;topology &#x27;
+                                                                   &#x27;is &#x27;
+                                                                   &#x27;turned &#x27;
+                                                                   &#x27;into a &#x27;
+                                                                   &#x27;shape.&#x27;,
+                                                    &#x27;enum&#x27;: [&#x27;solid&#x27;,
+                                                             &#x27;open-shell&#x27;,
+                                                             &#x27;polygon&#x27;,
+                                                             &#x27;face&#x27;,
+                                                             &#x27;ring&#x27;]},
+                                       &#x27;group&#x27;: {&#x27;description&#x27;: &#x27;Groups &#x27;
+                                                                &#x27;several &#x27;
+                                                                &#x27;kinds &#x27;
+                                                                &#x27;under one &#x27;
+                                                                &#x27;heading &#x27;
+                                                                &#x27;and &#x27;
+                                                                &#x27;toggle. &#x27;
+                                                                &#x27;Defaults &#x27;
+                                                                &#x27;to &#x27;
+                                                                &#x27;`kind`.&#x27;,
+                                                 &#x27;minLength&#x27;: 1,
+                                                 &#x27;type&#x27;: &#x27;string&#x27;},
+                                       &#x27;initiallyVisible&#x27;: {&#x27;description&#x27;: &#x27;Whether &#x27;
+                                                                           &#x27;the &#x27;
+                                                                           &#x27;feature &#x27;
+                                                                           &#x27;is &#x27;
+                                                                           &#x27;shown &#x27;
+                                                                           &#x27;when &#x27;
+                                                                           &#x27;the &#x27;
+                                                                           &#x27;view &#x27;
+                                                                           &#x27;opens. &#x27;
+                                                                           &#x27;Default &#x27;
+                                                                           &#x27;true.&#x27;,
+                                                            &#x27;type&#x27;: &#x27;boolean&#x27;},
+                                       &#x27;kind&#x27;: {&#x27;description&#x27;: &#x27;Identifier &#x27;
+                                                               &#x27;grouping &#x27;
+                                                               &#x27;this &#x27;
+                                                               &quot;rule&#x27;s &quot;
+                                                               &#x27;features, &#x27;
+                                                               &#x27;e.g. &#x27;
+                                                               &#x27;`parcel-created`.&#x27;,
+                                                &#x27;minLength&#x27;: 1,
+                                                &#x27;type&#x27;: &#x27;string&#x27;},
+                                       &#x27;kindLabel&#x27;: {&#x27;description&#x27;: &#x27;Human-readable &#x27;
+                                                                    &#x27;name &#x27;
+                                                                    &#x27;for &#x27;
+                                                                    &#x27;this &#x27;
+                                                                    &#x27;kind, &#x27;
+                                                                    &#x27;e.g. &#x27;
+                                                                    &#x27;`Former &#x27;
+                                                                    &#x27;Tenure`.&#x27;,
+                                                     &#x27;type&#x27;: &#x27;string&#x27;},
+                                       &#x27;label&#x27;: {&#x27;additionalProperties&#x27;: False,
+                                                 &#x27;description&#x27;: &#x27;Where a &#x27;
+                                                                &quot;feature&#x27;s &quot;
+                                                                &#x27;label &#x27;
+                                                                &#x27;comes &#x27;
+                                                                &#x27;from: the &#x27;
+                                                                &#x27;first of &#x27;
+                                                                &#x27;`properties` &#x27;
+                                                                &#x27;(dot-separated &#x27;
+                                                                &#x27;paths) &#x27;
+                                                                &#x27;that\n&#x27;
+                                                                &#x27;resolves &#x27;
+                                                                &#x27;to a &#x27;
+                                                                &#x27;non-empty &#x27;
+                                                                &#x27;value or &#x27;
+                                                                &#x27;to an &#x27;
+                                                                &#x27;object &#x27;
+                                                                &#x27;with a &#x27;
+                                                                &#x27;string &#x27;
+                                                                &#x27;`label`, &#x27;
+                                                                &#x27;else &#x27;
+                                                                &#x27;`fallback`\n&#x27;
+                                                                &#x27;(default &#x27;
+                                                                &#x27;`id`).\n&#x27;,
+                                                 &#x27;properties&#x27;: {&#x27;fallback&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                                                &#x27;properties&#x27;: {&#x27;items&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                                                               &#x27;type&#x27;: &#x27;array&#x27;}},
+                                                 &#x27;type&#x27;: &#x27;object&#x27;},
+                                       &#x27;match&#x27;: {&#x27;additionalProperties&#x27;: False,
+                                                 &#x27;description&#x27;: &#x27;Restricts &#x27;
+                                                                &#x27;the rule &#x27;
+                                                                &#x27;to &#x27;
+                                                                &#x27;features &#x27;
+                                                                &#x27;whose &#x27;
+                                                                &#x27;property &#x27;
+                                                                &#x27;value (or &#x27;
+                                                                &#x27;any &#x27;
+                                                                &#x27;value, &#x27;
+                                                                &#x27;for an &#x27;
+                                                                &#x27;array) &#x27;
+                                                                &#x27;equals\n&#x27;
+                                                                &#x27;one of &#x27;
+                                                                &#x27;`values`. &#x27;
+                                                                &#x27;Values &#x27;
+                                                                &#x27;may be &#x27;
+                                                                &#x27;literals, &#x27;
+                                                                &#x27;CURIEs &#x27;
+                                                                &#x27;expanded &#x27;
+                                                                &#x27;against &#x27;
+                                                                &#x27;the &#x27;
+                                                                &quot;document&#x27;s &quot;
+                                                                &#x27;own\n&#x27;
+                                                                &#x27;`@context`, &#x27;
+                                                                &#x27;or full &#x27;
+                                                                &#x27;URIs; &#x27;
+                                                                &#x27;both &#x27;
+                                                                &#x27;sides are &#x27;
+                                                                &#x27;expanded &#x27;
+                                                                &#x27;before &#x27;
+                                                                &#x27;comparing.\n&#x27;,
+                                                 &#x27;properties&#x27;: {&#x27;property&#x27;: {&#x27;description&#x27;: &#x27;Dot-separated &#x27;
+                                                                                            &#x27;path &#x27;
+                                                                                            &#x27;into &#x27;
+                                                                                            &#x27;the &#x27;
+                                                                                            &#x27;feature, &#x27;
+                                                                                            &#x27;e.g. &#x27;
+                                                                                            &#x27;`properties.parcelState`.&#x27;,
+                                                                             &#x27;minLength&#x27;: 1,
+                                                                             &#x27;type&#x27;: &#x27;string&#x27;},
+                                                                &#x27;values&#x27;: {&#x27;items&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                                                           &#x27;minItems&#x27;: 1,
+                                                                           &#x27;type&#x27;: &#x27;array&#x27;}},
+                                                 &#x27;required&#x27;: [&#x27;property&#x27;,
+                                                              &#x27;values&#x27;],
+                                                 &#x27;type&#x27;: &#x27;object&#x27;},
+                                       &#x27;source&#x27;: {&#x27;description&#x27;: &#x27;Top-level &#x27;
+                                                                 &#x27;collection &#x27;
+                                                                 &#x27;of the &#x27;
+                                                                 &#x27;document &#x27;
+                                                                 &#x27;to &#x27;
+                                                                 &#x27;classify, &#x27;
+                                                                 &#x27;e.g. &#x27;
+                                                                 &#x27;`solids`, &#x27;
+                                                                 &#x27;`parcels`, &#x27;
+                                                                 &#x27;`faces`,\n&#x27;
+                                                                 &#x27;`rings`, &#x27;
+                                                                 &#x27;or the &#x27;
+                                                                 &#x27;derived &#x27;
+                                                                 &#x27;`surfaces` &#x27;
+                                                                 &#x27;(shells &#x27;
+                                                                 &#x27;no solid &#x27;
+                                                                 &#x27;uses).\n&#x27;,
+                                                  &#x27;minLength&#x27;: 1,
+                                                  &#x27;type&#x27;: &#x27;string&#x27;},
+                                       &#x27;style&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/style&#x27;}},
+                        &#x27;required&#x27;: [&#x27;source&#x27;, &#x27;kind&#x27;, &#x27;geometry&#x27;],
+                        &#x27;type&#x27;: &#x27;object&#x27;},
+               &#x27;style&#x27;: {&#x27;additionalProperties&#x27;: False,
+                         &#x27;properties&#x27;: {&#x27;color&#x27;: {&#x27;description&#x27;: &#x27;Fill &#x27;
+                                                                 &#x27;colour, &#x27;
+                                                                 &#x27;any CSS &#x27;
+                                                                 &#x27;colour &#x27;
+                                                                 &#x27;(e.g. &#x27;
+                                                                 &#x27;`#a1531a`). &#x27;
+                                                                 &#x27;Default &#x27;
+                                                                 &#x27;cycles a &#x27;
+                                                                 &#x27;palette.&#x27;,
+                                                  &#x27;type&#x27;: &#x27;string&#x27;},
+                                        &#x27;lineColor&#x27;: {&#x27;description&#x27;: &#x27;Outline &#x27;
+                                                                     &#x27;colour, &#x27;
+                                                                     &#x27;any &#x27;
+                                                                     &#x27;CSS &#x27;
+                                                                     &#x27;colour. &#x27;
+                                                                     &#x27;Default &#x27;
+                                                                     &#x27;white.&#x27;,
+                                                      &#x27;type&#x27;: &#x27;string&#x27;},
+                                        &#x27;lineStyle&#x27;: {&#x27;enum&#x27;: [&#x27;solid&#x27;,
+                                                               &#x27;dashed&#x27;]},
+                                        &#x27;opacity&#x27;: {&#x27;description&#x27;: &#x27;Fill &#x27;
+                                                                   &#x27;opacity, &#x27;
+                                                                   &#x27;0 &#x27;
+                                                                   &#x27;(transparent) &#x27;
+                                                                   &#x27;to 1 &#x27;
+                                                                   &#x27;(opaque).&#x27;,
+                                                    &#x27;maximum&#x27;: 1,
+                                                    &#x27;minimum&#x27;: 0,
+                                                    &#x27;type&#x27;: &#x27;number&#x27;}},
+                         &#x27;type&#x27;: &#x27;object&#x27;}},
+     &#x27;$schema&#x27;: &#x27;https://json-schema.org/draft/2020-12/schema&#x27;,
+     &#x27;additionalProperties&#x27;: False,
+     &#x27;description&#x27;: &#x27;Per-block configuration for the &#x27;
+                    &#x27;TopoFeatureCesiumPlugin, the bblocks-viewer &quot;Globe&quot; &#x27;
+                    &#x27;view of\n&#x27;
+                    &#x27;topo-feature documents. A block declares it as a &#x27;
+                    &#x27;`resources` entry in its `bblock.json` with the\n&#x27;
+                    &#x27;role &#x27;
+                    &#x27;`https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config`.\n&#x27;
+                    &#x27;\n&#x27;
+                    &#x27;`rules`, `defaults` and `kindOrder` are the &#x27;
+                    &#x27;rule-engine configuration shared with the Three.js\n&#x27;
+                    &#x27;TopoFeaturePlugin &#x27;
+                    &#x27;(bblocks-viewer-topo-feature-plugin); `cesium` holds &#x27;
+                    &#x27;the globe-only options.\n&#x27;
+                    &#x27;Every member is optional: an omitted `rules` keeps &#x27;
+                    &quot;the plugin&#x27;s built-in rules.\n&quot;,
+     &#x27;properties&#x27;: {&#x27;cesium&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/cesiumOptions&#x27;},
+                    &#x27;defaults&#x27;: {&#x27;additionalProperties&#x27;: False,
+                                 &#x27;description&#x27;: &#x27;Defaults merged under &#x27;
+                                                &#x27;every rule; `style` is &#x27;
+                                                &#x27;merged key by key.&#x27;,
+                                 &#x27;properties&#x27;: {&#x27;elevation&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/elevation&#x27;},
+                                                &#x27;style&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/style&#x27;}},
+                                 &#x27;type&#x27;: &#x27;object&#x27;},
+                    &#x27;kindOrder&#x27;: {&#x27;description&#x27;: &#x27;Preferred order of &#x27;
+                                                 &#x27;kinds, for viewers that &#x27;
+                                                 &#x27;list them.&#x27;,
+                                  &#x27;items&#x27;: {&#x27;type&#x27;: &#x27;string&#x27;},
+                                  &#x27;type&#x27;: &#x27;array&#x27;},
+                    &#x27;rules&#x27;: {&#x27;description&#x27;: &#x27;Ordered rules. For each &#x27;
+                                             &#x27;feature, the first rule &#x27;
+                                             &#x27;whose `source` is the &#x27;
+                                             &#x27;collection it came from\n&#x27;
+                                             &#x27;and whose `match` (if any) &#x27;
+                                             &#x27;applies decides how it is &#x27;
+                                             &#x27;drawn; a feature no rule &#x27;
+                                             &#x27;claims is not\n&#x27;
+                                             &#x27;drawn. A non-empty list &#x27;
+                                             &#x27;replaces the built-in rules &#x27;
+                                             &#x27;entirely.\n&#x27;,
+                              &#x27;items&#x27;: {&#x27;$ref&#x27;: &#x27;#/$defs/rule&#x27;},
+                              &#x27;type&#x27;: &#x27;array&#x27;}},
+     &#x27;title&#x27;: &#x27;Cesium globe viewer configuration&#x27;,
+     &#x27;type&#x27;: &#x27;object&#x27;}
+
+On instance:
+    {&#x27;ruls&#x27;: []}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item require-fail" id="item-ogc.bbr.template.cesiumViewerConfig-10">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-10"
+                                                            aria-expanded="false" aria-controls="uid-10"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="../../_sources/cesiumViewerConfig/tests/unknown-terrain-fail.json" target="_blank">unknown-terrain-fail.json</a>
+                                                    <span class="badge bg-secondary test_resource">Test resource</span>
+                                                        <span class="badge text-bg-info">Requires fail</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-10">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-10">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">General</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-general ">Test was expected to fail and it did.</div>
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using unknown-terrain-fail.json from test resources</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema text-danger">ValidationError: &#x27;mars&#x27; is not one of [&#x27;ellipsoid&#x27;, &#x27;ion&#x27;]
+
+Failed validating &#x27;enum&#x27; in schema[&#x27;properties&#x27;][&#x27;cesium&#x27;][&#x27;properties&#x27;][&#x27;terrain&#x27;]:
+    {&#x27;description&#x27;: &#x27;`ellipsoid` (default, flat) or `ion` (Cesium World &#x27;
+                    &#x27;Terrain; needs `ionToken`).&#x27;,
+     &#x27;enum&#x27;: [&#x27;ellipsoid&#x27;, &#x27;ion&#x27;]}
+
+On instance[&#x27;cesium&#x27;][&#x27;terrain&#x27;]:
+    &#x27;mars&#x27;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-11">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-11"
+                                                            aria-expanded="false" aria-controls="uid-11"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerConfig/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-11">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-11">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using ../cesiumViewerDemo/parcel/viewer-config.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-12">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-12"
+                                                            aria-expanded="false" aria-controls="uid-12"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerConfig/example_2_1.json" target="_blank">example_2_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-12">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-12">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using ../cesiumViewerDemo/utilityNetwork/viewer-config.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-13">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-13"
+                                                            aria-expanded="false" aria-controls="uid-13"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerConfig/example_3_1.json" target="_blank">example_3_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-13">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-13">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using examples/basemap-and-camera.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerConfig-14">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-14"
+                                                            aria-expanded="false" aria-controls="uid-14"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerConfig/example_4_1.json" target="_blank">example_4_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerConfig-14">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-14">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using examples/ion-imagery-and-terrain.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item bblock-report" data-bblock-id="ogc.bbr.template.cesiumViewerDemo.parcel" id="bblock-ogc.bbr.template.cesiumViewerDemo.parcel">
+                            <h2 class="accordion-header bblock-title anchor-container">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#bblock-collapse-ogc\.bbr\.template\.cesiumViewerDemo\.parcel">
+                                    <div class="flex-fill">
+                                        Globe view demo: cadastral parcel
+                                        <small class="ms-2 bblock-id">ogc.bbr.template.cesiumViewerDemo.parcel</small>
+                                        <a class="anchor" href="#bblock-ogc.bbr.template.cesiumViewerDemo.parcel">¶</a>
+                                    </div>
+
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
+                                    </span>
+                                </button>
+                            </h2>
+                            <div class="accordion-collapse collapse " id="bblock-collapse-ogc.bbr.template.cesiumViewerDemo.parcel">
+                                <div class="accordion-body">
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 1 / 1
+                                        </p>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerDemo.parcel-1">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-15"
+                                                            aria-expanded="false" aria-controls="uid-15"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerDemo/parcel/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerDemo.parcel-1">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-15">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using ../../../harness/fixtures/parcel.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item bblock-report" data-bblock-id="ogc.bbr.template.cesiumViewerDemo.utilityNetwork" id="bblock-ogc.bbr.template.cesiumViewerDemo.utilityNetwork">
+                            <h2 class="accordion-header bblock-title anchor-container">
+                                <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#bblock-collapse-ogc\.bbr\.template\.cesiumViewerDemo\.utilityNetwork">
+                                    <div class="flex-fill">
+                                        Globe view demo: underground utility network
+                                        <small class="ms-2 bblock-id">ogc.bbr.template.cesiumViewerDemo.utilityNetwork</small>
+                                        <a class="anchor" href="#bblock-ogc.bbr.template.cesiumViewerDemo.utilityNetwork">¶</a>
+                                    </div>
+
+                                    <span class="badge text-bg-success me-2">
+                                            Passed
+                                            (100% passed)
+                                    </span>
+                                </button>
+                            </h2>
+                            <div class="accordion-collapse collapse " id="bblock-collapse-ogc.bbr.template.cesiumViewerDemo.utilityNetwork">
+                                <div class="accordion-body">
+                                        <p class="summary fw-semibold text-success">
+                                            Test passed: 1 / 1
+                                        </p>
+                                        <div class="card mb-2 validation-item " id="item-ogc.bbr.template.cesiumViewerDemo.utilityNetwork-1">
+                                            <div class="card-body">
+                                                <div class="card-title mb-0 anchor-container">
+                                                    <button type="button" class="btn btn-sm btn-primary collapsed"
+                                                            data-bs-toggle="collapse" data-bs-target="#uid-16"
+                                                            aria-expanded="false" aria-controls="uid-16"
+                                                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                                        <i class="bi bi-caret-right-fill caret"></i>
+                                                        Details
+                                                    </button>
+                                                    <a href="bbr/template/cesiumViewerDemo/utilityNetwork/example_1_1.json" target="_blank">example_1_1.json</a>
+                                                    <span class="badge bg-secondary example">Example</span>
+                                                    <a class="anchor" href="#item-ogc.bbr.template.cesiumViewerDemo.utilityNetwork-1">¶</a>
+                                                    <div class="float-end">
+                                                            <span class="badge text-bg-success me-2">Passed</span>
+                                                    </div>
+                                                </div>
+                                                <div class="card-text mt-2 validation-text collapse" id="uid-16">
+                                                    <div class="validation-text-inner">
+                                                                    <div class="font-monospace subsection-title mt-2">Files</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-files ">Using ../../../harness/fixtures/utility-network-georeferenced.json from examples</div>
+                                                                    <div class="font-monospace subsection-title mt-2">JSON Schema</div>
+                                                                
+                                                                    
+                                                                    <div class="font-monospace entry-message section-json_schema ">Validation passed</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            window.addEventListener('load', () => {
+                const accordionEntries = [...document.querySelectorAll('#bblock-reports .accordion-collapse')];
+                document.querySelector('#expand-collapse').addEventListener('click', ev => {
+                    ev.preventDefault();
+                    if (ev.target.matches('.expand-all')) {
+                        accordionEntries.forEach(e => e.classList.add('show'));
+                    } else if (ev.target.matches('.collapse-all')) {
+                        accordionEntries.forEach(e => e.classList.remove('show'));
+                    }
+                });
+                if (/^#(bblock|item)-/.test(location.hash)) {
+                    const highlight = document.querySelector(location.hash.replaceAll('.', '\\.'));
+                    if (highlight) {
+                        highlight.querySelector('.accordion-collapse').classList.add('show');
+                        highlight.classList.add('highlighted');
+                    }
+                }
+                document.addEventListener('click', ev => {
+                    if (!ev.target.classList.contains('anchor') || !ev.target.href) {
+                      return;
+                    }
+                    ev.stopPropagation();
+                    navigator?.clipboard?.writeText(ev.target.href);
+                });
+            });
+        </script>
+    </body>
+</html>

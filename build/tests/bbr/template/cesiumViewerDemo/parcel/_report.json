@@ -1,0 +1,51 @@
+{
+  "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.parcel - Globe view demo: cadastral parcel",
+  "bblockName": "Globe view demo: cadastral parcel",
+  "bblockId": "ogc.bbr.template.cesiumViewerDemo.parcel",
+  "generated": "2026-09-29T19:08:01.913100+00:00",
+  "result": true,
+  "items": [
+    {
+      "source": {
+        "type": "EXAMPLE",
+        "requireFail": false,
+        "filename": "build/tests/bbr/template/cesiumViewerDemo/parcel/example_1_1.json",
+        "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerDemo/parcel/example_1_1.json",
+        "exampleIndex": 1,
+        "snippetIndex": 1,
+        "language": "application/json"
+      },
+      "result": true,
+      "sections": [
+        {
+          "name": "FILES",
+          "title": "Files",
+          "entries": [
+            {
+              "isError": false,
+              "message": "Using ../../../harness/fixtures/parcel.json from examples"
+            }
+          ]
+        },
+        {
+          "name": "JSON_SCHEMA",
+          "title": "JSON Schema",
+          "entries": [
+            {
+              "op": "validation",
+              "result": true,
+              "isError": false,
+              "message": "Validation passed"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "globalErrors": {},
+  "counts": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  }
+}

@@ -1,0 +1,44 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.882429+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using camera-without-height-fail.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 'height' is a required property
+
+Failed validating 'required' in schema['properties']['cesium']['properties']['camera']:
+    {'additionalProperties': False,
+     'description': 'Initial view. Without it, the view frames the '
+                    "document's features.",
+     'properties': {'heading': {'description': 'Degrees clockwise from '
+                                               'north. Default 0.',
+                                'type': 'number'},
+                    'height': {'description': 'Metres above the ellipsoid.',
+                               'type': 'number'},
+                    'latitude': {'maximum': 90,
+                                 'minimum': -90,
+                                 'type': 'number'},
+                    'longitude': {'maximum': 180,
+                                  'minimum': -180,
+                                  'type': 'number'},
+                    'pitch': {'description': 'Degrees; negative looks '
+                                             'down. Default -45.',
+                              'maximum': 90,
+                              'minimum': -90,
+                              'type': 'number'},
+                    'roll': {'description': 'Degrees. Default 0.',
+                             'type': 'number'}},
+     'required': ['longitude', 'latitude', 'height'],
+     'type': 'object'}
+
+On instance['cesium']['camera']:
+    {'latitude': -31.9, 'longitude': 115.8}
+=== End JSON Schema ===
+

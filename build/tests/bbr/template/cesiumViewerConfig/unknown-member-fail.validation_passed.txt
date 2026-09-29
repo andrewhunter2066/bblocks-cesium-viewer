@@ -1,0 +1,428 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.896628+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using unknown-member-fail.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: Additional properties are not allowed ('ruls' was unexpected)
+
+Failed validating 'additionalProperties' in schema:
+    {'$defs': {'cesiumOptions': {'additionalProperties': False,
+                                 'description': 'Globe-only options. '
+                                                'Everything works without '
+                                                'an ion token: the default '
+                                                'is OpenStreetMap\n'
+                                                'imagery on the flat WGS84 '
+                                                'ellipsoid.\n',
+                                 'properties': {'basemap': {'description': '`osm` '
+                                                                           '(default), '
+                                                                           '`ion` '
+                                                                           '(Cesium '
+                                                                           'ion '
+                                                                           'world '
+                                                                           'imagery; '
+                                                                           'needs '
+                                                                           '`ionToken`), '
+                                                                           'or '
+                                                                           'an '
+                                                                           'XYZ '
+                                                                           'tile\n'
+                                                                           'template '
+                                                                           'served '
+                                                                           'over '
+                                                                           'https '
+                                                                           'with '
+                                                                           '`{z}`, '
+                                                                           '`{x}` '
+                                                                           'and '
+                                                                           '`{y}` '
+                                                                           'placeholders.\n',
+                                                            'oneOf': [{'enum': ['osm',
+                                                                                'ion']},
+                                                                      {'additionalProperties': False,
+                                                                       'properties': {'credit': {'description': 'Attribution '
+                                                                                                                'shown '
+                                                                                                                'on '
+                                                                                                                'the '
+                                                                                                                'globe; '
+                                                                                                                'required '
+                                                                                                                'by '
+                                                                                                                'most '
+                                                                                                                'tile '
+                                                                                                                'providers.',
+                                                                                                 'type': 'string'},
+                                                                                      'maximumLevel': {'description': 'Deepest '
+                                                                                                                      'zoom '
+                                                                                                                      'level '
+                                                                                                                      'the '
+                                                                                                                      'tile '
+                                                                                                                      'server '
+                                                                                                                      'has.',
+                                                                                                       'minimum': 0,
+                                                                                                       'type': 'integer'},
+                                                                                      'url': {'pattern': '^(?=.*\\{z\\})(?=.*\\{x\\})(?=.*\\{y\\})https://',
+                                                                                              'type': 'string'}},
+                                                                       'required': ['url'],
+                                                                       'type': 'object'}]},
+                                                'camera': {'additionalProperties': False,
+                                                           'description': 'Initial '
+                                                                          'view. '
+                                                                          'Without '
+                                                                          'it, '
+                                                                          'the '
+                                                                          'view '
+                                                                          'frames '
+                                                                          'the '
+                                                                          "document's "
+                                                                          'features.',
+                                                           'properties': {'heading': {'description': 'Degrees '
+                                                                                                     'clockwise '
+                                                                                                     'from '
+                                                                                                     'north. '
+                                                                                                     'Default '
+                                                                                                     '0.',
+                                                                                      'type': 'number'},
+                                                                          'height': {'description': 'Metres '
+                                                                                                    'above '
+                                                                                                    'the '
+                                                                                                    'ellipsoid.',
+                                                                                     'type': 'number'},
+                                                                          'latitude': {'maximum': 90,
+                                                                                       'minimum': -90,
+                                                                                       'type': 'number'},
+                                                                          'longitude': {'maximum': 180,
+                                                                                        'minimum': -180,
+                                                                                        'type': 'number'},
+                                                                          'pitch': {'description': 'Degrees; '
+                                                                                                   'negative '
+                                                                                                   'looks '
+                                                                                                   'down. '
+                                                                                                   'Default '
+                                                                                                   '-45.',
+                                                                                    'maximum': 90,
+                                                                                    'minimum': -90,
+                                                                                    'type': 'number'},
+                                                                          'roll': {'description': 'Degrees. '
+                                                                                                  'Default '
+                                                                                                  '0.',
+                                                                                   'type': 'number'}},
+                                                           'required': ['longitude',
+                                                                        'latitude',
+                                                                        'height'],
+                                                           'type': 'object'},
+                                                'ionToken': {'description': 'Cesium '
+                                                                            'ion '
+                                                                            'access '
+                                                                            'token, '
+                                                                            'used '
+                                                                            'only '
+                                                                            'by '
+                                                                            '`ion` '
+                                                                            'imagery '
+                                                                            'or '
+                                                                            'terrain. '
+                                                                            'Never '
+                                                                            'commit '
+                                                                            'one: '
+                                                                            'a\n'
+                                                                            'published '
+                                                                            'register '
+                                                                            'injects '
+                                                                            'it '
+                                                                            'at '
+                                                                            'build '
+                                                                            'time '
+                                                                            'from '
+                                                                            'a '
+                                                                            'CI '
+                                                                            'secret. '
+                                                                            'It '
+                                                                            'is '
+                                                                            'visible '
+                                                                            'to '
+                                                                            'anyone\n'
+                                                                            'using '
+                                                                            'the '
+                                                                            'viewer, '
+                                                                            'so '
+                                                                            'it '
+                                                                            'must '
+                                                                            'be '
+                                                                            'scoped '
+                                                                            'to '
+                                                                            '`assets:read` '
+                                                                            'and '
+                                                                            'restricted '
+                                                                            'to '
+                                                                            'the '
+                                                                            "register's\n"
+                                                                            'domain.\n',
+                                                             'type': 'string'},
+                                                'terrain': {'description': '`ellipsoid` '
+                                                                           '(default, '
+                                                                           'flat) '
+                                                                           'or '
+                                                                           '`ion` '
+                                                                           '(Cesium '
+                                                                           'World '
+                                                                           'Terrain; '
+                                                                           'needs '
+                                                                           '`ionToken`).',
+                                                            'enum': ['ellipsoid',
+                                                                     'ion']}},
+                                 'type': 'object'},
+               'elevation': {'description': '`preserve` (default) keeps '
+                                            "each point's height; "
+                                            '`flatten` clamps the feature '
+                                            'to the ground\n'
+                                            '(terrain, or the ellipsoid); '
+                                            '`{ "flattenTo": n }` places '
+                                            'it n metres above the '
+                                            'ellipsoid.\n',
+                             'oneOf': [{'enum': ['preserve', 'flatten']},
+                                       {'additionalProperties': False,
+                                        'properties': {'flattenTo': {'type': 'number'}},
+                                        'required': ['flattenTo'],
+                                        'type': 'object'}]},
+               'rule': {'additionalProperties': False,
+                        'properties': {'elevation': {'$ref': '#/$defs/elevation'},
+                                       'geometry': {'description': 'How '
+                                                                   'the '
+                                                                   "feature's "
+                                                                   'topology '
+                                                                   'is '
+                                                                   'turned '
+                                                                   'into a '
+                                                                   'shape.',
+                                                    'enum': ['solid',
+                                                             'open-shell',
+                                                             'polygon',
+                                                             'face',
+                                                             'ring']},
+                                       'group': {'description': 'Groups '
+                                                                'several '
+                                                                'kinds '
+                                                                'under one '
+                                                                'heading '
+                                                                'and '
+                                                                'toggle. '
+                                                                'Defaults '
+                                                                'to '
+                                                                '`kind`.',
+                                                 'minLength': 1,
+                                                 'type': 'string'},
+                                       'initiallyVisible': {'description': 'Whether '
+                                                                           'the '
+                                                                           'feature '
+                                                                           'is '
+                                                                           'shown '
+                                                                           'when '
+                                                                           'the '
+                                                                           'view '
+                                                                           'opens. '
+                                                                           'Default '
+                                                                           'true.',
+                                                            'type': 'boolean'},
+                                       'kind': {'description': 'Identifier '
+                                                               'grouping '
+                                                               'this '
+                                                               "rule's "
+                                                               'features, '
+                                                               'e.g. '
+                                                               '`parcel-created`.',
+                                                'minLength': 1,
+                                                'type': 'string'},
+                                       'kindLabel': {'description': 'Human-readable '
+                                                                    'name '
+                                                                    'for '
+                                                                    'this '
+                                                                    'kind, '
+                                                                    'e.g. '
+                                                                    '`Former '
+                                                                    'Tenure`.',
+                                                     'type': 'string'},
+                                       'label': {'additionalProperties': False,
+                                                 'description': 'Where a '
+                                                                "feature's "
+                                                                'label '
+                                                                'comes '
+                                                                'from: the '
+                                                                'first of '
+                                                                '`properties` '
+                                                                '(dot-separated '
+                                                                'paths) '
+                                                                'that\n'
+                                                                'resolves '
+                                                                'to a '
+                                                                'non-empty '
+                                                                'value or '
+                                                                'to an '
+                                                                'object '
+                                                                'with a '
+                                                                'string '
+                                                                '`label`, '
+                                                                'else '
+                                                                '`fallback`\n'
+                                                                '(default '
+                                                                '`id`).\n',
+                                                 'properties': {'fallback': {'type': 'string'},
+                                                                'properties': {'items': {'type': 'string'},
+                                                                               'type': 'array'}},
+                                                 'type': 'object'},
+                                       'match': {'additionalProperties': False,
+                                                 'description': 'Restricts '
+                                                                'the rule '
+                                                                'to '
+                                                                'features '
+                                                                'whose '
+                                                                'property '
+                                                                'value (or '
+                                                                'any '
+                                                                'value, '
+                                                                'for an '
+                                                                'array) '
+                                                                'equals\n'
+                                                                'one of '
+                                                                '`values`. '
+                                                                'Values '
+                                                                'may be '
+                                                                'literals, '
+                                                                'CURIEs '
+                                                                'expanded '
+                                                                'against '
+                                                                'the '
+                                                                "document's "
+                                                                'own\n'
+                                                                '`@context`, '
+                                                                'or full '
+                                                                'URIs; '
+                                                                'both '
+                                                                'sides are '
+                                                                'expanded '
+                                                                'before '
+                                                                'comparing.\n',
+                                                 'properties': {'property': {'description': 'Dot-separated '
+                                                                                            'path '
+                                                                                            'into '
+                                                                                            'the '
+                                                                                            'feature, '
+                                                                                            'e.g. '
+                                                                                            '`properties.parcelState`.',
+                                                                             'minLength': 1,
+                                                                             'type': 'string'},
+                                                                'values': {'items': {'type': 'string'},
+                                                                           'minItems': 1,
+                                                                           'type': 'array'}},
+                                                 'required': ['property',
+                                                              'values'],
+                                                 'type': 'object'},
+                                       'source': {'description': 'Top-level '
+                                                                 'collection '
+                                                                 'of the '
+                                                                 'document '
+                                                                 'to '
+                                                                 'classify, '
+                                                                 'e.g. '
+                                                                 '`solids`, '
+                                                                 '`parcels`, '
+                                                                 '`faces`,\n'
+                                                                 '`rings`, '
+                                                                 'or the '
+                                                                 'derived '
+                                                                 '`surfaces` '
+                                                                 '(shells '
+                                                                 'no solid '
+                                                                 'uses).\n',
+                                                  'minLength': 1,
+                                                  'type': 'string'},
+                                       'style': {'$ref': '#/$defs/style'}},
+                        'required': ['source', 'kind', 'geometry'],
+                        'type': 'object'},
+               'style': {'additionalProperties': False,
+                         'properties': {'color': {'description': 'Fill '
+                                                                 'colour, '
+                                                                 'any CSS '
+                                                                 'colour '
+                                                                 '(e.g. '
+                                                                 '`#a1531a`). '
+                                                                 'Default '
+                                                                 'cycles a '
+                                                                 'palette.',
+                                                  'type': 'string'},
+                                        'lineColor': {'description': 'Outline '
+                                                                     'colour, '
+                                                                     'any '
+                                                                     'CSS '
+                                                                     'colour. '
+                                                                     'Default '
+                                                                     'white.',
+                                                      'type': 'string'},
+                                        'lineStyle': {'enum': ['solid',
+                                                               'dashed']},
+                                        'opacity': {'description': 'Fill '
+                                                                   'opacity, '
+                                                                   '0 '
+                                                                   '(transparent) '
+                                                                   'to 1 '
+                                                                   '(opaque).',
+                                                    'maximum': 1,
+                                                    'minimum': 0,
+                                                    'type': 'number'}},
+                         'type': 'object'}},
+     '$schema': 'https://json-schema.org/draft/2020-12/schema',
+     'additionalProperties': False,
+     'description': 'Per-block configuration for the '
+                    'TopoFeatureCesiumPlugin, the bblocks-viewer "Globe" '
+                    'view of\n'
+                    'topo-feature documents. A block declares it as a '
+                    '`resources` entry in its `bblock.json` with the\n'
+                    'role '
+                    '`https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config`.\n'
+                    '\n'
+                    '`rules`, `defaults` and `kindOrder` are the '
+                    'rule-engine configuration shared with the Three.js\n'
+                    'TopoFeaturePlugin '
+                    '(bblocks-viewer-topo-feature-plugin); `cesium` holds '
+                    'the globe-only options.\n'
+                    'Every member is optional: an omitted `rules` keeps '
+                    "the plugin's built-in rules.\n",
+     'properties': {'cesium': {'$ref': '#/$defs/cesiumOptions'},
+                    'defaults': {'additionalProperties': False,
+                                 'description': 'Defaults merged under '
+                                                'every rule; `style` is '
+                                                'merged key by key.',
+                                 'properties': {'elevation': {'$ref': '#/$defs/elevation'},
+                                                'style': {'$ref': '#/$defs/style'}},
+                                 'type': 'object'},
+                    'kindOrder': {'description': 'Preferred order of '
+                                                 'kinds, for viewers that '
+                                                 'list them.',
+                                  'items': {'type': 'string'},
+                                  'type': 'array'},
+                    'rules': {'description': 'Ordered rules. For each '
+                                             'feature, the first rule '
+                                             'whose `source` is the '
+                                             'collection it came from\n'
+                                             'and whose `match` (if any) '
+                                             'applies decides how it is '
+                                             'drawn; a feature no rule '
+                                             'claims is not\n'
+                                             'drawn. A non-empty list '
+                                             'replaces the built-in rules '
+                                             'entirely.\n',
+                              'items': {'$ref': '#/$defs/rule'},
+                              'type': 'array'}},
+     'title': 'Cesium globe viewer configuration',
+     'type': 'object'}
+
+On instance:
+    {'ruls': []}
+=== End JSON Schema ===
+

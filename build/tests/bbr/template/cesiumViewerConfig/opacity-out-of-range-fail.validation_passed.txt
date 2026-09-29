@@ -1,0 +1,25 @@
+Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
+Generated 2026-09-29T19:08:01.884372+00:00
+=== General ===
+Test was expected to fail and it did.
+=== End General ===
+
+=== Files ===
+Using opacity-out-of-range-fail.json from test resources
+=== End Files ===
+
+=== JSON Schema ===
+
+** Validation error **
+ValidationError: 1.5 is greater than the maximum of 1
+
+Failed validating 'maximum' in schema['properties']['rules']['items']['properties']['style']['properties']['opacity']:
+    {'description': 'Fill opacity, 0 (transparent) to 1 (opaque).',
+     'maximum': 1,
+     'minimum': 0,
+     'type': 'number'}
+
+On instance['rules'][0]['style']['opacity']:
+    1.5
+=== End JSON Schema ===
+

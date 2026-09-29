@@ -1,0 +1,715 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "result": true
+  },
+  "bblocks": {
+    "ogc.bbr.template.cesiumViewerConfig": {
+      "title": "Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration",
+      "bblockName": "Cesium globe viewer configuration",
+      "bblockId": "ogc.bbr.template.cesiumViewerConfig",
+      "generated": "2026-09-29T19:08:01.900926+00:00",
+      "result": true,
+      "items": [
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/basemap-without-placeholders-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/basemap-without-placeholders-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using basemap-without-placeholders-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'https://tiles.example.org/tile.png' does not match '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://'",
+                  "isError": true,
+                  "message": "ValidationError: 'https://tiles.example.org/tile.png' does not match '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://'\n\nFailed validating 'pattern' in schema[1]['properties']['url']:\n    {'pattern': '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://',\n     'type': 'string'}\n\nOn instance['url']:\n    'https://tiles.example.org/tile.png'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/camera-without-height-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/camera-without-height-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using camera-without-height-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'height' is a required property",
+                  "isError": true,
+                  "message": "ValidationError: 'height' is a required property\n\nFailed validating 'required' in schema['properties']['cesium']['properties']['camera']:\n    {'additionalProperties': False,\n     'description': 'Initial view. Without it, the view frames the '\n                    \"document's features.\",\n     'properties': {'heading': {'description': 'Degrees clockwise from '\n                                               'north. Default 0.',\n                                'type': 'number'},\n                    'height': {'description': 'Metres above the ellipsoid.',\n                               'type': 'number'},\n                    'latitude': {'maximum': 90,\n                                 'minimum': -90,\n                                 'type': 'number'},\n                    'longitude': {'maximum': 180,\n                                  'minimum': -180,\n                                  'type': 'number'},\n                    'pitch': {'description': 'Degrees; negative looks '\n                                             'down. Default -45.',\n                              'maximum': 90,\n                              'minimum': -90,\n                              'type': 'number'},\n                    'roll': {'description': 'Degrees. Default 0.',\n                             'type': 'number'}},\n     'required': ['longitude', 'latitude', 'height'],\n     'type': 'object'}\n\nOn instance['cesium']['camera']:\n    {'latitude': -31.9, 'longitude': 115.8}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": false,
+            "filename": "_sources/cesiumViewerConfig/tests/defaults-and-flatten-to.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/defaults-and-flatten-to.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using defaults-and-flatten-to.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": false,
+            "filename": "_sources/cesiumViewerConfig/tests/empty-config.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/empty-config.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using empty-config.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/http-basemap-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/http-basemap-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using http-basemap-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'http://tiles.example.org/{z}/{x}/{y}.png' does not match '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://'",
+                  "isError": true,
+                  "message": "ValidationError: 'http://tiles.example.org/{z}/{x}/{y}.png' does not match '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://'\n\nFailed validating 'pattern' in schema[1]['properties']['url']:\n    {'pattern': '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://',\n     'type': 'string'}\n\nOn instance['url']:\n    'http://tiles.example.org/{z}/{x}/{y}.png'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/opacity-out-of-range-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/opacity-out-of-range-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using opacity-out-of-range-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "1.5 is greater than the maximum of 1",
+                  "isError": true,
+                  "message": "ValidationError: 1.5 is greater than the maximum of 1\n\nFailed validating 'maximum' in schema['properties']['rules']['items']['properties']['style']['properties']['opacity']:\n    {'description': 'Fill opacity, 0 (transparent) to 1 (opaque).',\n     'maximum': 1,\n     'minimum': 0,\n     'type': 'number'}\n\nOn instance['rules'][0]['style']['opacity']:\n    1.5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/rule-missing-kind-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/rule-missing-kind-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using rule-missing-kind-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'kind' is a required property",
+                  "isError": true,
+                  "message": "ValidationError: 'kind' is a required property\n\nFailed validating 'required' in schema['properties']['rules']['items']:\n    {'additionalProperties': False,\n     'properties': {'elevation': {'$ref': '#/$defs/elevation'},\n                    'geometry': {'description': \"How the feature's \"\n                                                'topology is turned into a '\n                                                'shape.',\n                                 'enum': ['solid',\n                                          'open-shell',\n                                          'polygon',\n                                          'face',\n                                          'ring']},\n                    'group': {'description': 'Groups several kinds under '\n                                             'one heading and toggle. '\n                                             'Defaults to `kind`.',\n                              'minLength': 1,\n                              'type': 'string'},\n                    'initiallyVisible': {'description': 'Whether the '\n                                                        'feature is shown '\n                                                        'when the view '\n                                                        'opens. Default '\n                                                        'true.',\n                                         'type': 'boolean'},\n                    'kind': {'description': 'Identifier grouping this '\n                                            \"rule's features, e.g. \"\n                                            '`parcel-created`.',\n                             'minLength': 1,\n                             'type': 'string'},\n                    'kindLabel': {'description': 'Human-readable name for '\n                                                 'this kind, e.g. `Former '\n                                                 'Tenure`.',\n                                  'type': 'string'},\n                    'label': {'additionalProperties': False,\n                              'description': \"Where a feature's label \"\n                                             'comes from: the first of '\n                                             '`properties` (dot-separated '\n                                             'paths) that\\n'\n                                             'resolves to a non-empty '\n                                             'value or to an object with a '\n                                             'string `label`, else '\n                                             '`fallback`\\n'\n                                             '(default `id`).\\n',\n                              'properties': {'fallback': {'type': 'string'},\n                                             'properties': {'items': {'type': 'string'},\n                                                            'type': 'array'}},\n                              'type': 'object'},\n                    'match': {'additionalProperties': False,\n                              'description': 'Restricts the rule to '\n                                             'features whose property '\n                                             'value (or any value, for an '\n                                             'array) equals\\n'\n                                             'one of `values`. Values may '\n                                             'be literals, CURIEs expanded '\n                                             \"against the document's own\\n\"\n                                             '`@context`, or full URIs; '\n                                             'both sides are expanded '\n                                             'before comparing.\\n',\n                              'properties': {'property': {'description': 'Dot-separated '\n                                                                         'path '\n                                                                         'into '\n                                                                         'the '\n                                                                         'feature, '\n                                                                         'e.g. '\n                                                                         '`properties.parcelState`.',\n                                                          'minLength': 1,\n                                                          'type': 'string'},\n                                             'values': {'items': {'type': 'string'},\n                                                        'minItems': 1,\n                                                        'type': 'array'}},\n                              'required': ['property', 'values'],\n                              'type': 'object'},\n                    'source': {'description': 'Top-level collection of the '\n                                              'document to classify, e.g. '\n                                              '`solids`, `parcels`, '\n                                              '`faces`,\\n'\n                                              '`rings`, or the derived '\n                                              '`surfaces` (shells no solid '\n                                              'uses).\\n',\n                               'minLength': 1,\n                               'type': 'string'},\n                    'style': {'$ref': '#/$defs/style'}},\n     'required': ['source', 'kind', 'geometry'],\n     'type': 'object'}\n\nOn instance['rules'][0]:\n    {'geometry': 'solid', 'source': 'solids'}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/unknown-geometry-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/unknown-geometry-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using unknown-geometry-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'sphere' is not one of ['solid', 'open-shell', 'polygon', 'face', 'ring']",
+                  "isError": true,
+                  "message": "ValidationError: 'sphere' is not one of ['solid', 'open-shell', 'polygon', 'face', 'ring']\n\nFailed validating 'enum' in schema['properties']['rules']['items']['properties']['geometry']:\n    {'description': \"How the feature's topology is turned into a shape.\",\n     'enum': ['solid', 'open-shell', 'polygon', 'face', 'ring']}\n\nOn instance['rules'][0]['geometry']:\n    'sphere'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/unknown-member-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/unknown-member-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using unknown-member-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "Additional properties are not allowed ('ruls' was unexpected)",
+                  "isError": true,
+                  "message": "ValidationError: Additional properties are not allowed ('ruls' was unexpected)\n\nFailed validating 'additionalProperties' in schema:\n    {'$defs': {'cesiumOptions': {'additionalProperties': False,\n                                 'description': 'Globe-only options. '\n                                                'Everything works without '\n                                                'an ion token: the default '\n                                                'is OpenStreetMap\\n'\n                                                'imagery on the flat WGS84 '\n                                                'ellipsoid.\\n',\n                                 'properties': {'basemap': {'description': '`osm` '\n                                                                           '(default), '\n                                                                           '`ion` '\n                                                                           '(Cesium '\n                                                                           'ion '\n                                                                           'world '\n                                                                           'imagery; '\n                                                                           'needs '\n                                                                           '`ionToken`), '\n                                                                           'or '\n                                                                           'an '\n                                                                           'XYZ '\n                                                                           'tile\\n'\n                                                                           'template '\n                                                                           'served '\n                                                                           'over '\n                                                                           'https '\n                                                                           'with '\n                                                                           '`{z}`, '\n                                                                           '`{x}` '\n                                                                           'and '\n                                                                           '`{y}` '\n                                                                           'placeholders.\\n',\n                                                            'oneOf': [{'enum': ['osm',\n                                                                                'ion']},\n                                                                      {'additionalProperties': False,\n                                                                       'properties': {'credit': {'description': 'Attribution '\n                                                                                                                'shown '\n                                                                                                                'on '\n                                                                                                                'the '\n                                                                                                                'globe; '\n                                                                                                                'required '\n                                                                                                                'by '\n                                                                                                                'most '\n                                                                                                                'tile '\n                                                                                                                'providers.',\n                                                                                                 'type': 'string'},\n                                                                                      'maximumLevel': {'description': 'Deepest '\n                                                                                                                      'zoom '\n                                                                                                                      'level '\n                                                                                                                      'the '\n                                                                                                                      'tile '\n                                                                                                                      'server '\n                                                                                                                      'has.',\n                                                                                                       'minimum': 0,\n                                                                                                       'type': 'integer'},\n                                                                                      'url': {'pattern': '^(?=.*\\\\{z\\\\})(?=.*\\\\{x\\\\})(?=.*\\\\{y\\\\})https://',\n                                                                                              'type': 'string'}},\n                                                                       'required': ['url'],\n                                                                       'type': 'object'}]},\n                                                'camera': {'additionalProperties': False,\n                                                           'description': 'Initial '\n                                                                          'view. '\n                                                                          'Without '\n                                                                          'it, '\n                                                                          'the '\n                                                                          'view '\n                                                                          'frames '\n                                                                          'the '\n                                                                          \"document's \"\n                                                                          'features.',\n                                                           'properties': {'heading': {'description': 'Degrees '\n                                                                                                     'clockwise '\n                                                                                                     'from '\n                                                                                                     'north. '\n                                                                                                     'Default '\n                                                                                                     '0.',\n                                                                                      'type': 'number'},\n                                                                          'height': {'description': 'Metres '\n                                                                                                    'above '\n                                                                                                    'the '\n                                                                                                    'ellipsoid.',\n                                                                                     'type': 'number'},\n                                                                          'latitude': {'maximum': 90,\n                                                                                       'minimum': -90,\n                                                                                       'type': 'number'},\n                                                                          'longitude': {'maximum': 180,\n                                                                                        'minimum': -180,\n                                                                                        'type': 'number'},\n                                                                          'pitch': {'description': 'Degrees; '\n                                                                                                   'negative '\n                                                                                                   'looks '\n                                                                                                   'down. '\n                                                                                                   'Default '\n                                                                                                   '-45.',\n                                                                                    'maximum': 90,\n                                                                                    'minimum': -90,\n                                                                                    'type': 'number'},\n                                                                          'roll': {'description': 'Degrees. '\n                                                                                                  'Default '\n                                                                                                  '0.',\n                                                                                   'type': 'number'}},\n                                                           'required': ['longitude',\n                                                                        'latitude',\n                                                                        'height'],\n                                                           'type': 'object'},\n                                                'ionToken': {'description': 'Cesium '\n                                                                            'ion '\n                                                                            'access '\n                                                                            'token, '\n                                                                            'used '\n                                                                            'only '\n                                                                            'by '\n                                                                            '`ion` '\n                                                                            'imagery '\n                                                                            'or '\n                                                                            'terrain. '\n                                                                            'Never '\n                                                                            'commit '\n                                                                            'one: '\n                                                                            'a\\n'\n                                                                            'published '\n                                                                            'register '\n                                                                            'injects '\n                                                                            'it '\n                                                                            'at '\n                                                                            'build '\n                                                                            'time '\n                                                                            'from '\n                                                                            'a '\n                                                                            'CI '\n                                                                            'secret. '\n                                                                            'It '\n                                                                            'is '\n                                                                            'visible '\n                                                                            'to '\n                                                                            'anyone\\n'\n                                                                            'using '\n                                                                            'the '\n                                                                            'viewer, '\n                                                                            'so '\n                                                                            'it '\n                                                                            'must '\n                                                                            'be '\n                                                                            'scoped '\n                                                                            'to '\n                                                                            '`assets:read` '\n                                                                            'and '\n                                                                            'restricted '\n                                                                            'to '\n                                                                            'the '\n                                                                            \"register's\\n\"\n                                                                            'domain.\\n',\n                                                             'type': 'string'},\n                                                'terrain': {'description': '`ellipsoid` '\n                                                                           '(default, '\n                                                                           'flat) '\n                                                                           'or '\n                                                                           '`ion` '\n                                                                           '(Cesium '\n                                                                           'World '\n                                                                           'Terrain; '\n                                                                           'needs '\n                                                                           '`ionToken`).',\n                                                            'enum': ['ellipsoid',\n                                                                     'ion']}},\n                                 'type': 'object'},\n               'elevation': {'description': '`preserve` (default) keeps '\n                                            \"each point's height; \"\n                                            '`flatten` clamps the feature '\n                                            'to the ground\\n'\n                                            '(terrain, or the ellipsoid); '\n                                            '`{ \"flattenTo\": n }` places '\n                                            'it n metres above the '\n                                            'ellipsoid.\\n',\n                             'oneOf': [{'enum': ['preserve', 'flatten']},\n                                       {'additionalProperties': False,\n                                        'properties': {'flattenTo': {'type': 'number'}},\n                                        'required': ['flattenTo'],\n                                        'type': 'object'}]},\n               'rule': {'additionalProperties': False,\n                        'properties': {'elevation': {'$ref': '#/$defs/elevation'},\n                                       'geometry': {'description': 'How '\n                                                                   'the '\n                                                                   \"feature's \"\n                                                                   'topology '\n                                                                   'is '\n                                                                   'turned '\n                                                                   'into a '\n                                                                   'shape.',\n                                                    'enum': ['solid',\n                                                             'open-shell',\n                                                             'polygon',\n                                                             'face',\n                                                             'ring']},\n                                       'group': {'description': 'Groups '\n                                                                'several '\n                                                                'kinds '\n                                                                'under one '\n                                                                'heading '\n                                                                'and '\n                                                                'toggle. '\n                                                                'Defaults '\n                                                                'to '\n                                                                '`kind`.',\n                                                 'minLength': 1,\n                                                 'type': 'string'},\n                                       'initiallyVisible': {'description': 'Whether '\n                                                                           'the '\n                                                                           'feature '\n                                                                           'is '\n                                                                           'shown '\n                                                                           'when '\n                                                                           'the '\n                                                                           'view '\n                                                                           'opens. '\n                                                                           'Default '\n                                                                           'true.',\n                                                            'type': 'boolean'},\n                                       'kind': {'description': 'Identifier '\n                                                               'grouping '\n                                                               'this '\n                                                               \"rule's \"\n                                                               'features, '\n                                                               'e.g. '\n                                                               '`parcel-created`.',\n                                                'minLength': 1,\n                                                'type': 'string'},\n                                       'kindLabel': {'description': 'Human-readable '\n                                                                    'name '\n                                                                    'for '\n                                                                    'this '\n                                                                    'kind, '\n                                                                    'e.g. '\n                                                                    '`Former '\n                                                                    'Tenure`.',\n                                                     'type': 'string'},\n                                       'label': {'additionalProperties': False,\n                                                 'description': 'Where a '\n                                                                \"feature's \"\n                                                                'label '\n                                                                'comes '\n                                                                'from: the '\n                                                                'first of '\n                                                                '`properties` '\n                                                                '(dot-separated '\n                                                                'paths) '\n                                                                'that\\n'\n                                                                'resolves '\n                                                                'to a '\n                                                                'non-empty '\n                                                                'value or '\n                                                                'to an '\n                                                                'object '\n                                                                'with a '\n                                                                'string '\n                                                                '`label`, '\n                                                                'else '\n                                                                '`fallback`\\n'\n                                                                '(default '\n                                                                '`id`).\\n',\n                                                 'properties': {'fallback': {'type': 'string'},\n                                                                'properties': {'items': {'type': 'string'},\n                                                                               'type': 'array'}},\n                                                 'type': 'object'},\n                                       'match': {'additionalProperties': False,\n                                                 'description': 'Restricts '\n                                                                'the rule '\n                                                                'to '\n                                                                'features '\n                                                                'whose '\n                                                                'property '\n                                                                'value (or '\n                                                                'any '\n                                                                'value, '\n                                                                'for an '\n                                                                'array) '\n                                                                'equals\\n'\n                                                                'one of '\n                                                                '`values`. '\n                                                                'Values '\n                                                                'may be '\n                                                                'literals, '\n                                                                'CURIEs '\n                                                                'expanded '\n                                                                'against '\n                                                                'the '\n                                                                \"document's \"\n                                                                'own\\n'\n                                                                '`@context`, '\n                                                                'or full '\n                                                                'URIs; '\n                                                                'both '\n                                                                'sides are '\n                                                                'expanded '\n                                                                'before '\n                                                                'comparing.\\n',\n                                                 'properties': {'property': {'description': 'Dot-separated '\n                                                                                            'path '\n                                                                                            'into '\n                                                                                            'the '\n                                                                                            'feature, '\n                                                                                            'e.g. '\n                                                                                            '`properties.parcelState`.',\n                                                                             'minLength': 1,\n                                                                             'type': 'string'},\n                                                                'values': {'items': {'type': 'string'},\n                                                                           'minItems': 1,\n                                                                           'type': 'array'}},\n                                                 'required': ['property',\n                                                              'values'],\n                                                 'type': 'object'},\n                                       'source': {'description': 'Top-level '\n                                                                 'collection '\n                                                                 'of the '\n                                                                 'document '\n                                                                 'to '\n                                                                 'classify, '\n                                                                 'e.g. '\n                                                                 '`solids`, '\n                                                                 '`parcels`, '\n                                                                 '`faces`,\\n'\n                                                                 '`rings`, '\n                                                                 'or the '\n                                                                 'derived '\n                                                                 '`surfaces` '\n                                                                 '(shells '\n                                                                 'no solid '\n                                                                 'uses).\\n',\n                                                  'minLength': 1,\n                                                  'type': 'string'},\n                                       'style': {'$ref': '#/$defs/style'}},\n                        'required': ['source', 'kind', 'geometry'],\n                        'type': 'object'},\n               'style': {'additionalProperties': False,\n                         'properties': {'color': {'description': 'Fill '\n                                                                 'colour, '\n                                                                 'any CSS '\n                                                                 'colour '\n                                                                 '(e.g. '\n                                                                 '`#a1531a`). '\n                                                                 'Default '\n                                                                 'cycles a '\n                                                                 'palette.',\n                                                  'type': 'string'},\n                                        'lineColor': {'description': 'Outline '\n                                                                     'colour, '\n                                                                     'any '\n                                                                     'CSS '\n                                                                     'colour. '\n                                                                     'Default '\n                                                                     'white.',\n                                                      'type': 'string'},\n                                        'lineStyle': {'enum': ['solid',\n                                                               'dashed']},\n                                        'opacity': {'description': 'Fill '\n                                                                   'opacity, '\n                                                                   '0 '\n                                                                   '(transparent) '\n                                                                   'to 1 '\n                                                                   '(opaque).',\n                                                    'maximum': 1,\n                                                    'minimum': 0,\n                                                    'type': 'number'}},\n                         'type': 'object'}},\n     '$schema': 'https://json-schema.org/draft/2020-12/schema',\n     'additionalProperties': False,\n     'description': 'Per-block configuration for the '\n                    'TopoFeatureCesiumPlugin, the bblocks-viewer \"Globe\" '\n                    'view of\\n'\n                    'topo-feature documents. A block declares it as a '\n                    '`resources` entry in its `bblock.json` with the\\n'\n                    'role '\n                    '`https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config`.\\n'\n                    '\\n'\n                    '`rules`, `defaults` and `kindOrder` are the '\n                    'rule-engine configuration shared with the Three.js\\n'\n                    'TopoFeaturePlugin '\n                    '(bblocks-viewer-topo-feature-plugin); `cesium` holds '\n                    'the globe-only options.\\n'\n                    'Every member is optional: an omitted `rules` keeps '\n                    \"the plugin's built-in rules.\\n\",\n     'properties': {'cesium': {'$ref': '#/$defs/cesiumOptions'},\n                    'defaults': {'additionalProperties': False,\n                                 'description': 'Defaults merged under '\n                                                'every rule; `style` is '\n                                                'merged key by key.',\n                                 'properties': {'elevation': {'$ref': '#/$defs/elevation'},\n                                                'style': {'$ref': '#/$defs/style'}},\n                                 'type': 'object'},\n                    'kindOrder': {'description': 'Preferred order of '\n                                                 'kinds, for viewers that '\n                                                 'list them.',\n                                  'items': {'type': 'string'},\n                                  'type': 'array'},\n                    'rules': {'description': 'Ordered rules. For each '\n                                             'feature, the first rule '\n                                             'whose `source` is the '\n                                             'collection it came from\\n'\n                                             'and whose `match` (if any) '\n                                             'applies decides how it is '\n                                             'drawn; a feature no rule '\n                                             'claims is not\\n'\n                                             'drawn. A non-empty list '\n                                             'replaces the built-in rules '\n                                             'entirely.\\n',\n                              'items': {'$ref': '#/$defs/rule'},\n                              'type': 'array'}},\n     'title': 'Cesium globe viewer configuration',\n     'type': 'object'}\n\nOn instance:\n    {'ruls': []}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "TEST_RESOURCE",
+            "requireFail": true,
+            "filename": "_sources/cesiumViewerConfig/tests/unknown-terrain-fail.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/_sources/cesiumViewerConfig/tests/unknown-terrain-fail.json",
+            "language": "json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "GENERAL",
+              "title": "General",
+              "entries": [
+                {
+                  "op": "require-fail",
+                  "isError": false,
+                  "message": "Test was expected to fail and it did."
+                }
+              ]
+            },
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using unknown-terrain-fail.json from test resources"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": false,
+                  "exception": "ValidationError",
+                  "errorMessage": "'mars' is not one of ['ellipsoid', 'ion']",
+                  "isError": true,
+                  "message": "ValidationError: 'mars' is not one of ['ellipsoid', 'ion']\n\nFailed validating 'enum' in schema['properties']['cesium']['properties']['terrain']:\n    {'description': '`ellipsoid` (default, flat) or `ion` (Cesium World '\n                    'Terrain; needs `ionToken`).',\n     'enum': ['ellipsoid', 'ion']}\n\nOn instance['cesium']['terrain']:\n    'mars'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerConfig/example_1_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerConfig/example_1_1.json",
+            "exampleIndex": 1,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using ../cesiumViewerDemo/parcel/viewer-config.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerConfig/example_2_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerConfig/example_2_1.json",
+            "exampleIndex": 2,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using ../cesiumViewerDemo/utilityNetwork/viewer-config.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerConfig/example_3_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerConfig/example_3_1.json",
+            "exampleIndex": 3,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/basemap-and-camera.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerConfig/example_4_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerConfig/example_4_1.json",
+            "exampleIndex": 4,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using examples/ion-imagery-and-terrain.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "globalErrors": {},
+      "counts": {
+        "total": 14,
+        "passed": 14,
+        "failed": 0
+      }
+    },
+    "ogc.bbr.template.cesiumViewerDemo.parcel": {
+      "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.parcel - Globe view demo: cadastral parcel",
+      "bblockName": "Globe view demo: cadastral parcel",
+      "bblockId": "ogc.bbr.template.cesiumViewerDemo.parcel",
+      "generated": "2026-09-29T19:08:01.913100+00:00",
+      "result": true,
+      "items": [
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerDemo/parcel/example_1_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerDemo/parcel/example_1_1.json",
+            "exampleIndex": 1,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using ../../../harness/fixtures/parcel.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "globalErrors": {},
+      "counts": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    },
+    "ogc.bbr.template.cesiumViewerDemo.utilityNetwork": {
+      "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.utilityNetwork - Globe view demo: underground utility network",
+      "bblockName": "Globe view demo: underground utility network",
+      "bblockId": "ogc.bbr.template.cesiumViewerDemo.utilityNetwork",
+      "generated": "2026-09-29T19:08:01.923753+00:00",
+      "result": true,
+      "items": [
+        {
+          "source": {
+            "type": "EXAMPLE",
+            "requireFail": false,
+            "filename": "build/tests/bbr/template/cesiumViewerDemo/utilityNetwork/example_1_1.json",
+            "url": "https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/tests/bbr/template/cesiumViewerDemo/utilityNetwork/example_1_1.json",
+            "exampleIndex": 1,
+            "snippetIndex": 1,
+            "language": "application/json"
+          },
+          "result": true,
+          "sections": [
+            {
+              "name": "FILES",
+              "title": "Files",
+              "entries": [
+                {
+                  "isError": false,
+                  "message": "Using ../../../harness/fixtures/utility-network-georeferenced.json from examples"
+                }
+              ]
+            },
+            {
+              "name": "JSON_SCHEMA",
+              "title": "JSON Schema",
+              "entries": [
+                {
+                  "op": "validation",
+                  "result": true,
+                  "isError": false,
+                  "message": "Validation passed"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "globalErrors": {},
+      "counts": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  }
+}

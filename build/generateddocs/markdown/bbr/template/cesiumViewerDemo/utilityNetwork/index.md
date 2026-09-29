@@ -1,0 +1,3258 @@
+
+# Globe view demo: underground utility network (Schema)
+
+`ogc.bbr.template.cesiumViewerDemo.utilityNetwork` *v0.1*
+
+Four underground pipe segments as topo-feature solids, classified by asset condition — a non-cadastral document showing that the Globe view's rules are domain-independent.
+
+[*Status*](http://www.opengis.net/def/status): Under development
+
+## Description
+
+Demonstrates that the **Globe** view's rules are domain-independent: four underground pipe segments,
+classified by `assetCondition`, with no cadastral vocabulary. Open the example below and choose its
+**Globe** tab.
+
+The attached [Globe view configuration](bblocks://ogc.bbr.template.cesiumViewerConfig)
+(`viewer-config.json`) matches a literal (`decommissioned` — shown grey and initially hidden), a
+CURIE (`util:hazardous`, expanded against the document's own `@context` — red) and a full URI
+(`…/utility-status#planned` — blue, clamped to the ground); other pipes fall through to a catch-all
+rule.
+
+The pipes sit 2–10 m below the ellipsoid in Murray Street, Perth. The document is georeferenced from
+the Three.js topology view's `utility-network.json`, whose local metre coordinates are kept in each
+point's `place`.
+
+## Examples
+
+### Four pipe segments in Murray Street, Perth
+Open the **Globe** tab. The document is the harness fixture
+`utility-network-georeferenced.json`, shared with the plugin's own tests.
+
+#### json
+```json
+{
+  "@context": {
+    "util": "http://example.org/utility-status#"
+  },
+  "id": "utility-network-demo-georeferenced",
+  "name": "Underground utility network (georeferenced)",
+  "description": "A non-cadastral topo-feature document \u2014 underground utility pipe segments as Solids, classified by assetCondition \u2014 proving the viewer needs no cadastral/WA vocabulary to render domain-specific styling rules. Georeferenced copy for the Cesium globe view: the original local coordinates (metres; x east, y north, z up, origin 0,0,0) are kept in each point's `place`, and `geometry` holds WGS84 lon/lat with ellipsoidal height, placing the local origin at 115.8605 E, 31.9535 S, 10 m below the ellipsoid (an exact east-north-up to geodetic conversion).",
+  "type": "FeatureCollection",
+  "featureType": "UtilityNetwork",
+  "points": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:pt:b0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.8605,
+              -31.9535,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:b1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860605775,
+              -31.9535,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              10,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:b2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860605775,
+              -31.953463927,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              10,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:b3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.8605,
+              -31.953463927,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              0,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:t0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.8605,
+              -31.9535,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              0,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:t1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860605775,
+              -31.9535,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              10,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:t2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860605775,
+              -31.953463927,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              10,
+              4,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:pt:t3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.8605,
+              -31.953463927,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              0,
+              4,
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:pt:b0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860658662,
+              -31.9535,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              15,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:b1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860764437,
+              -31.9535,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              25,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:b2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860764436,
+              -31.953463927,
+              -9.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              25,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:b3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860658662,
+              -31.953463927,
+              -10.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              15,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:t0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860658662,
+              -31.9535,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              15,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:t1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860764436,
+              -31.9535,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              25,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:t2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860764436,
+              -31.953463927,
+              -6.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              25,
+              4,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:pt:t3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860658662,
+              -31.953463927,
+              -7.0
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              15,
+              4,
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:pt:b0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860817324,
+              -31.9535,
+              -4.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              30,
+              0,
+              5
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:b1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860923098,
+              -31.953499999,
+              -4.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              40,
+              0,
+              5
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:b2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860923098,
+              -31.953463926,
+              -4.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              40,
+              4,
+              5
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:b3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860817323,
+              -31.953463926,
+              -4.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              30,
+              4,
+              5
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:t0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860817323,
+              -31.9535,
+              -1.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              30,
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:t1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860923098,
+              -31.953499999,
+              -1.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              40,
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:t2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860923098,
+              -31.953463926,
+              -1.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              40,
+              4,
+              8
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:pt:t3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860817323,
+              -31.953463927,
+              -1.9999
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              30,
+              4,
+              8
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:pt:b0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860975986,
+              -31.953499999,
+              -9.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              45,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:b1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.86108176,
+              -31.953499999,
+              -9.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              55,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:b2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.86108176,
+              -31.953463926,
+              -9.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              55,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:b3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860975986,
+              -31.953463926,
+              -9.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              45,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:t0",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860975985,
+              -31.953499999,
+              -6.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              45,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:t1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.86108176,
+              -31.953499999,
+              -6.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              55,
+              0,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:t2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.86108176,
+              -31.953463926,
+              -6.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              55,
+              4,
+              3
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:pt:t3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.860975985,
+              -31.953463926,
+              -6.9998
+            ]
+          },
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              45,
+              4,
+              3
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b0",
+              "pipe-a:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b1",
+              "pipe-a:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b2",
+              "pipe-a:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b3",
+              "pipe-a:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t0-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t0",
+              "pipe-a:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t1-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t1",
+              "pipe-a:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t2-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t2",
+              "pipe-a:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t3-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t3",
+              "pipe-a:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b0",
+              "pipe-a:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b1-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b1",
+              "pipe-a:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t1-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t1",
+              "pipe-a:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t0-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t0",
+              "pipe-a:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b1",
+              "pipe-a:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b2-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b2",
+              "pipe-a:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t2-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t2",
+              "pipe-a:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t1-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t1",
+              "pipe-a:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b2",
+              "pipe-a:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b3-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b3",
+              "pipe-a:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t3-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t3",
+              "pipe-a:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t2-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t2",
+              "pipe-a:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b3",
+              "pipe-a:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:b0-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:b0",
+              "pipe-a:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t0-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t0",
+              "pipe-a:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:edge:t3-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-a:pt:t3",
+              "pipe-a:pt:b3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b0",
+              "pipe-b:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b1",
+              "pipe-b:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b2",
+              "pipe-b:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b3",
+              "pipe-b:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t0-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t0",
+              "pipe-b:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t1-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t1",
+              "pipe-b:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t2-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t2",
+              "pipe-b:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t3-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t3",
+              "pipe-b:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b0",
+              "pipe-b:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b1-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b1",
+              "pipe-b:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t1-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t1",
+              "pipe-b:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t0-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t0",
+              "pipe-b:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b1",
+              "pipe-b:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b2-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b2",
+              "pipe-b:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t2-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t2",
+              "pipe-b:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t1-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t1",
+              "pipe-b:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b2",
+              "pipe-b:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b3-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b3",
+              "pipe-b:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t3-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t3",
+              "pipe-b:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t2-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t2",
+              "pipe-b:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b3",
+              "pipe-b:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:b0-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:b0",
+              "pipe-b:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t0-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t0",
+              "pipe-b:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:edge:t3-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-b:pt:t3",
+              "pipe-b:pt:b3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b0",
+              "pipe-c:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b1",
+              "pipe-c:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b2",
+              "pipe-c:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b3",
+              "pipe-c:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t0-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t0",
+              "pipe-c:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t1-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t1",
+              "pipe-c:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t2-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t2",
+              "pipe-c:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t3-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t3",
+              "pipe-c:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b0",
+              "pipe-c:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b1-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b1",
+              "pipe-c:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t1-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t1",
+              "pipe-c:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t0-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t0",
+              "pipe-c:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b1",
+              "pipe-c:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b2-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b2",
+              "pipe-c:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t2-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t2",
+              "pipe-c:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t1-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t1",
+              "pipe-c:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b2",
+              "pipe-c:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b3-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b3",
+              "pipe-c:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t3-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t3",
+              "pipe-c:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t2-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t2",
+              "pipe-c:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b3",
+              "pipe-c:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:b0-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:b0",
+              "pipe-c:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t0-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t0",
+              "pipe-c:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:edge:t3-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-c:pt:t3",
+              "pipe-c:pt:b3"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b0",
+              "pipe-d:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b1",
+              "pipe-d:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b2",
+              "pipe-d:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b3",
+              "pipe-d:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t0-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t0",
+              "pipe-d:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t1-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t1",
+              "pipe-d:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t2-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t2",
+              "pipe-d:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t3-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t3",
+              "pipe-d:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b0-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b0",
+              "pipe-d:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b1-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b1",
+              "pipe-d:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t1-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t1",
+              "pipe-d:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t0-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t0",
+              "pipe-d:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b1-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b1",
+              "pipe-d:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b2-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b2",
+              "pipe-d:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t2-t1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t2",
+              "pipe-d:pt:t1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t1-b1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t1",
+              "pipe-d:pt:b1"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b2-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b2",
+              "pipe-d:pt:b3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b3-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b3",
+              "pipe-d:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t3-t2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t3",
+              "pipe-d:pt:t2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t2-b2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t2",
+              "pipe-d:pt:b2"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b3-b0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b3",
+              "pipe-d:pt:b0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:b0-t0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:b0",
+              "pipe-d:pt:t0"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t0-t3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t0",
+              "pipe-d:pt:t3"
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:edge:t3-b3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "pipe-d:pt:t3",
+              "pipe-d:pt:b3"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "rings": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:ring:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b3-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:ring:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:t0-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t1-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t2-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t3-t0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:ring:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b1-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t1-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t0-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:ring:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b2-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t2-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t1-b1",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:ring:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b3-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t3-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t2-b2",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-a:ring:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-a:edge:b3-b0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:b0-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t0-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:edge:t3-b3",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:ring:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b3-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:ring:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:t0-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t1-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t2-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t3-t0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:ring:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b1-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t1-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t0-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:ring:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b2-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t2-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t1-b1",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:ring:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b3-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t3-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t2-b2",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-b:ring:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-b:edge:b3-b0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:b0-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t0-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:edge:t3-b3",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:ring:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b3-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:ring:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:t0-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t1-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t2-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t3-t0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:ring:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b1-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t1-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t0-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:ring:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b2-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t2-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t1-b1",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:ring:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b3-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t3-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t2-b2",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-c:ring:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-c:edge:b3-b0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:b0-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t0-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:edge:t3-b3",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:ring:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b3-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:ring:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:t0-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t1-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t2-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t3-t0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:ring:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:b0-b1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b1-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t1-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t0-b0",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:ring:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:b1-b2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b2-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t2-t1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t1-b1",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:ring:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:b2-b3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b3-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t3-t2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t2-b2",
+                "orientation": "+"
+              }
+            ]
+          }
+        },
+        {
+          "id": "pipe-d:ring:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "pipe-d:edge:b3-b0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:b0-t0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t0-t3",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:edge:t3-b3",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "faces": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:face:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:bottom",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "bottom face"
+          }
+        },
+        {
+          "id": "pipe-a:face:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:top",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "top face"
+          }
+        },
+        {
+          "id": "pipe-a:face:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:side0",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side0 face"
+          }
+        },
+        {
+          "id": "pipe-a:face:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:side1",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side1 face"
+          }
+        },
+        {
+          "id": "pipe-a:face:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:side2",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side2 face"
+          }
+        },
+        {
+          "id": "pipe-a:face:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-a:ring:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side3 face"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:face:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:bottom",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "bottom face"
+          }
+        },
+        {
+          "id": "pipe-b:face:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:top",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "top face"
+          }
+        },
+        {
+          "id": "pipe-b:face:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:side0",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side0 face"
+          }
+        },
+        {
+          "id": "pipe-b:face:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:side1",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side1 face"
+          }
+        },
+        {
+          "id": "pipe-b:face:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:side2",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side2 face"
+          }
+        },
+        {
+          "id": "pipe-b:face:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-b:ring:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side3 face"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:face:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:bottom",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "bottom face"
+          }
+        },
+        {
+          "id": "pipe-c:face:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:top",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "top face"
+          }
+        },
+        {
+          "id": "pipe-c:face:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:side0",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side0 face"
+          }
+        },
+        {
+          "id": "pipe-c:face:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:side1",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side1 face"
+          }
+        },
+        {
+          "id": "pipe-c:face:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:side2",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side2 face"
+          }
+        },
+        {
+          "id": "pipe-c:face:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-c:ring:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side3 face"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:face:bottom",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:bottom",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "bottom face"
+          }
+        },
+        {
+          "id": "pipe-d:face:top",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:top",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "top face"
+          }
+        },
+        {
+          "id": "pipe-d:face:side0",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:side0",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side0 face"
+          }
+        },
+        {
+          "id": "pipe-d:face:side1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:side1",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side1 face"
+          }
+        },
+        {
+          "id": "pipe-d:face:side2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:side2",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side2 face"
+          }
+        },
+        {
+          "id": "pipe-d:face:side3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Face",
+            "directed_references": [
+              {
+                "ref": "pipe-d:ring:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "side3 face"
+          }
+        }
+      ]
+    }
+  ],
+  "shells": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:shell",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Shell",
+            "directed_references": [
+              {
+                "ref": "pipe-a:face:bottom",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:face:top",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:face:side0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:face:side1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:face:side2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-a:face:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "pipe-a exterior shell"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:shell",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Shell",
+            "directed_references": [
+              {
+                "ref": "pipe-b:face:bottom",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:face:top",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:face:side0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:face:side1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:face:side2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-b:face:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "pipe-b exterior shell"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:shell",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Shell",
+            "directed_references": [
+              {
+                "ref": "pipe-c:face:bottom",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:face:top",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:face:side0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:face:side1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:face:side2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-c:face:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "pipe-c exterior shell"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:shell",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Shell",
+            "directed_references": [
+              {
+                "ref": "pipe-d:face:bottom",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:face:top",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:face:side0",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:face:side1",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:face:side2",
+                "orientation": "+"
+              },
+              {
+                "ref": "pipe-d:face:side3",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "description": "pipe-d exterior shell"
+          }
+        }
+      ]
+    }
+  ],
+  "solids": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-a:solid",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Solid",
+            "directed_references": [
+              {
+                "ref": "pipe-a:shell",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "name": "Pipe A",
+            "assetCondition": "decommissioned"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-b:solid",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Solid",
+            "directed_references": [
+              {
+                "ref": "pipe-b:shell",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "name": "Pipe B",
+            "assetCondition": "util:hazardous"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-c:solid",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Solid",
+            "directed_references": [
+              {
+                "ref": "pipe-c:shell",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "name": "Pipe C",
+            "assetCondition": "http://example.org/utility-status#planned"
+          }
+        }
+      ]
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "pipe-d:solid",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Solid",
+            "directed_references": [
+              {
+                "ref": "pipe-d:shell",
+                "orientation": "+"
+              }
+            ]
+          },
+          "properties": {
+            "name": "Pipe D",
+            "assetCondition": "active"
+          }
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+## Schema
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Georeferenced topo-feature document
+description: 'The minimum the Globe view needs to place a topo-feature document: a
+  `points` collection. This is
+
+  a demo block for the view, not a topo-feature schema; see
+
+  https://github.com/ogcincubator/topo-feature for the data model itself.
+
+  '
+type: object
+required:
+- points
+properties:
+  points:
+    type: array
+    minItems: 1
+
+```
+
+Links to the schema:
+
+* YAML version: [schema.yaml](https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/utilityNetwork/schema.json)
+* JSON version: [schema.json](https://raw.githubusercontent.com/andrewhunter2066/bblocks-cesium-viewer/undefined/build/annotated/bbr/template/cesiumViewerDemo/utilityNetwork/schema.yaml)
+
+
+# For developers
+
+The source code for this Building Block can be found in the following repository:
+
+* URL: [https://github.com/andrewhunter2066/bblocks-cesium-viewer](https://github.com/andrewhunter2066/bblocks-cesium-viewer)
+* Path: `_sources/cesiumViewerDemo/utilityNetwork`
+

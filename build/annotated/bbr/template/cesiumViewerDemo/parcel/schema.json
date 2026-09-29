@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Georeferenced topo-feature document",
+  "description": "The minimum the Globe view needs to place a topo-feature document: a `points` collection. This is\na demo block for the view, not a topo-feature schema; see\nhttps://github.com/ogcincubator/topo-feature for the data model itself.\n",
+  "type": "object",
+  "required": [
+    "points"
+  ],
+  "properties": {
+    "points": {
+      "type": "array",
+      "minItems": 1
+    }
+  }
+}
