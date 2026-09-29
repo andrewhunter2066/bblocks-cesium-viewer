@@ -23,13 +23,15 @@ The `bblocks-authoring` and `bblocks-consuming` skills live in `.agents/skills/`
 
 ## Commands
 
-The `npm` scripts arrive with stage 1 (scaffold); `build.sh`/`view.sh` come from the template.
+`build.sh`/`view.sh` come from the template.
 
 ```bash
 npm install
 npm test          # unit tests (Node's built-in runner)
 npm run dev       # harness with live reload
 npm run build     # -> dist/ (deploy the whole directory)
+npm run typecheck
 ./build.sh        # build the register locally into build-local/ (Docker)
+npm run local-register  # point build-local/register.json at the local dist/ (after build.sh)
 ./view.sh         # serve the local register in bblocks-viewer at http://localhost:9090
 ```

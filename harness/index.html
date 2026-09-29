@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TopoFeatureCesiumPlugin harness</title>
+  <style>
+    html, body { margin: 0; height: 100%; font: 14px/1.4 system-ui, sans-serif; background: #1b1e20; color: #eee; }
+    body { display: flex; flex-direction: column; }
+    #toolbar {
+      display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
+      padding: 10px 14px; background: #24282b; border-bottom: 1px solid #333;
+    }
+    #toolbar label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    select, input[type=text], input[type=password] {
+      background: #333; color: #eee; border: 1px solid #555; border-radius: 4px; padding: 4px 6px;
+    }
+    button { background: #3388ff; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+    button:hover { background: #2277ee; }
+    .sep { color: #666; }
+    #status { font-size: 12px; color: #aaa; margin-left: auto; }
+    /* The real viewer gives a plugin tab a fixed ~300px height; "Tab size" mimics that. */
+    #host { flex: 1; position: relative; min-height: 0; background: #fff; color: #333; }
+    #host.tab-size { flex: none; height: 300px; }
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <label>Fixture: <select id="fixtureSelect"></select></label>
+    <label>File: <input type="file" id="fileInput" accept="application/json,.json,.geojson" /></label>
+    <label>URL: <input type="text" id="urlInput" placeholder="https://.../example.json" size="36" /></label>
+    <button id="urlLoad" type="button">Load</button>
+    <span class="sep">|</span>
+    <label title="Delivered to the plugin as a context.bblock.resources entry, exactly as a bblock.json resources entry would be. Used from stage 4.">
+      Config file: <input type="file" id="configFileInput" accept="application/json,.json" />
+    </label>
+    <label>Config URL: <input type="text" id="configUrlInput" placeholder="https://.../viewer-config.json" size="28" /></label>
+    <button id="configUrlLoad" type="button">Load</button>
+    <button id="configClear" type="button">Clear config</button>
+    <span class="sep">|</span>
+    <label title="Optional Cesium ion token (premium terrain/imagery only). Stored only in this browser's localStorage; overrides VITE_CESIUM_ION_TOKEN from .env.local. Used from stage 4.">
+      Ion token: <input type="password" id="tokenInput" placeholder="(none — OSM basemap)" size="18" autocomplete="off" />
+    </label>
+    <button id="tokenSave" type="button">Save</button>
+    <button id="tokenClear" type="button">Forget</button>
+    <label><input type="checkbox" id="tabSize" /> Tab size</label>
+    <span id="status"></span>
+  </div>
+  <div id="host"></div>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

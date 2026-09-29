@@ -1,5 +1,6 @@
 build-local/
 .idea/
+.mcp.json
 bblocks-config-local.yml
 bblocks-config-local.yaml
 .volumes
@@ -12,3 +13,6 @@ dist/
 .env
 .env.*
 !.env.example
+
+.github
+.env.example
