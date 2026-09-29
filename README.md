@@ -160,7 +160,7 @@ only appear there.
 | `harness/` | Development harness and fixtures |
 | `scripts/` | Build and test helpers |
 | `_sources/` | The Building Blocks: `cesiumViewerConfig` (configuration schema) and `cesiumViewerDemo/*` |
-| `PLAN.md` | Development plan and decisions |
+| `docs/design.md` | Design decisions, secrets policy and verified integration behaviour |
 
 The rule engine (`src/js/utils/rules.js`, `curie.js`, `config.js`, `resolve-config.js`,
 `default-config.js` and their tests) is copied unchanged from bblocks-viewer-topo-feature-plugin at

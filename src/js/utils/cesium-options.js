@@ -13,7 +13,7 @@
 //
 // "ion" imagery/terrain need an ion token; without one they fall back to OSM / the ellipsoid, so
 // Cesium's bundled demo token is never used. A published register gets its token injected into
-// the config at build time (see PLAN.md), so it must be a restricted, assets:read-only token.
+// the config at build time (see docs/design.md), so it must be a restricted, assets:read-only token.
 
 export const DEFAULT_CESIUM_OPTIONS = Object.freeze({
   basemap: 'osm',

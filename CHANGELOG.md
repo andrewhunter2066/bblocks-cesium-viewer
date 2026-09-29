@@ -32,6 +32,8 @@ First version: a CesiumJS Globe view for topo-feature documents, and the registe
 - **Building blocks** — `cesiumViewerConfig`, the configuration's JSON Schema with documentation,
   examples and tests; `cesiumViewerDemo.parcel` and `cesiumViewerDemo.utilityNetwork`, which show
   the Globe view with their own configurations. The register declares its own plugin.
+- **Design notes** — `docs/design.md`: design decisions, secrets policy (including how to scope an
+  ion token) and verified integration behaviour.
 
 ### Removed
 

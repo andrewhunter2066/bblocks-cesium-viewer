@@ -20,7 +20,7 @@ export function isTopoFeatureMultiCollection(data) {
 }
 
 // True for a GeoJSON Point geometry whose first two coordinates are a plausible WGS84 lon/lat.
-// Only `geometry` counts: projected coordinates in `place` are ignored (see PLAN.md).
+// Only `geometry` counts: projected coordinates in `place` are ignored (see docs/design.md).
 export function isGeographicPoint(geometry) {
   if (geometry?.type !== 'Point' || !Array.isArray(geometry.coordinates)) return false;
   const [lon, lat, height] = geometry.coordinates;

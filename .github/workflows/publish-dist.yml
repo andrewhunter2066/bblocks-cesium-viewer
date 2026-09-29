@@ -3,7 +3,7 @@ name: Build and publish dist
 # Publishes dist/ to the `dist` branch (orphan history, force-pushed) so it can be served via
 # jsDelivr's GitHub CDN mode without needing GitHub Pages enabled:
 #   https://cdn.jsdelivr.net/gh/andrewhunter2066/bblocks-cesium-viewer@dist/index.js
-# (becomes ogcincubator/bblocks-cesium-viewer after the repo transfer — see PLAN.md).
+# (becomes ogcincubator/bblocks-cesium-viewer after the repo transfer).
 # dist/ itself stays gitignored on master -- this branch exists purely as a CDN target.
 # Publishes on every push to master; there is no tag/release gate.
 on:
