@@ -213,7 +213,7 @@
   "name": "Building Blocks - Cesium globe viewer for topo-feature documents",
   "abstract": "A CesiumJS **Globe** view for topo-feature topology documents in the Building Blocks viewer, the\nJSON Schema for its per-block configuration, and demo blocks that use it.\n",
   "description": "The `TopoFeatureCesiumPlugin` is a [bblocks-viewer](https://github.com/opengeospatial/bblocks-viewer)\nview plugin. It adds a **Globe** tab to any example or transform output that is a\n[topo-feature](https://github.com/ogcincubator/topo-feature) document whose points carry WGS84\n`geometry`, drawing its solids, surfaces, faces and parcels at their real positions on a\nCesiumJS globe \u2014 OpenStreetMap on the flat ellipsoid by default, with no Cesium ion token needed.\n\nWhich features are drawn and how is set by rules shared with the Three.js topology view\n([bblocks-viewer-topo-feature-plugin](https://github.com/ogcincubator/bblocks-viewer-topo-feature-plugin)),\noptionally configured per block; see the *Cesium globe viewer configuration* block. This register\ndeclares the plugin itself, so the demo blocks' examples open in the Globe tab here.\n\nSource, harness and instructions for adding the plugin to another register:\n[bblocks-cesium-viewer](https://github.com/andrewhunter2066/bblocks-cesium-viewer).\n",
-  "modified": "2026-09-29T19:08:01.547702",
+  "modified": "2026-09-29T19:43:34.571064",
   "tooling": {
     "bblocks-postprocess": {
       "commitId": "\"6411aed037da38c6d9079d9350eca33d004a4d0c",

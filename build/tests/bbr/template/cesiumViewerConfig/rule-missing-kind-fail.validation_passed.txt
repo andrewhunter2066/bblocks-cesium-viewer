@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
-Generated 2026-09-29T19:08:01.886781+00:00
+Generated 2026-09-29T19:43:34.929760+00:00
 === General ===
 Test was expected to fail and it did.
 === End General ===

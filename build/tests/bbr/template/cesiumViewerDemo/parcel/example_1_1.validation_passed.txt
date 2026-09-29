@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.template.cesiumViewerDemo.parcel - Globe view demo: cadastral parcel
-Generated 2026-09-29T19:08:01.913027+00:00
+Generated 2026-09-29T19:43:34.956738+00:00
 === Files ===
 Using ../../../harness/fixtures/parcel.json from examples
 === End Files ===

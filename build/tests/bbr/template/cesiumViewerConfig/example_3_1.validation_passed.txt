@@ -1,5 +1,5 @@
 Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration
-Generated 2026-09-29T19:08:01.900372+00:00
+Generated 2026-09-29T19:43:34.942993+00:00
 === Files ===
 Using examples/basemap-and-camera.json from examples
 === End Files ===

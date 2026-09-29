@@ -10,7 +10,7 @@
       "title": "Validation report for ogc.bbr.template.cesiumViewerConfig - Cesium globe viewer configuration",
       "bblockName": "Cesium globe viewer configuration",
       "bblockId": "ogc.bbr.template.cesiumViewerConfig",
-      "generated": "2026-09-29T19:08:01.900926+00:00",
+      "generated": "2026-09-29T19:43:34.943441+00:00",
       "result": true,
       "items": [
         {
@@ -613,7 +613,7 @@
       "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.parcel - Globe view demo: cadastral parcel",
       "bblockName": "Globe view demo: cadastral parcel",
       "bblockId": "ogc.bbr.template.cesiumViewerDemo.parcel",
-      "generated": "2026-09-29T19:08:01.913100+00:00",
+      "generated": "2026-09-29T19:43:34.956792+00:00",
       "result": true,
       "items": [
         {
@@ -664,7 +664,7 @@
       "title": "Validation report for ogc.bbr.template.cesiumViewerDemo.utilityNetwork - Globe view demo: underground utility network",
       "bblockName": "Globe view demo: underground utility network",
       "bblockId": "ogc.bbr.template.cesiumViewerDemo.utilityNetwork",
-      "generated": "2026-09-29T19:08:01.923753+00:00",
+      "generated": "2026-09-29T19:43:34.967501+00:00",
       "result": true,
       "items": [
         {
