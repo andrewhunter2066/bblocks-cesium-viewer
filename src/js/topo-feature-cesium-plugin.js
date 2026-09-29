@@ -1,16 +1,19 @@
 import { mimeTypeMatches } from './utils/mime-type-match.js';
 import { isGeoreferencedTopoFeature } from './utils/detect-topo.js';
 import { injectWidgetsCss, resolveCesium } from './utils/cesium-loader.js';
-import { buildViewerOptions, disableIonDefaults } from './utils/viewer-options.js';
-import { buildTopologyShapes } from './utils/topo-geometry.js';
-import { addToScene, buildScenePrimitives, frameData } from './cesium-scene.js';
+import { buildViewerOptions, fallBackFromIonErrors, setIonToken } from './utils/viewer-options.js';
+import { buildTopologyShapes, defaultConfigFor } from './utils/topo-geometry.js';
+import { loadConfig } from './utils/load-config.js';
+import { addToScene, buildScenePrimitives, frameData, setCameraView } from './cesium-scene.js';
 
 const SUPPORTED_TYPES = ['application/geo+json', 'application/json', 'application/ld+json'];
 
 // Renders topo-feature (https://github.com/ogcincubator/topo-feature) topology documents on a
 // CesiumJS globe, placing each point feature by its WGS84 `geometry` and assembling edges,
 // faces, shells, solids and parcels from their topology references. Sibling of the Three.js
-// TopoFeaturePlugin in bblocks-viewer-topo-feature-plugin. One instance per matched
+// TopoFeaturePlugin in bblocks-viewer-topo-feature-plugin, and driven by the same rule engine:
+// built-in rules, optionally replaced by a per-block config (utils/load-config.js) that can also
+// choose the basemap, terrain, initial camera and an ion token. One instance per matched
 // example/transform-output, so all state here is scoped to one candidate set.
 //
 // @implements {import('@ogc/bblocks-viewer-plugin-types').ViewPluginClass}
@@ -31,7 +34,9 @@ export default class TopoFeatureCesiumPlugin {
     this._el = null; // element currently rendered into; null once destroyed
     this._container = null; // this plugin's own child of _el, holding the Cesium widget
     this._viewer = null;
-    this._records = []; // one per drawn feature: { kind, id, fill, outline } (see cesium-scene.js)
+    this._records = [];
+    this._config = null; // one per drawn feature: { kind, group, label, …, fill, outline } (see cesium-scene.js)
+    this._config = null; // the effective config for the current render (see utils/load-config.js)
   }
 
   matches() {
@@ -56,9 +61,13 @@ export default class TopoFeatureCesiumPlugin {
     return this._candidate;
   }
 
-  // Seam for tests; everything else goes through the real CDN load.
+  // Seams for tests; everything else goes through the real CDN load and fetch().
   _loadCesium() {
     return resolveCesium(this._context);
+  }
+
+  _loadConfig() {
+    return loadConfig(this._context, defaultConfigFor(this._data));
   }
 
   render(el) {
@@ -78,22 +87,29 @@ export default class TopoFeatureCesiumPlugin {
     if (!this._pickCandidate()) return;
 
     injectWidgetsCss();
-    const Cesium = await this._loadCesium();
-    if (this._el !== el) return; // destroyed (or re-rendered) while Cesium was loading
+    // The config chooses the basemap/terrain, so it must be in hand before the viewer exists.
+    const [Cesium, loaded] = await Promise.all([this._loadCesium(), this._loadConfig()]);
+    if (this._el !== el) return; // destroyed (or re-rendered) while loading
+    this._config = loaded;
+    loaded.warnings.forEach(w => console.warn(`TopoFeatureCesiumPlugin: ${w}`));
 
-    disableIonDefaults(Cesium);
+    setIonToken(Cesium, loaded.cesium.ionToken);
 
     const container = document.createElement('div');
     container.style.cssText = 'position: absolute; inset: 0;';
     el.appendChild(container);
     this._container = container;
 
-    this._viewer = new Cesium.Viewer(container, buildViewerOptions(Cesium));
+    const viewerOptions = buildViewerOptions(Cesium, loaded.cesium);
+    this._viewer = new Cesium.Viewer(container, viewerOptions);
+    fallBackFromIonErrors(Cesium, this._viewer, viewerOptions, w => console.warn(`TopoFeatureCesiumPlugin: ${w}`));
 
-    const { records, primitives, positions } = buildScenePrimitives(Cesium, buildTopologyShapes(this._data));
+    const shapes = buildTopologyShapes(this._data, loaded.config);
+    const { records, primitives, positions } = buildScenePrimitives(Cesium, shapes);
     this._records = records;
     addToScene(this._viewer, primitives);
-    frameData(Cesium, this._viewer, positions);
+    if (loaded.cesium.camera) setCameraView(Cesium, this._viewer, loaded.cesium.camera);
+    else frameData(Cesium, this._viewer, positions);
   }
 
   _showError(el, message) {
@@ -118,6 +134,7 @@ export default class TopoFeatureCesiumPlugin {
     if (this._viewer && !this._viewer.isDestroyed()) this._viewer.destroy();
     this._viewer = null;
     this._records = [];
+    this._config = null;
     this._container?.remove();
     this._container = null;
     el?.replaceChildren();

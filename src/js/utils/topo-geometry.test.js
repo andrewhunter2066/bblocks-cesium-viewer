@@ -9,6 +9,8 @@ import {
   ringCoords,
   facePolygon,
   shapeCoordinates,
+  applyElevation,
+  defaultConfigFor,
 } from './topo-geometry.js';
 
 const fixture = name => JSON.parse(readFileSync(new URL(`../../../harness/fixtures/${name}`, import.meta.url), 'utf8'));
@@ -235,10 +237,11 @@ for (const [name, expected] of Object.entries(EXPECTED)) {
   });
 }
 
-test('holes and voids make solids translucent', () => {
-  assert.equal(buildTopologyShapes(fixture('cube-with-void.json')).translucent, true);
-  assert.equal(buildTopologyShapes(fixture('cube-with-protrusion.json')).translucent, true);
-  assert.equal(buildTopologyShapes(fixture('cube.json')).translucent, false);
+test('default rules make solids translucent when the document has a hole or void', () => {
+  const solidOpacity = name => defaultConfigFor(fixture(name)).rules.find(r => r.kind === 'solid').style.opacity;
+  assert.equal(solidOpacity('cube-with-void.json'), 0.85);
+  assert.equal(solidOpacity('cube-with-protrusion.json'), 0.85);
+  assert.equal(solidOpacity('cube.json'), 1);
 });
 
 test('every drawn coordinate is one of the document\'s own point geometries', () => {
@@ -263,4 +266,79 @@ test('the georeferenced utility network keeps local metres in place and sits 2�
   assert.ok(Math.abs(Math.max(...heights) + 2) < 0.001);
   const origin = points.find(p => p.place.coordinates.every(v => v === 0));
   assert.deepEqual(origin.geometry.coordinates, [115.8605, -31.9535, -10]);
+});
+
+// ─── Rules ────────────────────────────────────────────────────────────────────────
+
+test('rules decide which features are drawn; unmatched features are left out', () => {
+  const config = {
+    rules: [{
+      source: 'parcels', kind: 'lot', geometry: 'polygon',
+      match: { property: 'properties.zone', values: ['R20'] },
+    }],
+  };
+  const doc = squareDoc({
+    parcels: fc([
+      { id: 'a', type: 'Feature', properties: { zone: 'R20' }, topology: { type: 'Polygon', references: ['e1', 'e2', 'e3', 'e4'] } },
+      { id: 'b', type: 'Feature', properties: { zone: 'R40' }, topology: { type: 'Polygon', references: ['e1', 'e2', 'e3', 'e4'] } },
+    ]),
+  });
+  const { renderables } = buildTopologyShapes(doc, config);
+  assert.deepEqual(renderables.map(r => [r.id, r.kind, r.group, r.visible]), [['a', 'lot', 'lot', true]]);
+});
+
+test('a rule naming an unknown geometry strategy draws nothing', () => {
+  const shapes = buildTopologyShapes(fixture('cube.json'), { rules: [{ source: 'solids', kind: 'x', geometry: 'sphere' }] });
+  assert.equal(shapes.renderables.length, 0);
+  assert.equal(shapes.edges.length, 0, 'rules exist, so no bare-edge fallback');
+});
+
+test('renderables carry label, style and visibility from their rule', () => {
+  const config = {
+    defaults: { style: { opacity: 0.5 } },
+    rules: [{
+      source: 'solids', kind: 'solid', geometry: 'solid', initiallyVisible: false,
+      style: { color: '#123456' }, label: { properties: ['properties.missing'], fallback: 'id' },
+    }],
+  };
+  const [solid] = buildTopologyShapes(fixture('cube.json'), config).renderables;
+  assert.equal(solid.visible, false);
+  assert.deepEqual(solid.style, { opacity: 0.5, color: '#123456' });
+  assert.equal(solid.label, solid.id);
+});
+
+// ─── Elevation ────────────────────────────────────────────────────────────────────
+
+const cubeShape = () => buildTopologyShapes(fixture('cube.json')).renderables[0];
+
+test('elevation "preserve" (or none) leaves heights alone', () => {
+  const shape = cubeShape();
+  for (const elevation of [undefined, 'preserve', { flattenTo: 'high' }]) {
+    const result = applyElevation(shape, elevation);
+    assert.equal(result.clampToGround, false);
+    assert.equal(result.polygons, shape.polygons);
+  }
+});
+
+test('flattening a cube leaves one footprint polygon and its four edges', () => {
+  for (const [elevation, height, clamp] of [['flatten', 0, true], [{ flattenTo: 12.5 }, 12.5, false]]) {
+    const result = applyElevation(cubeShape(), elevation);
+    assert.equal(result.clampToGround, clamp);
+    assert.equal(result.polygons.length, 1, 'walls have no plan area; top and bottom coincide');
+    assert.equal(result.segments.length, 4, 'vertical edges vanish; top and bottom edges coincide');
+    const coords = [...result.polygons[0].outer, ...result.segments.flat()];
+    assert.ok(coords.every(c => c[2] === height));
+  }
+});
+
+test('flattening keeps a face hole that still has area', () => {
+  const doc = squareDoc({
+    points: fc([...SQUARE_POINTS, point('h1', [115.80003, -31.89997, 9]), point('h2', [115.80006, -31.89997, 9]), point('h3', [115.80006, -31.89994, 9])]),
+    edges: fc([...SQUARE_EDGES, edge('he1', 'h1', 'h2'), edge('he2', 'h2', 'h3'), edge('he3', 'h3', 'h1')]),
+    rings: fc([directed('Ring', 'outer', ['e1', 'e2', 'e3', 'e4']), directed('Ring', 'hole', ['he1', 'he2', 'he3'])]),
+    faces: fc([directed('Face', 'f', ['outer', 'hole'])]),
+  });
+  const [face] = buildTopologyShapes(doc).renderables;
+  const flat = applyElevation(face, 'flatten');
+  assert.equal(flat.polygons[0].holes.length, 1);
 });

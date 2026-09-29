@@ -4,6 +4,7 @@ import TopoFeatureCesiumPlugin from './topo-feature-cesium-plugin.js';
 import { TopoFeatureCesiumPlugin as NamedExport } from './index.js';
 import { installFakeDocument } from './test-support/fake-dom.js';
 import { createFakeCesium } from './test-support/fake-cesium.js';
+import { CESIUM_VIEWER_CONFIG_ROLE } from './utils/load-config.js';
 
 const georeferenced = JSON.stringify({
   points: [{
@@ -54,6 +55,27 @@ function pluginWithCesium(loadCesium) {
   const plugin = new TopoFeatureCesiumPlugin([candidate()]);
   plugin._loadCesium = loadCesium;
   return plugin;
+}
+
+const CONFIG_REF = 'https://register.example/viewer-config.json';
+
+// A plugin whose block declares a Cesium viewer config at CONFIG_REF.
+function configuredPlugin(Cesium) {
+  const context = { bblock: { resources: [{ role: CESIUM_VIEWER_CONFIG_ROLE, ref: CONFIG_REF }] } };
+  const plugin = new TopoFeatureCesiumPlugin([candidate()], context);
+  plugin._loadCesium = async () => Cesium;
+  return plugin;
+}
+
+// Runs fn with globalThis.fetch replaced, as the plugin's real config loading uses it.
+async function withFetch(fetchImpl, fn) {
+  const original = globalThis.fetch;
+  globalThis.fetch = fetchImpl;
+  try {
+    return await fn();
+  } finally {
+    globalThis.fetch = original;
+  }
 }
 
 function deferred() {
@@ -108,6 +130,40 @@ test('lifecycle', async t => {
     assert.equal(viewer.scene.primitives.list.length, 1);
     assert.deepEqual(viewer.scene.primitives.list[0].points[0].position, { lon: 115.8, lat: -31.9, height: 17.5 });
     assert.equal(viewer.camera.calls[0][0], 'viewBoundingSphere');
+  });
+
+  await t.test('a per-block config sets token, basemap, terrain and camera', async () => {
+    const Cesium = createFakeCesium();
+    const config = {
+      cesium: { ionToken: 'tok', basemap: 'ion', terrain: 'ion', camera: { longitude: 115.8, latitude: -31.9, height: 500 } },
+    };
+    const plugin = configuredPlugin(Cesium);
+
+    await withFetch(async () => ({ ok: true, status: 200, text: async () => JSON.stringify(config) }), () => plugin.render(dom.doc.createElement('div')));
+
+    const viewer = Cesium.created.viewers[0];
+    assert.equal(Cesium.Ion.defaultAccessToken, 'tok');
+    assert.equal(viewer.options.baseLayer.imageryProvider, 'ion-world-imagery');
+    assert.equal(viewer.options.terrain.name, 'ion-world-terrain');
+    assert.deepEqual(viewer.camera.calls.map(c => c[0]), ['setView'], 'configured camera, not framing');
+    assert.equal(plugin._config.ref, CONFIG_REF);
+  });
+
+  await t.test('config problems are logged as warnings and rendering carries on', async () => {
+    const Cesium = createFakeCesium();
+    const plugin = configuredPlugin(Cesium);
+    const warned = [];
+    const originalWarn = console.warn;
+    console.warn = message => warned.push(message);
+    try {
+      await withFetch(async () => ({ ok: false, status: 404, text: async () => '' }), () => plugin.render(dom.doc.createElement('div')));
+    } finally {
+      console.warn = originalWarn;
+    }
+    assert.equal(Cesium.created.viewers.length, 1);
+    assert.equal(Cesium.Ion.defaultAccessToken, '');
+    assert.match(warned[0], /HTTP 404/);
+    assert.equal(Cesium.created.viewers[0].camera.calls[0][0], 'viewBoundingSphere');
   });
 
   await t.test('destroy tears down the viewer and empties el', async () => {

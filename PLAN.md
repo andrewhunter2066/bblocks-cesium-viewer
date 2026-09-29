@@ -18,10 +18,10 @@ and is added to other registers the same way.
 | Dogfooding | This register declares its own plugin under `viewer.view-plugins` in `bblocks-config.yaml`. |
 | Coordinates | Read each point feature's `geometry` — GeoJSON WGS84 (EPSG:4326) lon/lat + ellipsoidal height — straight into `Cartesian3.fromDegrees`. No proj4, no geoid model. Projected coordinates in `place` are ignored. Higher-order features (`geometry: null`) are assembled from their referenced points. A document with no point `geometry` does not match (no Globe tab). |
 | Rule engine | **Copied** (not depended on) from bblocks-viewer-topo-feature-plugin branch `refactor/parameterised-viewer` at commit `d94018b`: `src/utils/rules.js`, `curie.js`, `config.js`, `resolve-config.js` plus their tests, into `src/js/utils/`. Each copied file carries a provenance header; later upstream fixes are ported by hand. |
-| Per-block config | Same `resources[]` mechanism as the Three.js plugin (`context.bblock.resources`), extended with Cesium options (basemap, terrain, initial camera). Its JSON Schema is the `cesiumViewerConfig` building block. |
+| Per-block config | Same `resources[]` mechanism as the Three.js plugin (`context.bblock.resources`), extended with Cesium options (basemap, terrain, initial camera). Its JSON Schema is the `cesiumViewerConfig` building block. *(Stage 4:)* role `https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config`; a block with only a Three.js viewer config (that plugin's role) gets the same rules on the globe. Cesium options live under a top-level `cesium` key (`basemap`: `"osm"` / `"ion"` / `{ url, credit, maximumLevel }`; `terrain`: `"ellipsoid"` / `"ion"`; `camera`; `ionToken`) that the copied rule-config parser ignores. Invalid values are dropped with a console warning. |
 | Cesium loading | Fetched at runtime from jsDelivr at a pinned version (not bundled), with `CESIUM_BASE_URL` pointed at the same CDN path for workers/assets/widget CSS. A prebuild script checks the pinned version against the `cesium` devDependency. |
 | Default basemap | OpenStreetMap imagery + flat `EllipsoidTerrainProvider`, **no ion token**. Ion default imagery, geocoder, timeline and animation widgets explicitly disabled so CesiumJS never falls back to its demo token. |
-| `elevation: "flatten"` | Clamp to ground; `{ flattenTo: n }` = n metres above the ellipsoid. |
+| `elevation: "flatten"` | Clamp to ground (GroundPrimitive / GroundPolylinePrimitive, so it drapes over ion terrain too); `{ flattenTo: n }` = n metres above the ellipsoid. Flattened solids drop their zero-area walls and duplicate footprints. |
 
 ## Secrets policy
 
@@ -32,7 +32,10 @@ Anything a browser uses is visible in devtools, so the goal is **nothing secret 
 - Optional Cesium ion token (premium terrain/imagery only):
   - Local dev: gitignored `.env.local` → `VITE_CESIUM_ION_TOKEN`, or the harness's token box
     (stored only in that browser's `localStorage`). `.env.example` documents the variable, empty.
-  - Published register: GitHub Actions secret, injected into the published config at build time.
+  - Published register: GitHub Actions secret, injected into the published config at build time
+    as `cesium.ionToken` (the harness does the same with its token box). Ion imagery/terrain are
+    used only when the config asks for them *and* has a token; if ion rejects the token, the
+    plugin falls back to OSM and the ellipsoid with a console warning.
   - Tokens must be scoped `assets:read` and restricted to the register's domain in the ion dashboard.
 - Guard rails: `.gitignore` covers `.env*`; enable GitHub secret scanning + push protection on the
   repo; gitleaks runs in CI.
@@ -69,7 +72,7 @@ appear there.
 3. **Geometry** *(done)* — build Cesium entities/primitives from `geometry` coordinates via the topology
    references (with unit tests); copy fixtures from the topo repo and add a georeferenced version
    of `utility-network.json` (its current coordinates are local metres at 0,0).
-4. **Rules & config** — copy the rule engine, apply kind/group/style/visibility/label/elevation;
+4. **Rules & config** *(done)* — copy the rule engine, apply kind/group/style/visibility/label/elevation;
    per-block config and optional ion token.
 5. **UI** — group toggles, labels, zoom-to-extent, fullscreen, compact vs. expanded layout; plain
    DOM, no Vuetify/mdi.

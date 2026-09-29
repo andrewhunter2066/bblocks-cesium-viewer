@@ -2,6 +2,21 @@
 // setup, scene building and lifecycle can be tested without WebGL or a network. Constructors just
 // keep their options; positions stay as readable { lon, lat, height } objects.
 
+// Minimal Cesium Event: listeners plus a raise() for tests to fire.
+export class FakeEvent {
+  constructor() {
+    this.listeners = [];
+  }
+
+  addEventListener(listener) {
+    this.listeners.push(listener);
+  }
+
+  raise(...args) {
+    this.listeners.forEach(l => l(...args));
+  }
+}
+
 export function createFakeCesium({ viewerThrows = null } = {}) {
   const created = { viewers: [], imageryProviders: [], layers: [], terrainProviders: [] };
 
@@ -24,6 +39,12 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
       this.options = options;
       created.layers.push(this);
     }
+
+    static fromWorldImagery() {
+      const layer = new ImageryLayer('ion-world-imagery');
+      layer.errorEvent = new FakeEvent();
+      return layer;
+    }
   }
 
   class EllipsoidTerrainProvider {
@@ -38,8 +59,9 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
       this.alpha = alpha;
     }
 
+    // Like Cesium, returns undefined for a string that isn't a CSS colour.
     static fromCssColorString(css) {
-      return new Color(css);
+      return /^(#[0-9a-f]{3,8}|rgba?\(.*\)|[a-z]+)$/i.test(css) && css !== 'notacolour' ? new Color(css) : undefined;
     }
 
     withAlpha(alpha) {
@@ -57,8 +79,8 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
 
   class PerInstanceColorAppearance extends keepOptions() {}
   PerInstanceColorAppearance.VERTEX_FORMAT = 'per-instance-color-vertex-format';
-  class PolylineColorAppearance extends keepOptions() {}
-  PolylineColorAppearance.VERTEX_FORMAT = 'polyline-color-vertex-format';
+  class PolylineMaterialAppearance extends keepOptions() {}
+  PolylineMaterialAppearance.VERTEX_FORMAT = 'polyline-material-vertex-format';
 
   class PointPrimitiveCollection {
     constructor() {
@@ -82,8 +104,15 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
         requestRender: () => { this.scene.renderRequests += 1; },
         primitives: { list: [], add: p => { this.scene.primitives.list.push(p); return p; } },
       };
+      this.terrainProvider = options?.terrainProvider ?? null;
+      this.imageryLayers = {
+        list: options?.baseLayer ? [options.baseLayer] : [],
+        add: (layer, index = this.imageryLayers.list.length) => { this.imageryLayers.list.splice(index, 0, layer); },
+        remove: layer => { this.imageryLayers.list = this.imageryLayers.list.filter(l => l !== layer); },
+      };
       this.camera = {
         calls: [],
+        setView: view => this.camera.calls.push(['setView', view]),
         viewBoundingSphere: (sphere, offset) => this.camera.calls.push(['viewBoundingSphere', sphere, offset]),
         lookAtTransform: transform => this.camera.calls.push(['lookAtTransform', transform]),
       };
@@ -108,12 +137,20 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
     Color,
     PolygonHierarchy,
     PerInstanceColorAppearance,
-    PolylineColorAppearance,
+    PolylineMaterialAppearance,
     PointPrimitiveCollection,
     GeometryInstance: keepOptions(),
     CoplanarPolygonGeometry: keepOptions(),
+    PolygonGeometry: keepOptions(),
     PolylineGeometry: keepOptions(),
+    GroundPolylineGeometry: keepOptions(),
     Primitive: keepOptions(),
+    GroundPrimitive: keepOptions(),
+    GroundPolylinePrimitive: keepOptions(),
+    UrlTemplateImageryProvider: keepOptions(),
+    Material: { fromType: (type, uniforms) => ({ type, uniforms }) },
+    ClassificationType: { TERRAIN: 'TERRAIN', CESIUM_3D_TILE: 'CESIUM_3D_TILE', BOTH: 'BOTH' },
+    Terrain: { fromWorldTerrain: () => ({ name: 'ion-world-terrain', errorEvent: new FakeEvent() }) },
     ColorGeometryInstanceAttribute: { fromColor: color => ({ color }) },
     ArcType: { NONE: 'NONE', GEODESIC: 'GEODESIC' },
     Cartesian3: { fromDegrees: (lon, lat, height) => ({ lon, lat, height }) },

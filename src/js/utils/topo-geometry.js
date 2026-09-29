@@ -3,13 +3,16 @@
 // polygons ({ outer, holes }) and line segments ([start, end]), each coordinate
 // [lon, lat, height]. No Cesium dependency — cesium-scene.js turns the result into primitives.
 //
-// The traversal logic (shell nesting, open shells, Polygon parcels, the default tiering) is
-// adapted from ogcincubator/bblocks-viewer-topo-feature-plugin@d94018b src/utils/topo-geometry.js,
-// src/utils/default-config.js and TopoFeaturePlugin._buildScene(). Differences: coordinates come
+// The traversal logic (shell nesting, open shells, Polygon parcels) is adapted from
+// ogcincubator/bblocks-viewer-topo-feature-plugin@d94018b src/utils/topo-geometry.js and
+// TopoFeaturePlugin._buildScene(). Which features are drawn, and how, comes from the rule
+// engine (rules.js, default-config.js — copied unchanged). Differences: coordinates come
 // only from each point's WGS84 `geometry` (never `place`) and are not re-centred, and nothing is
 // triangulated here (Cesium triangulates each planar polygon itself).
 
 import { collectionFeatures, isGeographicPoint } from './detect-topo.js';
+import { classifyFeatures, resolveFlattenZ } from './rules.js';
+import { buildDefaultConfig } from './default-config.js';
 
 const REVERSED_ORIENTATION = '-';
 const FACE_TOPOLOGY_TYPE = 'Face';
@@ -231,8 +234,8 @@ function polygonShape(feature, maps) {
 
 // ─── Geometry strategies ────────────────────────────────────────────────────────
 //
-// One entry per way of turning a feature into a shape — the same names the rule engine's
-// `geometry` field uses (stage 4). Each returns { polygons, segments }.
+// One entry per way of turning a feature into a shape, keyed by the rule engine's `geometry`
+// names. Each returns { polygons, segments }.
 export const GEOMETRY_STRATEGIES = {
   solid: containerShape,
   'open-shell': containerShape,
@@ -247,52 +250,134 @@ export const GEOMETRY_STRATEGIES = {
   }),
 };
 
-// True if any face has a hole or any solid has a void — the renderer then makes solids/faces
+// True if any face has a hole or any solid has a void — the default rules then make solids/faces
 // translucent so the interior stays visible.
 export function hasHolesOrVoids(data) {
   return getFeatures(data?.faces).some(face => directedReferences(face).length > 1)
     || getFeatures(data?.solids).some(solid => directedReferences(solid).length > 1);
 }
 
-// The built-in tiering, until the rule engine (stage 4) takes over: solids, open shells
-// ("surfaces") and Polygon parcels together whenever any is present; otherwise standalone faces,
-// else rings; otherwise bare edges, else bare points.
-export function defaultTiers(data, openShells) {
-  if (getFeatures(data?.solids).length || openShells.length || getFeatures(data?.parcels).length) {
-    return [
-      { kind: 'solid', geometry: 'solid', features: getFeatures(data?.solids) },
-      { kind: 'surface', geometry: 'open-shell', features: openShells },
-      { kind: 'parcel', geometry: 'polygon', features: getFeatures(data?.parcels) },
-    ];
-  }
-  if (getFeatures(data?.faces).length) return [{ kind: 'face', geometry: 'face', features: getFeatures(data?.faces) }];
-  if (getFeatures(data?.rings).length) return [{ kind: 'ring', geometry: 'ring', features: getFeatures(data?.rings) }];
-  return [];
+// ─── Default rules ──────────────────────────────────────────────────────────────
+
+// Per-kind fill opacity for the built-in rules, matching the Three.js TopoFeaturePlugin.
+export const DEFAULT_OPACITY = { solid: 1, face: 1, ring: 1, surface: 0.55, parcel: 0.35 };
+const TRANSLUCENT_OPACITY = 0.85; // solids/faces when the document has a hole or void
+
+// The built-in rule config for a document (default-config.js): solids, open shells ("surfaces")
+// and Polygon parcels together whenever any is present; otherwise faces, else rings. A document
+// with none of those gets no rules and is drawn as bare edges or points.
+export function defaultConfigFor(data) {
+  const maps = buildMaps(data);
+  const solidOrFace = hasHolesOrVoids(data) ? TRANSLUCENT_OPACITY : DEFAULT_OPACITY.solid;
+  return buildDefaultConfig(
+    {
+      solidCount: getFeatures(data?.solids).length,
+      openShellCount: getOpenShells(data, maps).length,
+      parcelCount: getFeatures(data?.parcels).length,
+      faceCount: getFeatures(data?.faces).length,
+      ringCount: getFeatures(data?.rings).length,
+    },
+    { ...DEFAULT_OPACITY, solid: solidOrFace, face: solidOrFace },
+  );
 }
 
-// Resolves a whole document into what the globe draws:
-// - renderables: one per drawable feature — { kind, geometry, id, feature, polygons, segments }
-// - edges: every resolvable edge, only when there is nothing to fill (the bare-edges case)
-// - points: every resolvable point, only in the bare-edges/bare-points cases
-export function buildTopologyShapes(data) {
+// ─── Elevation ──────────────────────────────────────────────────────────────────
+
+const COORD_KEY_DIGITS = 9; // ~0.1 mm in degrees
+const MIN_FLAT_AREA_M2 = 1e-3;
+const METRES_PER_DEGREE_LAT = 110574;
+const METRES_PER_DEGREE_LON_AT_EQUATOR = 111320;
+
+const lonLatKey = ([lon, lat]) => `${lon.toFixed(COORD_KEY_DIGITS)},${lat.toFixed(COORD_KEY_DIGITS)}`;
+
+// Plan area of a ring in square metres (shoelace on a local equirectangular approximation) —
+// only used to spot rings that collapse to a line once flattened.
+function planAreaM2(ring) {
+  const lonScale = METRES_PER_DEGREE_LON_AT_EQUATOR * Math.cos((ring[0][1] * Math.PI) / 180);
+  let twiceArea = 0;
+  for (let i = 0; i < ring.length; i++) {
+    const [x1, y1] = ring[i];
+    const [x2, y2] = ring[(i + 1) % ring.length];
+    twiceArea += (x1 * lonScale) * (y2 * METRES_PER_DEGREE_LAT) - (x2 * lonScale) * (y1 * METRES_PER_DEGREE_LAT);
+  }
+  return Math.abs(twiceArea) / 2;
+}
+
+// Applies a rule's `elevation` to a shape: "preserve" (default) leaves it alone; "flatten" clamps
+// it to the ground; { flattenTo: n } puts it n metres above the ellipsoid. Flattening a solid
+// turns its walls into lines and stacks its top and bottom faces on one footprint, so polygons
+// with no plan area and duplicate polygons/segments are dropped rather than drawn on top of one
+// another. Returns { polygons, segments, clampToGround }.
+export function applyElevation(shape, elevation) {
+  const height = resolveFlattenZ(elevation);
+  if (height === null) return { ...shape, clampToGround: false };
+
+  const flatten = coords => coords.map(([lon, lat]) => [lon, lat, height]);
+  const seenPolygons = new Set();
+  const polygons = shape.polygons
+    .map(p => ({ outer: flatten(p.outer), holes: p.holes.map(flatten) }))
+    .filter(p => {
+      if (planAreaM2(p.outer) < MIN_FLAT_AREA_M2) return false;
+      const key = p.outer.map(lonLatKey).sort().join(';');
+      if (seenPolygons.has(key)) return false;
+      seenPolygons.add(key);
+      return true;
+    })
+    .map(p => ({ ...p, holes: p.holes.filter(h => planAreaM2(h) >= MIN_FLAT_AREA_M2) }));
+
+  const seenSegments = new Set();
+  const segments = shape.segments.map(flatten).filter(([a, b]) => {
+    const keys = [lonLatKey(a), lonLatKey(b)];
+    if (keys[0] === keys[1]) return false;
+    const key = keys.sort().join('|');
+    if (seenSegments.has(key)) return false;
+    seenSegments.add(key);
+    return true;
+  });
+
+  return { polygons, segments, clampToGround: elevation === 'flatten' };
+}
+
+// ─── Whole document ─────────────────────────────────────────────────────────────
+
+// Resolves a whole document into what the globe draws, following `config`'s rules (rules.js):
+// - renderables: one per classified feature that has something to fill —
+//   { kind, group, kindLabel, label, id, feature, style, visible, clampToGround, polygons, segments }
+// - edges / points: every resolvable edge and point, only when the config has no rules at all
+//   (the bare-edges / bare-points documents)
+export function buildTopologyShapes(data, config = defaultConfigFor(data)) {
   const maps = buildMaps(data);
-  const openShells = getOpenShells(data, maps);
+  const rules = config?.rules ?? [];
   const renderables = [];
-  for (const tier of defaultTiers(data, openShells)) {
-    const strategy = GEOMETRY_STRATEGIES[tier.geometry];
-    for (const feature of tier.features) {
-      const { polygons, segments } = strategy(feature, maps);
-      if (!polygons.length) continue;
-      renderables.push({ kind: tier.kind, geometry: tier.geometry, id: feature.id ?? null, feature, polygons, segments });
+
+  if (rules.length) {
+    // `surfaces` is a derived source: open shells come from the solid/shell reference graph, not
+    // from a document array. A document's own top-level `surfaces` array would be shadowed.
+    const descriptors = classifyFeatures({ ...data, surfaces: getOpenShells(data, maps) }, config);
+    for (const descriptor of descriptors) {
+      const strategy = GEOMETRY_STRATEGIES[descriptor.geometry];
+      if (!strategy) continue;
+      const shape = applyElevation(strategy(descriptor.feature, maps), descriptor.elevation);
+      if (!shape.polygons.length) continue;
+      renderables.push({
+        kind: descriptor.kind,
+        group: descriptor.group,
+        kindLabel: descriptor.kindLabel,
+        label: descriptor.label,
+        id: descriptor.feature.id ?? null,
+        feature: descriptor.feature,
+        style: descriptor.style,
+        visible: descriptor.initiallyVisible,
+        ...shape,
+      });
     }
   }
 
-  const bare = renderables.length === 0;
+  const bare = rules.length === 0;
   return {
     renderables,
     edges: bare ? segmentsForEdgeIds(maps.edgeMap.keys(), maps) : [],
     points: bare ? [...maps.pointMap.values()] : [],
-    translucent: hasHolesOrVoids(data),
   };
 }
 

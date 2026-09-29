@@ -11,4 +11,11 @@
   and `geometry` holds the exact east-north-up → WGS84 conversion with the local origin at
   115.8605 E, 31.9535 S, 10 m below the ellipsoid (so the pipes sit 2–10 m underground).
 
-The `*-config.json` files are per-block rule configs, applied from stage 4.
+`parcel-config.json` and `utility-network-config.json` are the Three.js plugin's per-block rule
+configs; the harness applies them automatically with their documents. Two Cesium-only configs
+exercise the `cesium` options:
+
+- `cesium-basemap-camera-config.json`: an OpenTopoMap basemap and a fixed initial camera over
+  `parcel.json`'s lot (no token needed).
+- `cesium-ion-config.json`: ion world imagery and terrain. Needs an ion token (the harness token
+  box or `.env.local`); without one the plugin warns and falls back to OSM and the ellipsoid.

@@ -32,14 +32,17 @@
     <label>URL: <input type="text" id="urlInput" placeholder="https://.../example.json" size="36" /></label>
     <button id="urlLoad" type="button">Load</button>
     <span class="sep">|</span>
-    <label title="Delivered to the plugin as a context.bblock.resources entry, exactly as a bblock.json resources entry would be. Used from stage 4.">
+    <label title="A bundled per-block config, delivered to the plugin as a context.bblock.resources entry, exactly as a bblock.json resources entry would be.">
+      Sample config: <select id="sampleConfigSelect"></select>
+    </label>
+    <label title="Your own per-block config file, delivered the same way.">
       Config file: <input type="file" id="configFileInput" accept="application/json,.json" />
     </label>
     <label>Config URL: <input type="text" id="configUrlInput" placeholder="https://.../viewer-config.json" size="28" /></label>
     <button id="configUrlLoad" type="button">Load</button>
     <button id="configClear" type="button">Clear config</button>
     <span class="sep">|</span>
-    <label title="Optional Cesium ion token (premium terrain/imagery only). Stored only in this browser's localStorage; overrides VITE_CESIUM_ION_TOKEN from .env.local. Used from stage 4.">
+    <label title="Optional Cesium ion token, used only by a config that asks for ion imagery or terrain. Stored only in this browser's localStorage; overrides VITE_CESIUM_ION_TOKEN from .env.local. Injected into the config as cesium.ionToken, as a published register's build would.">
       Ion token: <input type="password" id="tokenInput" placeholder="(none — OSM basemap)" size="18" autocomplete="off" />
     </label>
     <button id="tokenSave" type="button">Save</button>
