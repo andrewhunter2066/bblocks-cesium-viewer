@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import TopoFeatureCesiumPlugin from './topo-feature-cesium-plugin.js';
 import { TopoFeatureCesiumPlugin as NamedExport } from './index.js';
 import { installFakeDocument } from './test-support/fake-dom.js';
@@ -78,6 +79,14 @@ async function withFetch(fetchImpl, fn) {
   }
 }
 
+// A plugin rendering parcel.json (solid, surface, parcels) with the built-in rules.
+function uiPlugin(Cesium) {
+  const content = readFileSync(new URL('../../harness/fixtures/parcel.json', import.meta.url), 'utf8');
+  const plugin = new TopoFeatureCesiumPlugin([candidate({ content })]);
+  plugin._loadCesium = async () => Cesium;
+  return plugin;
+}
+
 function deferred() {
   let resolve;
   let reject;
@@ -111,7 +120,9 @@ test('lifecycle', async t => {
 
     assert.equal(Cesium.created.viewers.length, 1);
     const viewer = Cesium.created.viewers[0];
-    assert.equal(viewer.container.parent, el, 'viewer container is a child of el');
+    assert.equal(viewer.container.className, 'bcv-viewer');
+    assert.equal(viewer.container.parent.className, 'bcv-root');
+    assert.equal(viewer.container.parent.parent, el, 'the plugin root is a child of el');
     assert.equal(el.style.position, 'relative');
     assert.equal(Cesium.Ion.defaultAccessToken, '', 'demo ion token blanked before the viewer is built');
     assert.equal(viewer.options.geocoder, false);
@@ -164,6 +175,74 @@ test('lifecycle', async t => {
     assert.equal(Cesium.Ion.defaultAccessToken, '');
     assert.match(warned[0], /HTTP 404/);
     assert.equal(Cesium.created.viewers[0].camera.calls[0][0], 'viewBoundingSphere');
+  });
+
+  await t.test('the UI is mounted with the plugin stylesheet, once per document', async () => {
+    const Cesium = createFakeCesium();
+    const first = pluginWithCesium(async () => Cesium);
+    await first.render(dom.doc.createElement('div'));
+    await pluginWithCesium(async () => Cesium).render(dom.doc.createElement('div'));
+    const styles = dom.doc.head.children.filter(c => c.id === 'bblocks-cesium-viewer-css');
+    assert.equal(styles.length, 1);
+    assert.match(styles[0].textContent, /\.bcv-root/);
+    assert.ok(first._root.find(c => c.className === 'bcv-toolbar'));
+  });
+
+  await t.test('edges, labels and feature visibility drive the primitives', async () => {
+    const Cesium = createFakeCesium();
+    const plugin = uiPlugin(Cesium);
+    await plugin.render(dom.doc.createElement('div'));
+    const [solid, surface] = plugin._records;
+    const { buttons } = plugin._controls;
+
+    assert.deepEqual([solid.fill.show, solid.outline.show, solid.labelGraphic.show], [true, true, false]);
+    buttons.labels.click();
+    assert.deepEqual([solid.labelGraphic.show, surface.labelGraphic.show], [true, true]);
+    buttons.edges.click();
+    assert.equal(solid.outline.show, false);
+    buttons['group:solid'].click();
+    assert.deepEqual([solid.fill.show, solid.labelGraphic.show], [false, false]);
+    buttons.edges.click();
+    assert.equal(solid.outline.show, false, 'a hidden feature keeps its outline hidden');
+    assert.ok(plugin._viewer.scene.renderRequests > 3, 'each change requests a render');
+  });
+
+  await t.test('zoom to extent flies to the visible features only', async () => {
+    const Cesium = createFakeCesium();
+    const plugin = uiPlugin(Cesium);
+    await plugin.render(dom.doc.createElement('div'));
+    const [solid, ...others] = plugin._records;
+    others.forEach(r => { r.visible = false; });
+    plugin._controls.buttons.extent.click();
+    const [call, sphere] = plugin._viewer.camera.calls.at(-1);
+    assert.equal(call, 'flyToBoundingSphere');
+    assert.deepEqual(sphere.points, solid.positions);
+  });
+
+  await t.test('fullscreen targets the plugin root and the button follows it', async () => {
+    const Cesium = createFakeCesium();
+    const plugin = uiPlugin(Cesium);
+    const el = dom.doc.createElement('div');
+    await plugin.render(el);
+    plugin._controls.buttons.fullscreen.click();
+    assert.equal(dom.doc.fullscreenElement, plugin._root);
+    assert.equal(plugin._controls.buttons.fullscreen.title, 'Exit fullscreen');
+    plugin._controls.buttons.fullscreen.click();
+    assert.equal(dom.doc.fullscreenElement, null);
+    assert.equal(plugin._controls.buttons.fullscreen.title, 'Fullscreen');
+  });
+
+  await t.test('destroy leaves fullscreen and removes its listeners', async () => {
+    const Cesium = createFakeCesium();
+    const plugin = uiPlugin(Cesium);
+    const el = dom.doc.createElement('div');
+    await plugin.render(el);
+    plugin._controls.buttons.fullscreen.click();
+    assert.equal(dom.doc.listenerCount('fullscreenchange'), 1);
+    plugin.destroy(el);
+    assert.equal(dom.doc.fullscreenElement, null);
+    assert.equal(dom.doc.listenerCount('fullscreenchange'), 0);
+    assert.equal(el.children.length, 0);
   });
 
   await t.test('destroy tears down the viewer and empties el', async () => {

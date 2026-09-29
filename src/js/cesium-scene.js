@@ -7,7 +7,7 @@
 // its feature to the ground instead: GroundPrimitive / GroundPolylinePrimitive drape it over
 // whatever terrain is loaded.
 
-import { shapeCoordinates } from './utils/topo-geometry.js';
+import { labelAnchor, shapeCoordinates } from './utils/topo-geometry.js';
 
 // Fill colour for a feature whose rule sets no `style.color`, cycling by draw order — the
 // Three.js TopoFeaturePlugin's palette.
@@ -21,10 +21,13 @@ const LINE_WIDTH = 2;
 const DASH_LENGTH = 16; // pixels
 const POINT_COLOR = '#ffff00';
 const POINT_PIXEL_SIZE = 8;
+const LABEL_FONT = '13px sans-serif';
+const LABEL_LIFT_PIXELS = 6;
 
 const CAMERA_PITCH_DEGREES = -35;
 const CAMERA_RANGE_FACTOR = 3.5; // camera distance as a multiple of the data's bounding radius
 const MIN_CAMERA_RANGE = 150; // metres, so a single point or tiny feature isn't viewed from 0 m
+const FLIGHT_SECONDS = 0.8;
 
 const toCartesian = (Cesium, [lon, lat, height]) => Cesium.Cartesian3.fromDegrees(lon, lat, height);
 
@@ -133,12 +136,33 @@ function pointCollection(Cesium, points) {
   return collection;
 }
 
+// Each feature's label, drawn over everything (no depth test) so it isn't hidden by the geometry
+// or terrain. Labels start hidden; the labels toggle shows them.
+function addLabel(Cesium, labels, renderable) {
+  return labels.add({
+    position: toCartesian(Cesium, labelAnchor(renderable)),
+    text: String(renderable.label ?? renderable.id ?? ''),
+    font: LABEL_FONT,
+    fillColor: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.BLACK,
+    outlineWidth: 3,
+    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -LABEL_LIFT_PIXELS),
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+    show: false,
+  });
+}
+
 // Builds (but does not add) every primitive for a set of shapes. Returns
-// { records, primitives, positions }: one record per renderable — its rule-derived kind, group,
-// kindLabel, label, id and visibility plus its `fill` and `outline` primitives (the handles the
-// UI toggles in stage 5) — the flat list of primitives to add to the scene, and every Cartesian
-// position for framing.
+// { records, primitives, positions }:
+// - records: one per renderable — its rule-derived kind, group, kindLabel, label, id and
+//   visibility; its `fill` and `outline` primitives and `labelGraphic`, the handles the UI
+//   toggles; and its own `positions`, for zooming to it
+// - primitives: the flat list to add to the scene
+// - positions: every Cartesian position, for framing the whole document
 export function buildScenePrimitives(Cesium, shapes) {
+  const labels = shapes.renderables.length ? new Cesium.LabelCollection() : null;
   const records = shapes.renderables.map((renderable, index) => ({
     kind: renderable.kind,
     group: renderable.group,
@@ -150,9 +174,12 @@ export function buildScenePrimitives(Cesium, shapes) {
     outline: renderable.segments.length
       ? outlinePrimitive(Cesium, renderable.segments, renderable)
       : null,
+    labelGraphic: addLabel(Cesium, labels, renderable),
+    positions: shapeCoordinates({ renderables: [renderable], edges: [], points: [] }).map(c => toCartesian(Cesium, c)),
   }));
 
   const primitives = records.flatMap(r => [r.fill, r.outline].filter(Boolean));
+  if (labels) primitives.push(labels);
   if (shapes.edges.length) primitives.push(outlinePrimitive(Cesium, shapes.edges, { id: 'edges' }));
   if (shapes.points.length) primitives.push(pointCollection(Cesium, shapes.points));
 
@@ -165,17 +192,19 @@ export function addToScene(viewer, primitives) {
   viewer.scene.requestRender();
 }
 
-// Points the camera at the data from the south, looking down at CAMERA_PITCH_DEGREES, then
-// releases the look-at lock so the user can pan/orbit freely.
-export function frameData(Cesium, viewer, positions) {
+// Points the camera at `positions` from the south, looking down at CAMERA_PITCH_DEGREES —
+// instantly, or with a short flight when `animate` — leaving the camera free to pan/orbit.
+export function frameData(Cesium, viewer, positions, { animate = false } = {}) {
   if (!positions.length) return;
   const sphere = Cesium.BoundingSphere.fromPoints(positions);
   const range = Math.max(sphere.radius * CAMERA_RANGE_FACTOR, MIN_CAMERA_RANGE);
-  viewer.camera.viewBoundingSphere(
-    sphere,
-    new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(CAMERA_PITCH_DEGREES), range),
-  );
-  viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+  const offset = new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(CAMERA_PITCH_DEGREES), range);
+  if (animate) {
+    viewer.camera.flyToBoundingSphere(sphere, { offset, duration: FLIGHT_SECONDS });
+  } else {
+    viewer.camera.viewBoundingSphere(sphere, offset);
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY); // release viewBoundingSphere's look-at lock
+  }
   viewer.scene.requestRender();
 }
 

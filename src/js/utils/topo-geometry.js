@@ -392,3 +392,11 @@ export function shapeCoordinates({ renderables, edges, points }) {
     ...points,
   ];
 }
+
+// Where a feature's label sits: above the centre of its outline, at its highest point.
+export function labelAnchor(renderable) {
+  const coords = renderable.polygons.flatMap(p => p.outer);
+  const lon = coords.reduce((sum, c) => sum + c[0], 0) / coords.length;
+  const lat = coords.reduce((sum, c) => sum + c[1], 0) / coords.length;
+  return [lon, lat, Math.max(...coords.map(c => c[2]))];
+}

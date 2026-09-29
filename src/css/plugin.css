@@ -1,0 +1,203 @@
+/* TopoFeatureCesiumPlugin UI. Plain CSS, no host framework: the plugin runs outside the host's
+   component tree. Everything is scoped under .bcv-root, the plugin's own wrapper element. */
+
+.bcv-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  font: 12px/1.4 system-ui, sans-serif;
+  color: #222;
+}
+
+.bcv-root:fullscreen {
+  background: #000;
+}
+
+.bcv-viewer {
+  position: absolute;
+  inset: 0;
+}
+
+/* ─── Toolbar ─────────────────────────────────────────────────────────────────── */
+
+.bcv-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bcv-toolbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bcv-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.bcv-button:hover {
+  background: #e8eef7;
+}
+
+.bcv-button[aria-pressed="true"] {
+  background: #1976d2;
+  color: #fff;
+}
+
+.bcv-button:focus-visible,
+.bcv-panel button:focus-visible,
+.bcv-panel input:focus-visible {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+.bcv-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.bcv-root [hidden] {
+  display: none !important;
+}
+
+/* ─── Layers panel ────────────────────────────────────────────────────────────── */
+
+.bcv-panel {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  width: max-content;
+  min-width: 160px;
+  max-width: min(280px, calc(100% - 60px));
+  max-height: calc(100% - 16px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.bcv-panel-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #555;
+}
+
+.bcv-group {
+  margin-bottom: 6px;
+}
+
+.bcv-group > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.bcv-group-body {
+  padding-left: 20px;
+  margin-top: 2px;
+}
+
+.bcv-kind {
+  margin-bottom: 4px;
+}
+
+.bcv-kind-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bcv-kind-body {
+  padding-left: 20px;
+}
+
+.bcv-feature {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 1px 0;
+}
+
+.bcv-feature label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.bcv-feature-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bcv-zoom-to {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: #1976d2;
+  cursor: pointer;
+}
+
+.bcv-zoom-to:hover {
+  background: #e8eef7;
+}
+
+.bcv-zoom-to svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── Error banner ────────────────────────────────────────────────────────────── */
+
+.bcv-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #b00020;
+  font: 14px/1.4 system-ui, sans-serif;
+}
+
+.bcv-error-hint {
+  margin-top: 12px;
+}

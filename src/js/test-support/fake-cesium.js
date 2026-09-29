@@ -69,6 +69,7 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
     }
   }
   Color.BLACK = new Color('#000000');
+  Color.WHITE = new Color('#ffffff');
 
   class PolygonHierarchy {
     constructor(positions, holes = []) {
@@ -81,6 +82,18 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
   PerInstanceColorAppearance.VERTEX_FORMAT = 'per-instance-color-vertex-format';
   class PolylineMaterialAppearance extends keepOptions() {}
   PolylineMaterialAppearance.VERTEX_FORMAT = 'polyline-material-vertex-format';
+
+  class LabelCollection {
+    constructor() {
+      this.labels = [];
+    }
+
+    add(options) {
+      const label = { ...options };
+      this.labels.push(label);
+      return label;
+    }
+  }
 
   class PointPrimitiveCollection {
     constructor() {
@@ -114,6 +127,7 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
         calls: [],
         setView: view => this.camera.calls.push(['setView', view]),
         viewBoundingSphere: (sphere, offset) => this.camera.calls.push(['viewBoundingSphere', sphere, offset]),
+        flyToBoundingSphere: (sphere, options) => this.camera.calls.push(['flyToBoundingSphere', sphere, options]),
         lookAtTransform: transform => this.camera.calls.push(['lookAtTransform', transform]),
       };
       created.viewers.push(this);
@@ -139,6 +153,14 @@ export function createFakeCesium({ viewerThrows = null } = {}) {
     PerInstanceColorAppearance,
     PolylineMaterialAppearance,
     PointPrimitiveCollection,
+    LabelCollection,
+    LabelStyle: { FILL: 'FILL', OUTLINE: 'OUTLINE', FILL_AND_OUTLINE: 'FILL_AND_OUTLINE' },
+    VerticalOrigin: { CENTER: 'CENTER', BOTTOM: 'BOTTOM', TOP: 'TOP', BASELINE: 'BASELINE' },
+    Cartesian2: class {
+      constructor(x, y) {
+        Object.assign(this, { x, y });
+      }
+    },
     GeometryInstance: keepOptions(),
     CoplanarPolygonGeometry: keepOptions(),
     PolygonGeometry: keepOptions(),

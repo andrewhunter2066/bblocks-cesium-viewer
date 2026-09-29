@@ -74,7 +74,7 @@ appear there.
    of `utility-network.json` (its current coordinates are local metres at 0,0).
 4. **Rules & config** *(done)* — copy the rule engine, apply kind/group/style/visibility/label/elevation;
    per-block config and optional ion token.
-5. **UI** — group toggles, labels, zoom-to-extent, fullscreen, compact vs. expanded layout; plain
+5. **UI** *(done)* — group toggles, labels, zoom-to-extent, fullscreen, compact vs. expanded layout; plain
    DOM, no Vuetify/mdi.
 6. **Building block & docs** — `_sources/cesiumViewerConfig/` (schema, description, examples,
    tests), `bblocks-config.yaml` register metadata + `view-plugins` entry, README replacing the

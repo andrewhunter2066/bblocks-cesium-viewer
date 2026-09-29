@@ -159,3 +159,36 @@ test('setCameraView converts the configured view to Cesium units', () => {
   assert.equal(view.orientation.heading, Math.PI / 2);
   assert.equal(view.orientation.pitch, -Math.PI / 4);
 });
+
+test('each record gets a hidden label above its highest point, and its own positions', () => {
+  const Cesium = createFakeCesium();
+  const shapes = shapesOf('parcel.json');
+  const { records, primitives } = buildScenePrimitives(Cesium, shapes);
+  const labels = primitives.find(p => p instanceof Cesium.LabelCollection);
+  assert.equal(labels.labels.length, records.length);
+  const [solid] = records;
+  assert.equal(solid.labelGraphic.show, false);
+  assert.equal(solid.labelGraphic.text, shapes.renderables[0].label);
+  assert.equal(solid.labelGraphic.disableDepthTestDistance, Number.POSITIVE_INFINITY);
+  const maxHeight = Math.max(...shapes.renderables[0].polygons.flatMap(p => p.outer.map(c => c[2])));
+  assert.equal(solid.labelGraphic.position.height, maxHeight);
+  assert.ok(solid.positions.length > 0);
+  assert.ok(solid.positions.every(p => typeof p.lon === 'number'));
+});
+
+test('bare edges/points documents get no label collection', () => {
+  const Cesium = createFakeCesium();
+  const { primitives } = buildScenePrimitives(Cesium, { renderables: [], edges: [], points: [[115.8, -31.9, 0]] });
+  assert.ok(!primitives.some(p => p instanceof Cesium.LabelCollection));
+});
+
+test('frameData with animate flies there instead of jumping', () => {
+  const Cesium = createFakeCesium();
+  const viewer = new Cesium.Viewer({}, {});
+  const { positions } = buildScenePrimitives(Cesium, shapesOf('cube.json'));
+  frameData(Cesium, viewer, positions, { animate: true });
+  const [[call, , options]] = viewer.camera.calls;
+  assert.equal(call, 'flyToBoundingSphere');
+  assert.ok(options.duration > 0 && options.duration < 2);
+  assert.ok(options.offset.pitch < 0);
+});
