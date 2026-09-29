@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { OSM_CREDIT, OSM_TILE_URL, buildViewerOptions, disableIonDefaults } from './viewer-options.js';
+import { OSM_CREDIT, OSM_MAX_LEVEL, OSM_TILE_URL, buildViewerOptions, disableIonDefaults } from './viewer-options.js';
 import { createFakeCesium } from '../test-support/fake-cesium.js';
 
 test('disableIonDefaults blanks the bundled demo ion token', () => {
@@ -18,6 +18,13 @@ test('base layer is OpenStreetMap imagery with attribution', () => {
   assert.equal(provider.options.url, OSM_TILE_URL);
   assert.equal(OSM_TILE_URL, 'https://tile.openstreetmap.org/');
   assert.equal(provider.options.credit, OSM_CREDIT);
+});
+
+test('OSM imagery stops at zoom 19, the deepest level the tile server has', () => {
+  const Cesium = createFakeCesium();
+  const provider = buildViewerOptions(Cesium).baseLayer.imageryProvider;
+  assert.equal(OSM_MAX_LEVEL, 19);
+  assert.equal(provider.options.maximumLevel, OSM_MAX_LEVEL);
 });
 
 test('terrain is the flat ellipsoid, not ion world terrain', () => {

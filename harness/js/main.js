@@ -5,8 +5,17 @@
 import { TopoFeatureCesiumPlugin } from '../../src/js/index.js';
 
 // Fixture paths are fetch()ed relative to the page (harness/index.html), not this module.
+// All but the two squares are copies of the Three.js plugin's fixtures (see fixtures/README.md).
 const FIXTURES = [
-  { label: 'Georeferenced square', file: 'fixtures/georeferenced-square.json' },
+  { label: 'Parcel (solid + open shell + 3 parcels)', file: 'fixtures/parcel.json' },
+  { label: 'Derived 3D solid (solid + open shell + 3 parcels, below ground)', file: 'fixtures/derived-3d-solid.json' },
+  { label: 'Cube', file: 'fixtures/cube.json' },
+  { label: 'Cube with void (translucent)', file: 'fixtures/cube-with-void.json' },
+  { label: 'Cube with protrusion (face with a hole)', file: 'fixtures/cube-with-protrusion.json' },
+  { label: 'Tetrahedron', file: 'fixtures/tetrahedron.json' },
+  { label: 'Four units up/down (5 solids)', file: 'fixtures/4-unit-up-down.json' },
+  { label: 'Utility network, georeferenced (4 pipes, underground)', file: 'fixtures/utility-network-georeferenced.json' },
+  { label: 'Georeferenced square (a single ring)', file: 'fixtures/georeferenced-square.json' },
   { label: 'Projected-only square (no match expected)', file: 'fixtures/projected-only-square.json' },
 ];
 
@@ -27,6 +36,8 @@ const statusEl = $('status');
 const host = $('host');
 
 let plugin = null;
+// For poking at the live scene from DevTools, e.g. harness.plugin._viewer.scene.primitives.length
+window.harness = { get plugin() { return plugin; } };
 let currentDocument = null; // { content, label, mimeType }
 let configRef = null; // URL (real or blob:) the plugin fetch()es as its config resource
 let configLabel = 'none';

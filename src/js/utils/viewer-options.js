@@ -3,6 +3,9 @@
 
 export const OSM_TILE_URL = 'https://tile.openstreetmap.org/';
 export const OSM_CREDIT = '© OpenStreetMap contributors';
+// tile.openstreetmap.org serves zoom 0–19; Cesium upsamples level 19 when zoomed in further
+// instead of requesting tiles that don't exist.
+export const OSM_MAX_LEVEL = 19;
 
 // Cesium ships a shared demo ion token as Ion.defaultAccessToken. Blanking it means anything that
 // still tried ion would fail visibly instead of quietly using the demo token. An optional real
@@ -12,7 +15,11 @@ export function disableIonDefaults(Cesium) {
 }
 
 export function buildViewerOptions(Cesium) {
-  const imagery = new Cesium.OpenStreetMapImageryProvider({ url: OSM_TILE_URL, credit: OSM_CREDIT });
+  const imagery = new Cesium.OpenStreetMapImageryProvider({
+    url: OSM_TILE_URL,
+    credit: OSM_CREDIT,
+    maximumLevel: OSM_MAX_LEVEL,
+  });
   return {
     baseLayer: new Cesium.ImageryLayer(imagery),
     terrainProvider: new Cesium.EllipsoidTerrainProvider(),

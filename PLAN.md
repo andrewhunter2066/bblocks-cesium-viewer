@@ -66,7 +66,7 @@ appear there.
    step, `.env.example`; resolve the local-viewer open question above.
 2. **Globe** *(done)* — runtime CDN load of CesiumJS, empty token-free globe in the harness, clean
    `destroy()`.
-3. **Geometry** — build Cesium entities/primitives from `geometry` coordinates via the topology
+3. **Geometry** *(done)* — build Cesium entities/primitives from `geometry` coordinates via the topology
    references (with unit tests); copy fixtures from the topo repo and add a georeferenced version
    of `utility-network.json` (its current coordinates are local metres at 0,0).
 4. **Rules & config** — copy the rule engine, apply kind/group/style/visibility/label/elevation;

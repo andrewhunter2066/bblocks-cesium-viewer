@@ -96,6 +96,20 @@ test('lifecycle', async t => {
     assert.ok(dom.doc.getElementById('bblocks-cesium-viewer-widgets-css'), 'widgets.css injected');
   });
 
+  await t.test('render draws the document and frames the camera on it', async () => {
+    const Cesium = createFakeCesium();
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => Cesium);
+
+    await plugin.render(el);
+
+    const viewer = Cesium.created.viewers[0];
+    // The candidate is a single georeferenced point: bare points → one point collection.
+    assert.equal(viewer.scene.primitives.list.length, 1);
+    assert.deepEqual(viewer.scene.primitives.list[0].points[0].position, { lon: 115.8, lat: -31.9, height: 17.5 });
+    assert.equal(viewer.camera.calls[0][0], 'viewBoundingSphere');
+  });
+
   await t.test('destroy tears down the viewer and empties el', async () => {
     const Cesium = createFakeCesium();
     const el = dom.doc.createElement('div');
