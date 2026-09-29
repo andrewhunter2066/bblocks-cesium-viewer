@@ -1,0 +1,19 @@
+{
+  "name": "Globe view demo: cadastral parcel",
+  "abstract": "A Western Australian cadastral survey as a topo-feature document — a 3D lot solid, the ground surface and three parcels — shown in the Globe view with the parcel rules from the Three.js topology view.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-09-28T00:00:00Z",
+  "itemClass": "schema",
+  "version": "0.1",
+  "tags": ["viewer", "cesium", "topo-feature", "cadastre", "demo"],
+  "group": "Globe viewer",
+  "seeAlso": ["bblocks://ogc.bbr.template.cesiumViewerConfig"],
+  "resources": [
+    {
+      "role": "https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config",
+      "ref": "viewer-config.json",
+      "format": "application/json",
+      "title": "Globe view configuration"
+    }
+  ]
+}

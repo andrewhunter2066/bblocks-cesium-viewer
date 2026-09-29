@@ -1,0 +1,16 @@
+{
+  "cesium": {
+    "basemap": {
+      "url": "https://tile.opentopomap.org/{z}/{x}/{y}.png",
+      "credit": "Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)",
+      "maximumLevel": 17
+    },
+    "camera": {
+      "longitude": 115.7967,
+      "latitude": -31.8952,
+      "height": 150,
+      "heading": 20,
+      "pitch": -30
+    }
+  }
+}

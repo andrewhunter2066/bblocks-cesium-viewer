@@ -1,0 +1,19 @@
+{
+  "name": "Globe view demo: underground utility network",
+  "abstract": "Four underground pipe segments as topo-feature solids, classified by asset condition — a non-cadastral document showing that the Globe view's rules are domain-independent.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-09-28T00:00:00Z",
+  "itemClass": "schema",
+  "version": "0.1",
+  "tags": ["viewer", "cesium", "topo-feature", "utilities", "demo"],
+  "group": "Globe viewer",
+  "seeAlso": ["bblocks://ogc.bbr.template.cesiumViewerConfig"],
+  "resources": [
+    {
+      "role": "https://github.com/ogcincubator/bblocks-cesium-viewer/role/viewer-config",
+      "ref": "viewer-config.json",
+      "format": "application/json",
+      "title": "Globe view configuration"
+    }
+  ]
+}

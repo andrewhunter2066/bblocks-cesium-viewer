@@ -1,0 +1,114 @@
+{
+  "rules": [
+    {
+      "source": "parcels",
+      "geometry": "polygon",
+      "match": {
+        "property": "properties.parcelState",
+        "values": [
+          "wa-parcel-state:created"
+        ]
+      },
+      "kind": "parcel-created",
+      "group": "parcel",
+      "kindLabel": "Created",
+      "initiallyVisible": true,
+      "elevation": "flatten",
+      "style": {
+        "color": "#0a6ff6",
+        "opacity": 0.5,
+        "lineColor": "#06102b"
+      },
+      "label": {
+        "properties": [
+          "properties.appellation.label",
+          "properties.appellation",
+          "properties.description",
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "parcels",
+      "geometry": "polygon",
+      "match": {
+        "property": "properties.parcelState",
+        "values": [
+          "wa-parcel-state:former-tenure"
+        ]
+      },
+      "kind": "parcel-former-tenure",
+      "group": "parcel",
+      "kindLabel": "Former Tenure",
+      "initiallyVisible": false,
+      "elevation": "flatten",
+      "style": {
+        "color": "#dadcfd",
+        "opacity": 0.35,
+        "lineColor": "#0d1424",
+        "lineStyle": "dashed"
+      },
+      "label": {
+        "properties": [
+          "properties.appellation.label",
+          "properties.appellation",
+          "properties.description",
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "solids",
+      "geometry": "solid",
+      "match": {
+        "property": "properties.description",
+        "values": [
+          "Solid for Lot 800 on Plan DP 431276"
+        ]
+      },
+      "kind": "solid",
+      "initiallyVisible": true,
+      "style": {
+
+        "color": "#960f00",
+        "opacity": 1.0
+      },
+      "label": {
+        "properties": [
+          "properties.appellation.label",
+          "properties.appellation",
+          "properties.description",
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "surfaces",
+      "geometry": "open-shell",
+      "match": {
+        "property": "properties.description",
+        "values": [
+          "Surface Shell of Ground Surface"
+        ]
+      },
+      "kind": "surface",
+      "initiallyVisible": false,
+      "style": {
+        "color": "#006e0c",
+        "opacity": 0.75
+      },
+      "label": {
+        "properties": [
+          "properties.appellation.label",
+          "properties.appellation",
+          "properties.description",
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    }
+  ]
+}

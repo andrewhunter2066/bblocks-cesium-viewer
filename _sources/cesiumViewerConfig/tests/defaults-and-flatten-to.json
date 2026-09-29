@@ -1,0 +1,13 @@
+{
+  "defaults": { "style": { "opacity": 0.8 }, "elevation": { "flattenTo": 12.5 } },
+  "kindOrder": ["building"],
+  "rules": [
+    {
+      "source": "solids",
+      "kind": "building",
+      "geometry": "solid",
+      "label": { "properties": ["properties.name"], "fallback": "id" },
+      "style": { "color": "rgb(161, 83, 26)", "lineStyle": "solid" }
+    }
+  ]
+}

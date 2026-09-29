@@ -1,0 +1,8 @@
+examples:
+  - title: Lot 800 on Plan DP 431276
+    content: |
+      Open the **Globe** tab. The document is the harness fixture `parcel.json`, shared with the
+      plugin's own tests.
+    snippets:
+      - language: json
+        ref: ../../../harness/fixtures/parcel.json

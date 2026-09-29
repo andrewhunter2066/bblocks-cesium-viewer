@@ -1,0 +1,1 @@
+{ "rules": [{ "source": "solids", "kind": "solid", "geometry": "sphere" }] }

@@ -1,5 +1,21 @@
 build-local/
 .idea/
+.mcp.json
 bblocks-config-local.yml
 bblocks-config-local.yaml
 .volumes
+
+# Plugin build (dist/ is published to the `dist` branch by CI, never committed on master)
+node_modules/
+dist/
+
+# Local secrets — Cesium ion tokens etc. must never be committed
+.env
+.env.*
+!.env.example
+
+# Local AI-assistant tooling and instructions, not part of the project
+.agents/
+.claude/
+skills-lock.json
+CLAUDE.md

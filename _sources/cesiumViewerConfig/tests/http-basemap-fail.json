@@ -1,0 +1,1 @@
+{ "cesium": { "basemap": { "url": "http://tiles.example.org/{z}/{x}/{y}.png" } } }

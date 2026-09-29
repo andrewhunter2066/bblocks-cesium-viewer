@@ -1,0 +1,25 @@
+{
+  "name": "Cesium globe viewer configuration",
+  "abstract": "Per-block configuration for the bblocks-viewer Globe view of topo-feature documents: which features are drawn and how (rules shared with the Three.js topology view), plus the globe's basemap, terrain and initial camera.",
+  "status": "under-development",
+  "dateTimeAddition": "2026-09-28T00:00:00Z",
+  "itemClass": "schema",
+  "version": "0.1",
+  "tags": ["viewer", "view-plugin", "cesium", "topo-feature", "configuration"],
+  "group": "Globe viewer",
+  "highlighted": true,
+  "links": [
+    {
+      "title": "TopoFeatureCesiumPlugin source",
+      "href": "https://github.com/andrewhunter2066/bblocks-cesium-viewer"
+    },
+    {
+      "title": "Three.js TopoFeaturePlugin (shares the rule configuration)",
+      "href": "https://github.com/ogcincubator/bblocks-viewer-topo-feature-plugin"
+    },
+    {
+      "title": "topo-feature",
+      "href": "https://github.com/ogcincubator/topo-feature"
+    }
+  ]
+}

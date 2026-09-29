@@ -1,0 +1,86 @@
+{
+  "defaults": {
+    "style": {
+      "opacity": 1
+    }
+  },
+  "rules": [
+    {
+      "source": "solids",
+      "kind": "pipe",
+      "geometry": "solid",
+      "match": {
+        "property": "properties.assetCondition",
+        "values": [
+          "decommissioned"
+        ]
+      },
+      "initiallyVisible": false,
+      "style": {
+        "color": "#8a8f89",
+        "opacity": 0.25
+      },
+      "label": {
+        "properties": [
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "solids",
+      "kind": "pipe",
+      "geometry": "solid",
+      "match": {
+        "property": "properties.assetCondition",
+        "values": [
+          "util:hazardous"
+        ]
+      },
+      "style": {
+        "color": "#c23b22"
+      },
+      "label": {
+        "properties": [
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "solids",
+      "kind": "pipe",
+      "geometry": "solid",
+      "match": {
+        "property": "properties.assetCondition",
+        "values": [
+          "http://example.org/utility-status#planned"
+        ]
+      },
+      "style": {
+        "color": "#3b5bab"
+      },
+      "elevation": "flatten",
+      "label": {
+        "properties": [
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    },
+    {
+      "source": "solids",
+      "kind": "pipe",
+      "geometry": "solid",
+      "style": {
+        "color": "#3388ff"
+      },
+      "label": {
+        "properties": [
+          "properties.name"
+        ],
+        "fallback": "id"
+      }
+    }
+  ]
+}

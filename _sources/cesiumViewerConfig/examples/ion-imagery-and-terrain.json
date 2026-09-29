@@ -1,0 +1,6 @@
+{
+  "cesium": {
+    "basemap": "ion",
+    "terrain": "ion"
+  }
+}

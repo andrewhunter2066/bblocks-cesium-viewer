@@ -1,0 +1,37 @@
+examples:
+  - title: Parcel rules
+    content: |
+      Rules from the Three.js topology view's cadastral example, used unchanged by the Globe view:
+      parcels are grouped under one heading with a kind per `parcelState` (matched as CURIEs),
+      flattened onto the ground, with former-tenure parcels dashed and initially hidden. This is the
+      configuration of the [parcel demo block](bblocks://ogc.bbr.template.cesiumViewerDemo.parcel).
+    snippets:
+      - language: json
+        ref: ../cesiumViewerDemo/parcel/viewer-config.json
+
+  - title: Utility network rules
+    content: |
+      A non-cadastral configuration: underground pipes classified by `assetCondition`, matching a
+      literal, a CURIE and a full URI. Decommissioned pipes start hidden; planned pipes are clamped
+      to the ground. This is the configuration of the
+      [utility network demo block](bblocks://ogc.bbr.template.cesiumViewerDemo.utilityNetwork).
+    snippets:
+      - language: json
+        ref: ../cesiumViewerDemo/utilityNetwork/viewer-config.json
+
+  - title: Basemap and initial camera
+    content: |
+      Globe options only, so the built-in rules still apply: an OpenTopoMap basemap (no key needed)
+      and a fixed starting view instead of framing the data.
+    snippets:
+      - language: json
+        ref: examples/basemap-and-camera.json
+
+  - title: Cesium ion imagery and terrain
+    content: |
+      Cesium ion world imagery and terrain. These need an ion token, which is injected into the
+      published configuration at build time and never committed; without one, the view falls back
+      to OpenStreetMap and the flat ellipsoid.
+    snippets:
+      - language: json
+        ref: examples/ion-imagery-and-terrain.json

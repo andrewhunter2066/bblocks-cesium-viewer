@@ -1,0 +1,154 @@
+{
+  "id": "projected-only-square",
+  "name": "Projected-only square (should not match)",
+  "description": "Same topology, but points carry only projected `place` coordinates and `geometry: null`, so the Globe view must not offer a tab.",
+  "type": "FeatureCollection",
+  "features": [],
+  "points": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "p1",
+          "type": "Feature",
+          "geometry": null,
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              48130,
+              369940,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p2",
+          "type": "Feature",
+          "geometry": null,
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              48160,
+              369940,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p3",
+          "type": "Feature",
+          "geometry": null,
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              48160,
+              369915,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p4",
+          "type": "Feature",
+          "geometry": null,
+          "place": {
+            "type": "Point",
+            "coordinates": [
+              48130,
+              369915,
+              17.5
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "e1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p1",
+              "p2"
+            ]
+          }
+        },
+        {
+          "id": "e2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p2",
+              "p3"
+            ]
+          }
+        },
+        {
+          "id": "e3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p3",
+              "p4"
+            ]
+          }
+        },
+        {
+          "id": "e4",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p4",
+              "p1"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "rings": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "r1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "e1",
+                "orientation": "+"
+              },
+              {
+                "ref": "e2",
+                "orientation": "+"
+              },
+              {
+                "ref": "e3",
+                "orientation": "+"
+              },
+              {
+                "ref": "e4",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

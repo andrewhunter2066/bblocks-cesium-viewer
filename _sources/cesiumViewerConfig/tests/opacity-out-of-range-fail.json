@@ -1,0 +1,1 @@
+{ "rules": [{ "source": "parcels", "kind": "parcel", "geometry": "polygon", "style": { "opacity": 1.5 } }] }

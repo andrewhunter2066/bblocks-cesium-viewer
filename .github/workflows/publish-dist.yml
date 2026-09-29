@@ -1,0 +1,49 @@
+name: Build and publish dist
+
+# Publishes dist/ to the `dist` branch (orphan history, force-pushed) so it can be served via
+# jsDelivr's GitHub CDN mode without needing GitHub Pages enabled:
+#   https://cdn.jsdelivr.net/gh/andrewhunter2066/bblocks-cesium-viewer@dist/index.js
+# (becomes ogcincubator/bblocks-cesium-viewer after the repo transfer).
+# dist/ itself stays gitignored on master -- this branch exists purely as a CDN target.
+# Publishes on every push to master; there is no tag/release gate.
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  publish-dist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: Publish dist/ to the dist branch
+        run: |
+          mkdir /tmp/dist-out
+          cp -r dist/. /tmp/dist-out/
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan dist-publish
+          git rm -rf . > /dev/null
+          cp -r /tmp/dist-out/. .
+          git add -A
+          git commit -m "Publish dist from ${GITHUB_SHA}"
+          git push origin dist-publish:dist --force
+
+      - name: Purge jsDelivr cache
+        run: |
+          for f in $(find dist -type f); do
+            path="${f#dist/}"
+            curl -fsS "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@dist/${path}" || true
+          done

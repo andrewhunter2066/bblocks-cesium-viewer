@@ -1,0 +1,150 @@
+{
+  "id": "georeferenced-square",
+  "name": "Georeferenced square (harness scaffold fixture)",
+  "description": "Hand-made minimal topo-feature document: four WGS84 points with ellipsoidal heights, four edges and one ring. Used to check matching until the real fixtures arrive in stage 3.",
+  "type": "FeatureCollection",
+  "features": [],
+  "points": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "p1",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.797,
+              -31.8936,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p2",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.7973,
+              -31.8936,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p3",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.7973,
+              -31.89385,
+              17.5
+            ]
+          }
+        },
+        {
+          "id": "p4",
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              115.797,
+              -31.89385,
+              17.5
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "e1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p1",
+              "p2"
+            ]
+          }
+        },
+        {
+          "id": "e2",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p2",
+              "p3"
+            ]
+          }
+        },
+        {
+          "id": "e3",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p3",
+              "p4"
+            ]
+          }
+        },
+        {
+          "id": "e4",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Edge",
+            "references": [
+              "p4",
+              "p1"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "rings": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "id": "r1",
+          "type": "Feature",
+          "geometry": null,
+          "topology": {
+            "type": "Ring",
+            "directed_references": [
+              {
+                "ref": "e1",
+                "orientation": "+"
+              },
+              {
+                "ref": "e2",
+                "orientation": "+"
+              },
+              {
+                "ref": "e3",
+                "orientation": "+"
+              },
+              {
+                "ref": "e4",
+                "orientation": "+"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
