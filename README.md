@@ -175,5 +175,6 @@ commit `d94018b`; each file says so in its header, and later upstream fixes are 
   get whatever is on `master`.
 - `.github/workflows/process-bblocks.yml` builds and publishes the register itself.
 
-This repository was created from the OGC Building Blocks template; the template's own usage notes
-are in [USAGE.md](USAGE.md).
+This repository was created from the [OGC Building Blocks template](https://github.com/opengeospatial/bblocks-template);
+see its [usage notes](https://github.com/opengeospatial/bblocks-template/blob/master/USAGE.md) for
+how the register tooling works.
