@@ -2,6 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import TopoFeatureCesiumPlugin from './topo-feature-cesium-plugin.js';
 import { TopoFeatureCesiumPlugin as NamedExport } from './index.js';
+import { installFakeDocument } from './test-support/fake-dom.js';
+import { createFakeCesium } from './test-support/fake-cesium.js';
 
 const georeferenced = JSON.stringify({
   points: [{
@@ -43,6 +45,142 @@ test('picks the first usable candidate among several representations', () => {
   ]);
   assert.equal(plugin.matches(), true);
   assert.equal(plugin._pickCandidate().label, 'JSON-LD');
+});
+
+// --- render()/destroy() lifecycle, against a fake DOM and a fake Cesium namespace ---
+
+// A plugin whose Cesium load is controlled by the test instead of hitting the CDN.
+function pluginWithCesium(loadCesium) {
+  const plugin = new TopoFeatureCesiumPlugin([candidate()]);
+  plugin._loadCesium = loadCesium;
+  return plugin;
+}
+
+function deferred() {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => { resolve = res; reject = rej; });
+  return { promise, resolve, reject };
+}
+
+async function withQuietConsoleError(fn) {
+  const original = console.error;
+  const logged = [];
+  console.error = (...args) => logged.push(args);
+  try {
+    await fn();
+  } finally {
+    console.error = original;
+  }
+  return logged;
+}
+
+test('lifecycle', async t => {
+  let dom;
+  t.beforeEach(() => { dom = installFakeDocument(); });
+  t.afterEach(() => { dom.restore(); });
+
+  await t.test('render mounts a token-free Cesium viewer inside el', async () => {
+    const Cesium = createFakeCesium();
+    const el = dom.doc.body.appendChild(dom.doc.createElement('div'));
+    const plugin = pluginWithCesium(async () => Cesium);
+
+    await plugin.render(el);
+
+    assert.equal(Cesium.created.viewers.length, 1);
+    const viewer = Cesium.created.viewers[0];
+    assert.equal(viewer.container.parent, el, 'viewer container is a child of el');
+    assert.equal(el.style.position, 'relative');
+    assert.equal(Cesium.Ion.defaultAccessToken, '', 'demo ion token blanked before the viewer is built');
+    assert.equal(viewer.options.geocoder, false);
+    assert.ok(dom.doc.getElementById('bblocks-cesium-viewer-widgets-css'), 'widgets.css injected');
+  });
+
+  await t.test('destroy tears down the viewer and empties el', async () => {
+    const Cesium = createFakeCesium();
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => Cesium);
+    await plugin.render(el);
+    const viewer = Cesium.created.viewers[0];
+
+    plugin.destroy(el);
+
+    assert.equal(viewer.destroyCount, 1);
+    assert.equal(el.children.length, 0);
+    assert.equal(plugin._viewer, null);
+  });
+
+  await t.test('destroy is idempotent and safe before render', async () => {
+    const Cesium = createFakeCesium();
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => Cesium);
+    assert.doesNotThrow(() => plugin.destroy(el));
+    await plugin.render(el);
+    plugin.destroy(el);
+    plugin.destroy(el);
+    plugin.destroy(undefined);
+    assert.equal(Cesium.created.viewers[0].destroyCount, 1);
+  });
+
+  await t.test('destroy while Cesium is still loading creates no viewer', async () => {
+    const Cesium = createFakeCesium();
+    const load = deferred();
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(() => load.promise);
+
+    const rendering = plugin.render(el);
+    plugin.destroy(el);
+    load.resolve(Cesium);
+    await rendering;
+
+    assert.equal(Cesium.created.viewers.length, 0);
+    assert.equal(el.children.length, 0);
+  });
+
+  await t.test('re-render replaces the previous viewer', async () => {
+    const Cesium = createFakeCesium();
+    const first = dom.doc.createElement('div');
+    const second = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => Cesium);
+
+    await plugin.render(first);
+    await plugin.render(second);
+
+    assert.equal(Cesium.created.viewers.length, 2);
+    assert.equal(Cesium.created.viewers[0].destroyCount, 1);
+    assert.equal(Cesium.created.viewers[1].destroyCount, 0);
+    assert.equal(first.children.length, 0);
+    assert.equal(second.children.length, 1);
+  });
+
+  await t.test('a failed CDN load shows an error banner instead of a blank tab', async () => {
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => { throw new Error('network down'); });
+
+    const logged = await withQuietConsoleError(() => plugin.render(el));
+
+    assert.match(el.allText, /Failed to render the globe view \(network down\)/);
+    assert.equal(logged.length, 1);
+  });
+
+  await t.test('a Viewer construction failure (e.g. no WebGL) shows an error banner', async () => {
+    const Cesium = createFakeCesium({ viewerThrows: new Error('WebGL is not supported') });
+    const el = dom.doc.createElement('div');
+    const plugin = pluginWithCesium(async () => Cesium);
+
+    await withQuietConsoleError(() => plugin.render(el));
+
+    assert.match(el.allText, /WebGL is not supported/);
+    assert.equal(el.children.length, 1, 'only the banner remains; the empty container was removed');
+  });
+
+  await t.test('render does not load Cesium for a non-matching document', async () => {
+    const el = dom.doc.createElement('div');
+    const plugin = new TopoFeatureCesiumPlugin([candidate({ content: '{}' })]);
+    plugin._loadCesium = async () => assert.fail('must not load Cesium');
+    await plugin.render(el);
+    assert.equal(el.children.length, 0);
+  });
 });
 
 test('does not match plain GeoJSON or ungeoreferenced topology', () => {

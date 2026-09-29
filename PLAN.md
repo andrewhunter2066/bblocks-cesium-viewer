@@ -64,7 +64,7 @@ appear there.
 1. **Scaffold** *(done)* — `package.json`, `vite.config.js`, empty `TopoFeatureCesiumPlugin` class with
    correct `supportedTypes`/`viewName`/`matches()`, harness page, `publish-dist.yml`, gitleaks CI
    step, `.env.example`; resolve the local-viewer open question above.
-2. **Globe** — runtime CDN load of CesiumJS, empty token-free globe in the harness, clean
+2. **Globe** *(done)* — runtime CDN load of CesiumJS, empty token-free globe in the harness, clean
    `destroy()`.
 3. **Geometry** — build Cesium entities/primitives from `geometry` coordinates via the topology
    references (with unit tests); copy fixtures from the topo repo and add a georeferenced version
